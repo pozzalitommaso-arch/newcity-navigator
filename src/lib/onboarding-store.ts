@@ -127,6 +127,8 @@ const defaultProfile: UserProfile = {
   age: '',
   hasChildren: false,
   childrenCount: 0,
+  hasPets: false,
+  petsCount: 0,
   profession: '',
   gender: '',
   genderCustom: '',
