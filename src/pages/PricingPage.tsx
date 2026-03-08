@@ -12,6 +12,9 @@ import {
   Users,
   Shield,
   Headphones,
+  MapPinned,
+  Coffee,
+  CalendarCheck,
 } from "lucide-react";
 
 const plans = [
@@ -144,7 +147,7 @@ export default function PricingPage() {
                 className="w-full mb-6"
                 disabled={plan.disabled}
               >
-                {plan.disabled ? plan.cta : plan.cta}
+                {plan.cta}
               </Button>
 
               <div className="space-y-3 flex-1">
@@ -163,6 +166,56 @@ export default function PricingPage() {
               </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Local Guide Consultation — One-off */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-5xl mx-auto"
+        >
+          <div className="p-8 rounded-2xl border-2 border-accent bg-card shadow-[var(--shadow-card)] relative overflow-hidden">
+            <div className="absolute top-0 right-0 bg-accent text-accent-foreground text-xs font-semibold px-4 py-1.5 rounded-bl-xl flex items-center gap-1">
+              <MapPinned className="h-3 w-3" /> Ad Hoc
+            </div>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h3 className="font-display text-2xl font-bold text-foreground mb-2">Local Guide Consultation</h3>
+                <p className="text-muted-foreground mb-4">
+                  Book a 1-on-1 session with a verified local guide who knows your city inside out. Get personalized advice on neighborhoods, schools, bureaucracy, and hidden gems.
+                </p>
+                <div className="space-y-2 mb-6">
+                  {[
+                    { icon: Coffee, text: "60-minute video or in-person session" },
+                    { icon: MapPinned, text: "Matched to a guide in your city" },
+                    { icon: CalendarCheck, text: "Flexible scheduling, book within 48h" },
+                    { icon: MessageCircle, text: "Follow-up chat for 7 days after session" },
+                    { icon: Users, text: "Couple or family sessions available" },
+                  ].map((f) => (
+                    <div key={f.text} className="flex items-center gap-2">
+                      <f.icon className="h-4 w-4 text-accent shrink-0" />
+                      <span className="text-sm text-foreground">{f.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="text-center md:text-right">
+                <div className="mb-1">
+                  <span className="text-sm text-muted-foreground line-through mr-2">CHF 149</span>
+                  <span className="text-xs font-medium bg-accent/10 text-accent px-2 py-0.5 rounded-full">Launch offer</span>
+                </div>
+                <div className="mb-4">
+                  <span className="text-5xl font-display font-bold text-foreground">CHF 99</span>
+                  <span className="text-muted-foreground text-sm ml-1">one-time</span>
+                </div>
+                <Button variant="accent" size="lg" className="w-full md:w-auto px-8">
+                  Book a Local Guide
+                </Button>
+                <p className="text-xs text-muted-foreground mt-2">No subscription · Pay once · Satisfaction guaranteed</p>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         {/* Trust Section */}
