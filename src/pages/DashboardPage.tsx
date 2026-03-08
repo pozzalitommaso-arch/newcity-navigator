@@ -13,7 +13,7 @@ import {
   ChevronRight, User, MessageCircle, Building2, PiggyBank, Users,
   CalendarDays, FileText, Zap, TrendingUp, Calendar, Calculator,
   Rocket, Timer, PartyPopper, UserPlus, FolderOpen, BarChart3,
-  ShoppingBag,
+  ShoppingBag, ShoppingCart, Languages as LanguagesIcon,
 } from "lucide-react";
 import type { QuickInfo } from "@/lib/onboarding-store";
 
@@ -30,6 +30,8 @@ const categoryData = [
   { id: "events", icon: CalendarDays, label: "Events & Culture", color: "text-warning", bg: "bg-warning/10", desc: "Local events, festivals" },
   { id: "public-services", icon: FileText, label: "Public Services", color: "text-info", bg: "bg-info/10", desc: "Registration, permits" },
   { id: "shopping", icon: ShoppingBag, label: "Shopping & Furnishing", color: "text-warning", bg: "bg-warning/10", desc: "Furniture, wardrobe, markets" },
+  { id: "groceries", icon: ShoppingCart, label: "Groceries & Daily", color: "text-success", bg: "bg-success/10", desc: "Supermarkets, Sunday tips" },
+  { id: "language", icon: LanguagesIcon, label: "Language & Integration", color: "text-info", bg: "bg-info/10", desc: "Courses, permits, Swiss German" },
 ];
 
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.05 } } };

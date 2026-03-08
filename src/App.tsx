@@ -26,6 +26,8 @@ import MyInfoPage from "./pages/MyInfoPage";
 import DocumentVaultPage from "./pages/DocumentVaultPage";
 import ProgressReportPage from "./pages/ProgressReportPage";
 import ShoppingPage from "./pages/ShoppingPage";
+import GroceriesPage from "./pages/GroceriesPage";
+import LanguagePage from "./pages/LanguagePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -60,6 +62,8 @@ const App = () => (
           <Route path="/documents" element={<DocumentVaultPage />} />
           <Route path="/progress" element={<ProgressReportPage />} />
           <Route path="/shopping" element={<ShoppingPage />} />
+          <Route path="/groceries" element={<GroceriesPage />} />
+          <Route path="/language" element={<LanguagePage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
