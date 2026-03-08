@@ -89,23 +89,14 @@ const tips = [
   { icon: Footprints, title: "Free Activities Everywhere", text: "Running trails, outdoor fitness parks (Vita Parcours), lake swimming, and hiking are all free. Switzerland is an outdoor playground." },
 ];
 
-const checklist = [
-  { text: "Explore Uetliberg hiking trail", done: false },
-  { text: "Try a local sports club trial session", done: false },
-  { text: "Sign up for gym or fitness center", done: false },
-  { text: "Check ASVZ if affiliated with university", done: false },
-  { text: "Visit a lake bath (Seebad)", done: false },
-  { text: "Register for Parkrun Zurich", done: false },
-  { text: "Join a local Verein (sports club)", done: false },
-];
-
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
 
 export default function SportsPage() {
   const navigate = useNavigate();
-  const completedCount = checklist.filter((c) => c.done).length;
-  const progress = Math.round((completedCount / checklist.length) * 100);
+  const { getCategoryProgress, getCategoryStats } = useChecklistStore();
+  const progress = getCategoryProgress("sports");
+  const { completed: completedCount, total } = getCategoryStats("sports");
 
   return (
     <div className="min-h-screen bg-background">
