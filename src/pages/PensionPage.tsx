@@ -65,23 +65,14 @@ const websites = [
   { name: "VZ Vermögenszentrum", url: "https://www.vermoegenszentrum.ch", desc: "Independent pension planning and retirement advice.", tag: "Advisory" },
 ];
 
-const checklist = [
-  { text: "Understand the 3-pillar system", done: false },
-  { text: "Open a Pillar 3a account (VIAC or Finpension)", done: false },
-  { text: "Set up monthly 3a contribution (max CHF 588/month)", done: false },
-  { text: "Review Pillar 2 pension certificate from employer", done: false },
-  { text: "Check if BVG voluntary buy-in is possible", done: false },
-  { text: "Request AHV contribution statement", done: false },
-  { text: "Plan multiple 3a accounts for tax-efficient withdrawal", done: false },
-];
-
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
 
 export default function PensionPage() {
   const navigate = useNavigate();
-  const completedCount = checklist.filter((c) => c.done).length;
-  const progress = Math.round((completedCount / checklist.length) * 100);
+  const { getCategoryProgress, getCategoryStats } = useChecklistStore();
+  const progress = getCategoryProgress("pension");
+  const { completed: completedCount, total } = getCategoryStats("pension");
 
   return (
     <div className="min-h-screen bg-background">
