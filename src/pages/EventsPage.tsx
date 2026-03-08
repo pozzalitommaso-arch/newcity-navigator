@@ -49,23 +49,14 @@ const tips = [
   { icon: Music, title: "Free Concerts", text: "Churches, parks, and public spaces host free concerts year-round. Check Tonhalle free lunchtime concerts." },
 ];
 
-const checklist = [
-  { text: "Subscribe to a local events newsletter", done: false },
-  { text: "Visit Kunsthaus Zürich", done: false },
-  { text: "Attend a farmers market", done: false },
-  { text: "Experience a major Zurich festival", done: false },
-  { text: "Explore Langstrasse nightlife", done: false },
-  { text: "Visit a Christmas market (winter)", done: false },
-  { text: "Take a weekend trip to the Alps", done: false },
-];
-
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
 
 export default function EventsPage() {
   const navigate = useNavigate();
-  const completedCount = checklist.filter((c) => c.done).length;
-  const progress = Math.round((completedCount / checklist.length) * 100);
+  const { getCategoryProgress, getCategoryStats } = useChecklistStore();
+  const progress = getCategoryProgress("events");
+  const { completed: completedCount, total } = getCategoryStats("events");
 
   return (
     <div className="min-h-screen bg-background">
