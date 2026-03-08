@@ -105,9 +105,10 @@ export default function HousingPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <MapPin className="h-5 w-5 text-primary" /> Zurich Districts & Price Map
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Our recommendation:</strong> Kreis 3 and 9 offer the best value for families. Kreis 4 & 5 are perfect for young professionals. Always check commute times — a 10-min difference saves hours weekly.</p>
           <div className="grid lg:grid-cols-2 gap-6">
             <div>
               <ZurichMap />
