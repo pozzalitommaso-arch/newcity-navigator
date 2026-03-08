@@ -1,5 +1,14 @@
 import { create } from 'zustand';
 
+export interface QuickInfo {
+  address: string;
+  bank: string;
+  insurance: string;
+  doctor: string;
+  emergencyContact: string;
+  ahvNumber: string;
+}
+
 export interface UserProfile {
   city: string;
   familyStatus: string;
@@ -16,6 +25,7 @@ export interface UserProfile {
   moveReason: string;
   interests: string[];
   priorities: string[];
+  quickInfo: QuickInfo;
 }
 
 interface OnboardingStore {
