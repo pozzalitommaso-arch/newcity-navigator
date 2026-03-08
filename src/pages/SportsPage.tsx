@@ -148,9 +148,10 @@ export default function SportsPage() {
 
         {/* Clubs */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <Trophy className="h-5 w-5 text-warning" /> Popular Sports Clubs
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Integration tip:</strong> Joining a Swiss Verein (sports club) is the #1 way to make local friends. Most offer trial sessions — try 2-3 clubs before committing. The social life is as valuable as the sport.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {clubs.map((club) => (
               <motion.div key={club.name} variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
