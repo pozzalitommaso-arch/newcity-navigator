@@ -131,6 +131,7 @@ const defaultProfile: UserProfile = {
   hasPets: false,
   petsCount: 0,
   profession: '',
+  arrivalDate: '',
   gender: '',
   genderCustom: '',
   orientation: '',
