@@ -63,25 +63,14 @@ const tips = [
   { icon: Home, title: "Abmeldung When Leaving", text: "If you move away, deregister (Abmeldung) at the Kreisbüro. Required for tax final settlement and pension withdrawal." },
 ];
 
-const checklist = [
-  { text: "Register at Einwohnerkontrolle (within 14 days)", done: false },
-  { text: "Apply for / receive residence permit", done: false },
-  { text: "Register for health insurance (within 3 months)", done: false },
-  { text: "Open Swiss bank account", done: false },
-  { text: "Exchange driver's license (within 12 months)", done: false },
-  { text: "Order Betreibungsauskunft for apartment search", done: false },
-  { text: "Set up mail forwarding (Post.ch)", done: false },
-  { text: "Register with tax office if needed", done: false },
-  { text: "Get apostille on foreign documents", done: false },
-];
-
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
 
 export default function PublicServicesPage() {
   const navigate = useNavigate();
-  const completedCount = checklist.filter((c) => c.done).length;
-  const progress = Math.round((completedCount / checklist.length) * 100);
+  const { getCategoryProgress, getCategoryStats } = useChecklistStore();
+  const progress = getCategoryProgress("public-services");
+  const { completed: completedCount, total } = getCategoryStats("public-services");
 
   return (
     <div className="min-h-screen bg-background">
