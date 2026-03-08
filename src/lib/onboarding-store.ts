@@ -1,12 +1,46 @@
 import { create } from 'zustand';
 
+export interface AddressInfo {
+  street: string;
+  postalCode: string;
+  city: string;
+}
+
+export interface BankInfo {
+  bankName: string;
+  iban: string;
+  accountType: string;
+}
+
+export interface InsuranceInfo {
+  provider: string;
+  policyNumber: string;
+  plan: string;
+}
+
+export interface DoctorInfo {
+  name: string;
+  phone: string;
+  clinic: string;
+}
+
+export interface EmergencyContactInfo {
+  name: string;
+  phone: string;
+  relationship: string;
+}
+
+export interface AhvInfo {
+  number: string;
+}
+
 export interface QuickInfo {
-  address: string;
-  bank: string;
-  insurance: string;
-  doctor: string;
-  emergencyContact: string;
-  ahvNumber: string;
+  address: AddressInfo;
+  bank: BankInfo;
+  insurance: InsuranceInfo;
+  doctor: DoctorInfo;
+  emergencyContact: EmergencyContactInfo;
+  ahvNumber: AhvInfo;
 }
 
 export interface UserProfile {
@@ -38,12 +72,12 @@ interface OnboardingStore {
 }
 
 const defaultQuickInfo: QuickInfo = {
-  address: '',
-  bank: '',
-  insurance: '',
-  doctor: '',
-  emergencyContact: '',
-  ahvNumber: '',
+  address: { street: '', postalCode: '', city: '' },
+  bank: { bankName: '', iban: '', accountType: '' },
+  insurance: { provider: '', policyNumber: '', plan: '' },
+  doctor: { name: '', phone: '', clinic: '' },
+  emergencyContact: { name: '', phone: '', relationship: '' },
+  ahvNumber: { number: '' },
 };
 
 const defaultProfile: UserProfile = {
