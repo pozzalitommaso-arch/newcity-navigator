@@ -71,6 +71,8 @@ export interface UserProfile {
   age: string;
   hasChildren: boolean;
   childrenCount: number;
+  hasPets: boolean;
+  petsCount: number;
   profession: string;
   gender: string;
   genderCustom: string;
@@ -125,6 +127,8 @@ const defaultProfile: UserProfile = {
   age: '',
   hasChildren: false,
   childrenCount: 0,
+  hasPets: false,
+  petsCount: 0,
   profession: '',
   gender: '',
   genderCustom: '',
