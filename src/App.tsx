@@ -25,6 +25,7 @@ import CalculatorPage from "./pages/CalculatorPage";
 import MyInfoPage from "./pages/MyInfoPage";
 import DocumentVaultPage from "./pages/DocumentVaultPage";
 import ProgressReportPage from "./pages/ProgressReportPage";
+import ShoppingPage from "./pages/ShoppingPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -58,6 +59,7 @@ const App = () => (
           <Route path="/my-info" element={<MyInfoPage />} />
           <Route path="/documents" element={<DocumentVaultPage />} />
           <Route path="/progress" element={<ProgressReportPage />} />
+          <Route path="/shopping" element={<ShoppingPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
