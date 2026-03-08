@@ -13,6 +13,7 @@ import {
   ChevronRight, User, MessageCircle, Building2, PiggyBank, Users,
   CalendarDays, FileText, Zap, TrendingUp, Calendar, Calculator,
   Rocket, Timer, PartyPopper, UserPlus, FolderOpen, BarChart3,
+  ShoppingBag,
 } from "lucide-react";
 import type { QuickInfo } from "@/lib/onboarding-store";
 
