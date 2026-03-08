@@ -112,13 +112,20 @@ export default function DashboardPage() {
         </motion.div>
 
         {/* Overall Progress */}
-        <motion.div className="p-6 rounded-2xl bg-card shadow-[var(--shadow-card)] border border-border" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
+        <motion.div
+          className="p-6 rounded-2xl bg-card shadow-[var(--shadow-card)] border border-border cursor-pointer hover:shadow-[var(--shadow-soft)] transition-shadow"
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
+          onClick={() => navigate("/profile")}
+        >
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-display text-xl font-semibold text-foreground">Settling-In Progress</h2>
-            <span className="text-2xl font-bold text-primary">{overallProgress}%</span>
+            <div className="flex items-center gap-2">
+              <span className="text-2xl font-bold text-primary">{overallProgress}%</span>
+              <ChevronRight className="h-5 w-5 text-muted-foreground" />
+            </div>
           </div>
           <Progress value={overallProgress} className="h-3 bg-muted" />
-          <p className="text-sm text-muted-foreground mt-2">You're making great progress! Keep going to feel fully settled.</p>
+          <p className="text-sm text-muted-foreground mt-2">Tap to see detailed category progress, milestones & what's missing →</p>
         </motion.div>
 
         {/* Quick Access Info Cards */}
