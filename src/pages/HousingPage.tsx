@@ -158,9 +158,10 @@ export default function HousingPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <TrendingUp className="h-5 w-5 text-primary" /> Best Websites to Find Apartments
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Pro tip:</strong> Use Homegate + Flatfox simultaneously. Set up alerts for new listings — in Zurich's tight market, the first applicant often wins. Apply within hours, not days.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {websites.map((site) => (
               <motion.a
