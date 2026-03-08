@@ -12,6 +12,14 @@ import FamilyPage from "./pages/FamilyPage";
 import InsurancePage from "./pages/InsurancePage";
 import SportsPage from "./pages/SportsPage";
 import FinancePage from "./pages/FinancePage";
+import BankingPage from "./pages/BankingPage";
+import PensionPage from "./pages/PensionPage";
+import FriendsPage from "./pages/FriendsPage";
+import EventsPage from "./pages/EventsPage";
+import PublicServicesPage from "./pages/PublicServicesPage";
+import ProfilePage from "./pages/ProfilePage";
+import ChatPage from "./pages/ChatPage";
+import PricingPage from "./pages/PricingPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +40,14 @@ const App = () => (
           <Route path="/insurance" element={<InsurancePage />} />
           <Route path="/sports" element={<SportsPage />} />
           <Route path="/finance" element={<FinancePage />} />
+          <Route path="/banking" element={<BankingPage />} />
+          <Route path="/pension" element={<PensionPage />} />
+          <Route path="/friends" element={<FriendsPage />} />
+          <Route path="/events" element={<EventsPage />} />
+          <Route path="/public-services" element={<PublicServicesPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/chat" element={<ChatPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
