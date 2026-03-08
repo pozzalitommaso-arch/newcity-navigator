@@ -1,5 +1,14 @@
 import { create } from 'zustand';
 
+export interface QuickInfo {
+  address: string;
+  bank: string;
+  insurance: string;
+  doctor: string;
+  emergencyContact: string;
+  ahvNumber: string;
+}
+
 export interface UserProfile {
   city: string;
   familyStatus: string;
@@ -16,6 +25,7 @@ export interface UserProfile {
   moveReason: string;
   interests: string[];
   priorities: string[];
+  quickInfo: QuickInfo;
 }
 
 interface OnboardingStore {
@@ -23,8 +33,18 @@ interface OnboardingStore {
   profile: UserProfile;
   setStep: (step: number) => void;
   updateProfile: (data: Partial<UserProfile>) => void;
+  updateQuickInfo: (data: Partial<QuickInfo>) => void;
   reset: () => void;
 }
+
+const defaultQuickInfo: QuickInfo = {
+  address: '',
+  bank: '',
+  insurance: '',
+  doctor: '',
+  emergencyContact: '',
+  ahvNumber: '',
+};
 
 const defaultProfile: UserProfile = {
   city: '',
@@ -42,6 +62,7 @@ const defaultProfile: UserProfile = {
   moveReason: '',
   interests: [],
   priorities: [],
+  quickInfo: defaultQuickInfo,
 };
 
 export const useOnboardingStore = create<OnboardingStore>((set) => ({
@@ -50,5 +71,7 @@ export const useOnboardingStore = create<OnboardingStore>((set) => ({
   setStep: (step) => set({ step }),
   updateProfile: (data) =>
     set((state) => ({ profile: { ...state.profile, ...data } })),
+  updateQuickInfo: (data) =>
+    set((state) => ({ profile: { ...state.profile, quickInfo: { ...state.profile.quickInfo, ...data } } })),
   reset: () => set({ step: 0, profile: defaultProfile }),
 }));

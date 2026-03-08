@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useOnboardingStore } from "@/lib/onboarding-store";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import {
   GraduationCap,
@@ -25,6 +27,11 @@ import {
   Users,
   CalendarDays,
   FileText,
+  Pencil,
+  Check,
+  Stethoscope,
+  Phone,
+  CreditCard,
 } from "lucide-react";
 
 const categoryData = [
@@ -56,11 +63,22 @@ const notifications = [
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
 const item = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.4 } } };
 
+const quickInfoCards = [
+  { key: "address" as const, label: "My Address", icon: Home, color: "text-primary", bg: "bg-primary/10", placeholder: "e.g., Bahnhofstr. 12, 8001 Zürich" },
+  { key: "bank" as const, label: "Bank Account", icon: CreditCard, color: "text-info", bg: "bg-info/10", placeholder: "e.g., UBS, IBAN CH93..." },
+  { key: "insurance" as const, label: "Health Insurance", icon: Shield, color: "text-success", bg: "bg-success/10", placeholder: "e.g., CSS, Policy #123..." },
+  { key: "doctor" as const, label: "Doctor / GP", icon: Stethoscope, color: "text-accent", bg: "bg-accent/10", placeholder: "e.g., Dr. Müller, +41 44..." },
+  { key: "emergencyContact" as const, label: "Emergency Contact", icon: Phone, color: "text-warning", bg: "bg-warning/10", placeholder: "e.g., Anna, +41 79..." },
+  { key: "ahvNumber" as const, label: "AHV / Social Security", icon: FileText, color: "text-primary", bg: "bg-primary/10", placeholder: "e.g., 756.1234.5678.90" },
+];
+
 export default function DashboardPage() {
   const navigate = useNavigate();
-  const { profile } = useOnboardingStore();
+  const { profile, updateQuickInfo } = useOnboardingStore();
   const city = profile.city || "Your City";
   const overallProgress = Math.round(categoryData.reduce((a, c) => a + c.progress, 0) / categoryData.length);
+  const [editingCard, setEditingCard] = useState<string | null>(null);
+  const [editValue, setEditValue] = useState("");
 
   return (
     <div className="min-h-screen bg-background">
@@ -101,6 +119,62 @@ export default function DashboardPage() {
           </div>
           <Progress value={overallProgress} className="h-3 bg-muted" />
           <p className="text-sm text-muted-foreground mt-2">You're making great progress! Keep going to feel fully settled.</p>
+        </motion.div>
+
+        {/* Quick Access Info Cards */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
+          <h2 className="font-display text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+            <CheckCircle2 className="h-5 w-5 text-primary" /> My Essentials
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {quickInfoCards.map((card) => {
+              const value = profile.quickInfo[card.key];
+              const isEditing = editingCard === card.key;
+              return (
+                <div key={card.key} className="p-4 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] group">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <div className={`p-1.5 rounded-lg ${card.bg}`}>
+                        <card.icon className={`h-4 w-4 ${card.color}`} />
+                      </div>
+                      <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">{card.label}</span>
+                    </div>
+                    {!isEditing && (
+                      <button
+                        onClick={() => { setEditingCard(card.key); setEditValue(value); }}
+                        className="opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded hover:bg-muted"
+                      >
+                        <Pencil className="h-3 w-3 text-muted-foreground" />
+                      </button>
+                    )}
+                  </div>
+                  {isEditing ? (
+                    <div className="flex gap-1.5">
+                      <Input
+                        value={editValue}
+                        onChange={(e) => setEditValue(e.target.value)}
+                        placeholder={card.placeholder}
+                        className="h-8 text-sm"
+                        autoFocus
+                        maxLength={200}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") { updateQuickInfo({ [card.key]: editValue }); setEditingCard(null); }
+                          if (e.key === "Escape") setEditingCard(null);
+                        }}
+                      />
+                      <Button size="icon" variant="ghost" className="h-8 w-8 shrink-0" onClick={() => { updateQuickInfo({ [card.key]: editValue }); setEditingCard(null); }}>
+                        <Check className="h-3.5 w-3.5 text-primary" />
+                      </Button>
+                    </div>
+                  ) : (
+                    <p className={`text-sm truncate ${value ? "text-foreground font-medium" : "text-muted-foreground italic"}`}>
+                      {value || "Not set yet — click to add"}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-8">

@@ -28,6 +28,26 @@ import {
   Dog,
   Globe,
   MessageCircle,
+  Camera,
+  Gamepad2,
+  Bike,
+  Plane,
+  Utensils,
+  Wine,
+  Laptop,
+  Film,
+  Waves,
+  Flower2,
+  HandHeart,
+  Languages,
+  Building2,
+  PiggyBank,
+  Users,
+  CalendarDays,
+  FileText,
+  Car,
+  Stethoscope,
+  CheckCheck,
 } from "lucide-react";
 
 const genderOptions = ["Man", "Woman", "Non-binary", "Genderqueer", "Prefer not to say", "Other"];
@@ -47,10 +67,22 @@ const interestOptions = [
   { id: "arts", label: "Arts & Culture", icon: Palette },
   { id: "music", label: "Music", icon: Music },
   { id: "reading", label: "Reading", icon: BookOpen },
-  { id: "outdoors", label: "Outdoors", icon: TreePine },
-  { id: "food", label: "Food & Dining", icon: Coffee },
-  { id: "pets", label: "Pets", icon: Dog },
+  { id: "outdoors", label: "Outdoors & Hiking", icon: TreePine },
+  { id: "food", label: "Food & Cooking", icon: Utensils },
+  { id: "dining", label: "Restaurants & Bars", icon: Wine },
+  { id: "pets", label: "Pets & Animals", icon: Dog },
   { id: "education", label: "Education", icon: GraduationCap },
+  { id: "photography", label: "Photography", icon: Camera },
+  { id: "gaming", label: "Gaming", icon: Gamepad2 },
+  { id: "cycling", label: "Cycling", icon: Bike },
+  { id: "travel", label: "Travel", icon: Plane },
+  { id: "tech", label: "Tech & Startups", icon: Laptop },
+  { id: "film", label: "Film & Cinema", icon: Film },
+  { id: "swimming", label: "Swimming & Water", icon: Waves },
+  { id: "gardening", label: "Gardening", icon: Flower2 },
+  { id: "volunteering", label: "Volunteering", icon: HandHeart },
+  { id: "languages", label: "Language Learning", icon: Languages },
+  { id: "coffee", label: "Coffee & Cafés", icon: Coffee },
 ];
 
 const priorityOptions = [
@@ -60,8 +92,15 @@ const priorityOptions = [
   { id: "insurance", label: "Insurance & Health", icon: Shield },
   { id: "sports", label: "Sports & Leisure", icon: Dumbbell },
   { id: "finance", label: "Financial Planning", icon: Landmark },
+  { id: "banking", label: "Banking", icon: Building2 },
+  { id: "pension", label: "Pension & Retirement", icon: PiggyBank },
+  { id: "friends", label: "Friends & Community", icon: Users },
+  { id: "events", label: "Events & Culture", icon: CalendarDays },
+  { id: "public-services", label: "Public Services", icon: FileText },
   { id: "safety", label: "Safety & Security", icon: Shield },
   { id: "career", label: "Career", icon: Briefcase },
+  { id: "transport", label: "Transport & Mobility", icon: Car },
+  { id: "healthcare", label: "Healthcare & Doctors", icon: Stethoscope },
 ];
 
 const familyStatuses = ["Single", "In a Relationship", "Married", "Divorced", "Widowed"];
@@ -400,20 +439,20 @@ export default function OnboardingPage() {
                     <h1 className="text-3xl font-display font-bold text-foreground mb-2">What are your interests?</h1>
                     <p className="text-muted-foreground">Select all that apply — we'll match you with local activities.</p>
                   </div>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto pr-1">
                     {interestOptions.map((opt) => {
                       const selected = profile.interests.includes(opt.id);
                       return (
                         <button
                           key={opt.id}
                           onClick={() => updateProfile({ interests: toggleArray(profile.interests, opt.id) })}
-                          className={`flex items-center gap-3 p-4 rounded-xl border transition-all duration-200 ${
+                          className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all duration-200 ${
                             selected
                               ? "bg-primary/10 border-primary text-foreground shadow-sm"
                               : "bg-card border-border text-foreground hover:border-primary/30"
                           }`}
                         >
-                          <opt.icon className={`h-5 w-5 ${selected ? "text-primary" : "text-muted-foreground"}`} />
+                          <opt.icon className={`h-5 w-5 shrink-0 ${selected ? "text-primary" : "text-muted-foreground"}`} />
                           <span className="text-sm font-medium">{opt.label}</span>
                         </button>
                       );
@@ -428,20 +467,36 @@ export default function OnboardingPage() {
                     <h1 className="text-3xl font-display font-bold text-foreground mb-2">Set your priorities</h1>
                     <p className="text-muted-foreground">What matters most as you settle in?</p>
                   </div>
-                  <div className="grid grid-cols-2 gap-3">
+                  {/* All button */}
+                  <button
+                    onClick={() => {
+                      const allIds = priorityOptions.map(o => o.id);
+                      const allSelected = allIds.every(id => profile.priorities.includes(id));
+                      updateProfile({ priorities: allSelected ? [] : allIds });
+                    }}
+                    className={`w-full flex items-center justify-center gap-2 p-3 rounded-xl border transition-all duration-200 ${
+                      priorityOptions.every(o => profile.priorities.includes(o.id))
+                        ? "bg-accent/10 border-accent text-foreground shadow-sm"
+                        : "bg-card border-border text-foreground hover:border-accent/30"
+                    }`}
+                  >
+                    <CheckCheck className={`h-5 w-5 ${priorityOptions.every(o => profile.priorities.includes(o.id)) ? "text-accent" : "text-muted-foreground"}`} />
+                    <span className="text-sm font-semibold">Select All</span>
+                  </button>
+                  <div className="grid grid-cols-2 gap-3 max-h-[42vh] overflow-y-auto pr-1">
                     {priorityOptions.map((opt) => {
                       const selected = profile.priorities.includes(opt.id);
                       return (
                         <button
                           key={opt.id}
                           onClick={() => updateProfile({ priorities: toggleArray(profile.priorities, opt.id) })}
-                          className={`flex items-center gap-3 p-4 rounded-xl border transition-all duration-200 ${
+                          className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all duration-200 ${
                             selected
                               ? "bg-accent/10 border-accent text-foreground shadow-sm"
                               : "bg-card border-border text-foreground hover:border-accent/30"
                           }`}
                         >
-                          <opt.icon className={`h-5 w-5 ${selected ? "text-accent" : "text-muted-foreground"}`} />
+                          <opt.icon className={`h-5 w-5 shrink-0 ${selected ? "text-accent" : "text-muted-foreground"}`} />
                           <span className="text-sm font-medium">{opt.label}</span>
                         </button>
                       );
