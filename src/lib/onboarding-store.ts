@@ -74,6 +74,7 @@ export interface UserProfile {
   hasPets: boolean;
   petsCount: number;
   profession: string;
+  arrivalDate: string; // ISO date string
   gender: string;
   genderCustom: string;
   orientation: string;
