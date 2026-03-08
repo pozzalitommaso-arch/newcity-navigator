@@ -66,24 +66,14 @@ const tips = [
   { icon: TreePine, title: "Family-Friendly Neighborhoods", text: "Kreis 2, 6, 7, and 10 are especially popular with families. Look for proximity to parks, schools, and Kitas." },
 ];
 
-const checklist = [
-  { text: "Register on Kita waitlist(s)", done: false },
-  { text: "Apply for childcare subsidies", done: false },
-  { text: "Find local Spielgruppe for toddlers", done: false },
-  { text: "Schedule Mütterberatung appointment", done: false },
-  { text: "Research after-school care (Hort) options", done: false },
-  { text: "Join a local family center or parent group", done: false },
-  { text: "Set up pediatrician (Kinderarzt)", done: false },
-  { text: "Explore family activities and parks nearby", done: false },
-];
-
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
 
 export default function FamilyPage() {
   const navigate = useNavigate();
-  const completedCount = checklist.filter((c) => c.done).length;
-  const progress = Math.round((completedCount / checklist.length) * 100);
+  const { getCategoryProgress, getCategoryStats } = useChecklistStore();
+  const progress = getCategoryProgress("family");
+  const { completed: completedCount, total } = getCategoryStats("family");
 
   return (
     <div className="min-h-screen bg-background">
