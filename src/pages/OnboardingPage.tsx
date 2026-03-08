@@ -1,9 +1,55 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useOnboardingStore } from "@/lib/onboarding-store";
+
+const cityDatabase = [
+  { city: "Zurich", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Geneva", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Basel", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Bern", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Lausanne", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Lucerne", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Winterthur", country: "Switzerland", flag: "🇨🇭" },
+  { city: "St. Gallen", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Lugano", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Zug", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Munich", country: "Germany", flag: "🇩🇪" },
+  { city: "Berlin", country: "Germany", flag: "🇩🇪" },
+  { city: "Hamburg", country: "Germany", flag: "🇩🇪" },
+  { city: "Frankfurt", country: "Germany", flag: "🇩🇪" },
+  { city: "Stuttgart", country: "Germany", flag: "🇩🇪" },
+  { city: "Düsseldorf", country: "Germany", flag: "🇩🇪" },
+  { city: "Cologne", country: "Germany", flag: "🇩🇪" },
+  { city: "Vienna", country: "Austria", flag: "🇦🇹" },
+  { city: "Salzburg", country: "Austria", flag: "🇦🇹" },
+  { city: "Innsbruck", country: "Austria", flag: "🇦🇹" },
+  { city: "Graz", country: "Austria", flag: "🇦🇹" },
+  { city: "Paris", country: "France", flag: "🇫🇷" },
+  { city: "Lyon", country: "France", flag: "🇫🇷" },
+  { city: "Strasbourg", country: "France", flag: "🇫🇷" },
+  { city: "Amsterdam", country: "Netherlands", flag: "🇳🇱" },
+  { city: "Rotterdam", country: "Netherlands", flag: "🇳🇱" },
+  { city: "London", country: "United Kingdom", flag: "🇬🇧" },
+  { city: "Manchester", country: "United Kingdom", flag: "🇬🇧" },
+  { city: "Milan", country: "Italy", flag: "🇮🇹" },
+  { city: "Rome", country: "Italy", flag: "🇮🇹" },
+  { city: "Barcelona", country: "Spain", flag: "🇪🇸" },
+  { city: "Madrid", country: "Spain", flag: "🇪🇸" },
+  { city: "Lisbon", country: "Portugal", flag: "🇵🇹" },
+  { city: "Copenhagen", country: "Denmark", flag: "🇩🇰" },
+  { city: "Stockholm", country: "Sweden", flag: "🇸🇪" },
+  { city: "Oslo", country: "Norway", flag: "🇳🇴" },
+  { city: "Helsinki", country: "Finland", flag: "🇫🇮" },
+  { city: "Dublin", country: "Ireland", flag: "🇮🇪" },
+  { city: "Brussels", country: "Belgium", flag: "🇧🇪" },
+  { city: "Luxembourg", country: "Luxembourg", flag: "🇱🇺" },
+  { city: "Prague", country: "Czech Republic", flag: "🇨🇿" },
+  { city: "Warsaw", country: "Poland", flag: "🇵🇱" },
+  { city: "Budapest", country: "Hungary", flag: "🇭🇺" },
+];
 import {
   MapPin,
   User,
@@ -62,6 +108,26 @@ export default function OnboardingPage() {
   const navigate = useNavigate();
   const { step, setStep, profile, updateProfile } = useOnboardingStore();
   const [direction, setDirection] = useState(1);
+  const [cityQuery, setCityQuery] = useState(profile.city);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const suggestionsRef = useRef<HTMLDivElement>(null);
+
+  const filteredCities = cityQuery.trim().length > 0
+    ? cityDatabase.filter(c =>
+        c.city.toLowerCase().includes(cityQuery.toLowerCase()) ||
+        c.country.toLowerCase().includes(cityQuery.toLowerCase())
+      ).slice(0, 6)
+    : [];
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (suggestionsRef.current && !suggestionsRef.current.contains(e.target as Node)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
   const goNext = () => {
     if (step < 3) {
@@ -155,14 +221,41 @@ export default function OnboardingPage() {
                     <h1 className="text-3xl font-display font-bold text-foreground mb-2">Where are you moving?</h1>
                     <p className="text-muted-foreground">Enter your new city so we can find local resources for you.</p>
                   </div>
-                  <div className="relative">
-                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <div className="relative" ref={suggestionsRef}>
+                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground z-10" />
                     <Input
-                      placeholder="e.g., Munich, Berlin, Zurich..."
-                      value={profile.city}
-                      onChange={(e) => updateProfile({ city: e.target.value })}
+                      placeholder="Start typing a city..."
+                      value={cityQuery}
+                      onChange={(e) => {
+                        setCityQuery(e.target.value);
+                        updateProfile({ city: e.target.value });
+                        setShowSuggestions(true);
+                      }}
+                      onFocus={() => setShowSuggestions(true)}
                       className="pl-10 h-12 text-base"
+                      autoComplete="off"
                     />
+                    {showSuggestions && filteredCities.length > 0 && (
+                      <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-xl shadow-lg overflow-hidden z-50">
+                        {filteredCities.map((c) => (
+                          <button
+                            key={`${c.city}-${c.country}`}
+                            onClick={() => {
+                              setCityQuery(c.city);
+                              updateProfile({ city: c.city });
+                              setShowSuggestions(false);
+                            }}
+                            className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-muted/50 transition-colors border-b border-border last:border-b-0"
+                          >
+                            <span className="text-xl">{c.flag}</span>
+                            <div>
+                              <span className="font-medium text-foreground">{c.city}</span>
+                              <span className="text-sm text-muted-foreground ml-2">{c.country}</span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
