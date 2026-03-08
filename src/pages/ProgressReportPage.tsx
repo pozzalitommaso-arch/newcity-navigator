@@ -13,7 +13,7 @@ const categoryLabels: Record<string, string> = {
   education: "Education", family: "Family Services", housing: "Housing",
   insurance: "Insurance & Health", sports: "Sports & Leisure", finance: "Financial Planning",
   banking: "Banking", pension: "Pension", friends: "Friends & Community",
-  events: "Events & Culture", "public-services": "Public Services",
+  events: "Events & Culture", "public-services": "Public Services", shopping: "Shopping & Furnishing",
 };
 
 export default function ProgressReportPage() {
