@@ -65,6 +65,10 @@ export default function OnboardingPage() {
   const [direction, setDirection] = useState(1);
   const [cityQuery, setCityQuery] = useState(profile.city);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedFlag, setSelectedFlag] = useState(() => {
+    const match = cityDatabase.find(c => c.city === profile.city);
+    return match?.flag || "";
+  });
   const suggestionsRef = useRef<HTMLDivElement>(null);
 
   const filteredCities = cityQuery.trim().length > 0
