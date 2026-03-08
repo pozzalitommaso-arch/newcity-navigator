@@ -109,7 +109,8 @@ export default function PublicServicesPage() {
         ))}
 
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Official Resources</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Official Resources</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Bookmark:</strong> stadt-zuerich.ch and ch.ch are your lifelines for all government services. Book appointments online to avoid queues — walk-ins often mean 1+ hour waits.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {websites.map((s) => (<motion.a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elevated)] transition-all group block">
               <div className="flex items-start justify-between mb-2"><h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">{s.name}</h3><ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary shrink-0" /></div>
