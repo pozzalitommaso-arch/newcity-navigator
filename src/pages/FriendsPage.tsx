@@ -43,23 +43,14 @@ const tips = [
   { icon: Globe, title: "Mix Expat + Local", text: "Balance expat friendships (for shared experience) with local ones (for integration). Both are valuable." },
 ];
 
-const checklist = [
-  { text: "Join an expat group (InterNations or Facebook)", done: false },
-  { text: "Attend your first local meetup or event", done: false },
-  { text: "Find a Tandem language partner", done: false },
-  { text: "Join a local Verein or sports club", done: false },
-  { text: "Attend a Quartierverein neighborhood event", done: false },
-  { text: "Host an Apéro for colleagues or neighbors", done: false },
-  { text: "Sign up for a course (cooking, language, art)", done: false },
-];
-
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
 
 export default function FriendsPage() {
   const navigate = useNavigate();
-  const completedCount = checklist.filter((c) => c.done).length;
-  const progress = Math.round((completedCount / checklist.length) * 100);
+  const { getCategoryProgress, getCategoryStats } = useChecklistStore();
+  const progress = getCategoryProgress("friends");
+  const { completed: completedCount, total } = getCategoryStats("friends");
 
   return (
     <div className="min-h-screen bg-background">
