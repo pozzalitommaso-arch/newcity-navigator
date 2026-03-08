@@ -55,25 +55,14 @@ const tips = [
   { icon: Star, title: "Tenant Rights", text: "The Mieterverband (tenant association) offers free legal advice. You can challenge unfair rent increases." },
 ];
 
-const checklist = [
-  { text: "Create apartment search dossier", done: true },
-  { text: "Register on Homegate & ImmoScout24", done: true },
-  { text: "Set up search alerts for your budget", done: false },
-  { text: "Get Betreibungsauskunft (debt certificate)", done: false },
-  { text: "Attend apartment viewings", done: false },
-  { text: "Sign lease agreement", done: false },
-  { text: "Set up Mietkautionskonto (deposit account)", done: false },
-  { text: "Register at Einwohnerkontrolle (residents' office)", done: false },
-  { text: "Set up electricity, internet, insurance", done: false },
-];
-
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
 
 export default function HousingPage() {
   const navigate = useNavigate();
-  const completedCount = checklist.filter((c) => c.done).length;
-  const progress = Math.round((completedCount / checklist.length) * 100);
+  const { getCategoryProgress, getCategoryStats } = useChecklistStore();
+  const progress = getCategoryProgress("housing");
+  const { completed: completedCount, total } = getCategoryStats("housing");
 
   return (
     <div className="min-h-screen bg-background">
