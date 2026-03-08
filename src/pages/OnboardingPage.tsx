@@ -221,14 +221,41 @@ export default function OnboardingPage() {
                     <h1 className="text-3xl font-display font-bold text-foreground mb-2">Where are you moving?</h1>
                     <p className="text-muted-foreground">Enter your new city so we can find local resources for you.</p>
                   </div>
-                  <div className="relative">
-                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <div className="relative" ref={suggestionsRef}>
+                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground z-10" />
                     <Input
-                      placeholder="e.g., Munich, Berlin, Zurich..."
-                      value={profile.city}
-                      onChange={(e) => updateProfile({ city: e.target.value })}
+                      placeholder="Start typing a city..."
+                      value={cityQuery}
+                      onChange={(e) => {
+                        setCityQuery(e.target.value);
+                        updateProfile({ city: e.target.value });
+                        setShowSuggestions(true);
+                      }}
+                      onFocus={() => setShowSuggestions(true)}
                       className="pl-10 h-12 text-base"
+                      autoComplete="off"
                     />
+                    {showSuggestions && filteredCities.length > 0 && (
+                      <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-xl shadow-lg overflow-hidden z-50">
+                        {filteredCities.map((c) => (
+                          <button
+                            key={`${c.city}-${c.country}`}
+                            onClick={() => {
+                              setCityQuery(c.city);
+                              updateProfile({ city: c.city });
+                              setShowSuggestions(false);
+                            }}
+                            className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-muted/50 transition-colors border-b border-border last:border-b-0"
+                          >
+                            <span className="text-xl">{c.flag}</span>
+                            <div>
+                              <span className="font-medium text-foreground">{c.city}</span>
+                              <span className="text-sm text-muted-foreground ml-2">{c.country}</span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
