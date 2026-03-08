@@ -103,6 +103,24 @@ const defaultChecklists: ChecklistData = {
     { text: "Set up cleaning supplies and basics", done: false },
     { text: "Check Tutti.ch for free furniture listings", done: false },
   ],
+  groceries: [
+    { text: "Find your nearest Migros and Coop", done: false },
+    { text: "Discover budget options: Aldi, Lidl, Denner", done: false },
+    { text: "Download the Too Good To Go app for food rescue deals", done: false },
+    { text: "Learn the recycling system (glass, PET, aluminum, paper)", done: false },
+    { text: "Stock up on Saturday — shops are CLOSED on Sundays", done: false },
+    { text: "Try a local weekly market (Bürkliplatz, Helvetiaplatz)", done: false },
+    { text: "Get a Cumulus card (Migros) and Supercard (Coop)", done: false },
+  ],
+  language: [
+    { text: "Assess your current German level (A1–C2)", done: false },
+    { text: "Enroll in a German/Swiss German course", done: false },
+    { text: "Download a language app (Duolingo, Babbel, or Tandem)", done: false },
+    { text: "Join a Tandem language exchange group", done: false },
+    { text: "Practice Swiss German basics (Grüezi, Merci vilmal)", done: false },
+    { text: "Check employer-sponsored language courses", done: false },
+    { text: "Understand permit language requirements (B1 for C permit)", done: false },
+  ],
 };
 
 interface ChecklistStore {
