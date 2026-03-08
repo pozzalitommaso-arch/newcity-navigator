@@ -118,7 +118,7 @@ export default function OnboardingPage() {
   const canProceed = () => {
     switch (step) {
       case 0: return profile.city.trim().length > 0;
-      case 1: return profile.familyStatus && profile.age && profile.profession;
+      case 1: return profile.age.trim().length > 0;
       case 2: return profile.interests.length > 0;
       case 3: return profile.priorities.length > 0;
       default: return true;
