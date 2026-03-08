@@ -47,6 +47,9 @@ const fieldDefinitions: Record<QuickInfoKey, FieldDef[]> = {
   ],
 };
 
+export { fieldDefinitions };
+export type { QuickInfoKey, FieldDef };
+
 const cardMeta: Record<QuickInfoKey, { label: string; icon: React.ElementType; color: string; bg: string }> = {
   address: { label: "My Address", icon: Home, color: "text-primary", bg: "bg-primary/10" },
   bank: { label: "Bank Account", icon: CreditCard, color: "text-info", bg: "bg-info/10" },
@@ -56,7 +59,9 @@ const cardMeta: Record<QuickInfoKey, { label: string; icon: React.ElementType; c
   ahvNumber: { label: "AHV / Social Security", icon: FileText, color: "text-primary", bg: "bg-primary/10" },
 };
 
-function getSummary(category: QuickInfoKey, data: Record<string, string>): string {
+export { cardMeta };
+
+export function getSummary(category: QuickInfoKey, data: Record<string, string>): string {
   const values = Object.values(data).filter(Boolean);
   if (values.length === 0) return "";
   switch (category) {
@@ -70,9 +75,19 @@ function getSummary(category: QuickInfoKey, data: Record<string, string>): strin
   }
 }
 
-export default function EssentialsCard({ category }: { category: QuickInfoKey }) {
-  const { profile, updateQuickInfo } = useOnboardingStore();
-  const stored = profile.quickInfo[category] as unknown as Record<string, string>;
+interface EssentialsCardProps {
+  category: QuickInfoKey;
+  memberId?: string; // If provided, edits that family member's quickInfo
+  memberLabel?: string;
+}
+
+export default function EssentialsCard({ category, memberId, memberLabel }: EssentialsCardProps) {
+  const { profile, updateQuickInfo, updateFamilyMemberQuickInfo } = useOnboardingStore();
+  
+  const stored = memberId
+    ? (profile.familyMembers.find(m => m.id === memberId)?.quickInfo[category] as unknown as Record<string, string>) || {}
+    : (profile.quickInfo[category] as unknown as Record<string, string>);
+  
   const [isEditing, setIsEditing] = useState(false);
   const [draft, setDraft] = useState<Record<string, string>>({});
 
@@ -87,7 +102,11 @@ export default function EssentialsCard({ category }: { category: QuickInfoKey })
   };
 
   const save = () => {
-    updateQuickInfo({ [category]: draft });
+    if (memberId) {
+      updateFamilyMemberQuickInfo(memberId, { [category]: draft });
+    } else {
+      updateQuickInfo({ [category]: draft });
+    }
     setIsEditing(false);
   };
 
@@ -100,7 +119,12 @@ export default function EssentialsCard({ category }: { category: QuickInfoKey })
           <div className={`p-1.5 rounded-lg ${meta.bg}`}>
             <Icon className={`h-4 w-4 ${meta.color}`} />
           </div>
-          <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">{meta.label}</span>
+          <div>
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">{meta.label}</span>
+            {memberLabel && (
+              <span className="text-xs text-muted-foreground ml-1.5">· {memberLabel}</span>
+            )}
+          </div>
         </div>
         {!isEditing && (
           <button
