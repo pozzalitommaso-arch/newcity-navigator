@@ -179,7 +179,8 @@ export default function InsurancePage() {
 
         {/* Websites */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Comparison Platforms</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Comparison Platforms</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Start here:</strong> Comparis.ch is the gold standard — 5 minutes of comparison can save you CHF 1'000+/year. Always check Priminfo for the official government data too.</p>
           <div className="grid sm:grid-cols-2 gap-4">
             {websites.map((site) => (
               <a key={site.name} href={site.url} target="_blank" rel="noopener noreferrer" className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elevated)] transition-all group block">
