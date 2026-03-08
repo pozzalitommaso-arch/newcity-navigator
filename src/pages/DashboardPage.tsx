@@ -4,7 +4,7 @@ import { useOnboardingStore } from "@/lib/onboarding-store";
 import { useChecklistStore } from "@/lib/checklist-store";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import EssentialsCard from "@/components/EssentialsCard";
+
 import ThemeToggle from "@/components/ThemeToggle";
 import PageTransition from "@/components/PageTransition";
 import {
@@ -144,16 +144,40 @@ export default function DashboardPage() {
           </div>
         </motion.div>
 
-        {/* My Essentials */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
-          <h2 className="font-display text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-            <CheckCircle2 className="h-5 w-5 text-primary" /> My Essentials
-          </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {essentialsKeys.map((key) => (
-              <EssentialsCard key={key} category={key} />
-            ))}
+        {/* My Family Info Hub — Core CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}
+          onClick={() => navigate("/my-info")}
+          className="p-6 rounded-2xl glass-strong border border-primary/30 cursor-pointer group hover:border-primary/50 transition-all"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-xl bg-primary/10">
+                <CheckCircle2 className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h2 className="font-display text-xl font-semibold text-foreground">My Family Info Hub</h2>
+                <p className="text-sm text-muted-foreground">All essentials for you, your partner, kids & pets — in one place</p>
+              </div>
+            </div>
+            <ChevronRight className="h-6 w-6 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
           </div>
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mt-4">
+            {essentialsKeys.map((key) => {
+              const stored = profile.quickInfo[key] as unknown as Record<string, string>;
+              const filled = Object.values(stored).some(Boolean);
+              return (
+                <div key={key} className={`p-2 rounded-lg text-center text-xs font-medium ${filled ? "bg-success/10 text-success" : "bg-muted text-muted-foreground"}`}>
+                  {filled ? "✓" : "○"} {key === "emergencyContact" ? "SOS" : key === "ahvNumber" ? "AHV" : key.charAt(0).toUpperCase() + key.slice(1)}
+                </div>
+              );
+            })}
+          </div>
+          {profile.familyMembers.length > 0 && (
+            <p className="text-xs text-muted-foreground mt-3">
+              + {profile.familyMembers.length} family member{profile.familyMembers.length > 1 ? "s" : ""} tracked
+            </p>
+          )}
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-8">
