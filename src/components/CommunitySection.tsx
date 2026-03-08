@@ -60,6 +60,10 @@ const defaultTips: Record<string, Tip[]> = {
   "public-services": [
     { user: "Carlos G.", text: "Go to Kreisbüro early morning. After 10am the wait is 2+ hours.", likes: 27, timeAgo: "2d ago" },
   ],
+  shopping: [
+    { user: "Mia W.", text: "Furnished my entire apartment from Brocki + Tutti.ch for under CHF 400. Patience pays off!", likes: 35, timeAgo: "1d ago" },
+    { user: "Tom K.", text: "Don't forget Züri-Sack! Regular trash bags don't work here. Buy the official ones at Migros.", likes: 29, timeAgo: "3d ago" },
+  ],
 };
 
 const defaultQuestions: Record<string, Question[]> = {
