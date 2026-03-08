@@ -139,9 +139,10 @@ export default function EducationPage() {
 
         {/* Top Schools */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <Star className="h-5 w-5 text-warning" /> Top Schools Near Zurich
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Plan ahead:</strong> ZIS and ICS have 6–12 month waitlists. If you're considering international schools, apply immediately — even before you have a confirmed move date.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {topSchools.map((school) => (
               <motion.div key={school.name} variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-soft)] transition-shadow">
