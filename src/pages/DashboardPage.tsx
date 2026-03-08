@@ -179,7 +179,7 @@ export default function DashboardPage() {
                   <motion.div
                     key={cat.id}
                     variants={item}
-                    onClick={() => cat.id === "housing" ? navigate("/housing") : undefined}
+                    onClick={() => navigate(`/${cat.id}`)}
                     className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-soft)] transition-shadow cursor-pointer group"
                   >
                     <div className="flex items-center justify-between mb-3">
