@@ -1,9 +1,55 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useOnboardingStore } from "@/lib/onboarding-store";
+
+const cityDatabase = [
+  { city: "Zurich", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Geneva", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Basel", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Bern", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Lausanne", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Lucerne", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Winterthur", country: "Switzerland", flag: "🇨🇭" },
+  { city: "St. Gallen", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Lugano", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Zug", country: "Switzerland", flag: "🇨🇭" },
+  { city: "Munich", country: "Germany", flag: "🇩🇪" },
+  { city: "Berlin", country: "Germany", flag: "🇩🇪" },
+  { city: "Hamburg", country: "Germany", flag: "🇩🇪" },
+  { city: "Frankfurt", country: "Germany", flag: "🇩🇪" },
+  { city: "Stuttgart", country: "Germany", flag: "🇩🇪" },
+  { city: "Düsseldorf", country: "Germany", flag: "🇩🇪" },
+  { city: "Cologne", country: "Germany", flag: "🇩🇪" },
+  { city: "Vienna", country: "Austria", flag: "🇦🇹" },
+  { city: "Salzburg", country: "Austria", flag: "🇦🇹" },
+  { city: "Innsbruck", country: "Austria", flag: "🇦🇹" },
+  { city: "Graz", country: "Austria", flag: "🇦🇹" },
+  { city: "Paris", country: "France", flag: "🇫🇷" },
+  { city: "Lyon", country: "France", flag: "🇫🇷" },
+  { city: "Strasbourg", country: "France", flag: "🇫🇷" },
+  { city: "Amsterdam", country: "Netherlands", flag: "🇳🇱" },
+  { city: "Rotterdam", country: "Netherlands", flag: "🇳🇱" },
+  { city: "London", country: "United Kingdom", flag: "🇬🇧" },
+  { city: "Manchester", country: "United Kingdom", flag: "🇬🇧" },
+  { city: "Milan", country: "Italy", flag: "🇮🇹" },
+  { city: "Rome", country: "Italy", flag: "🇮🇹" },
+  { city: "Barcelona", country: "Spain", flag: "🇪🇸" },
+  { city: "Madrid", country: "Spain", flag: "🇪🇸" },
+  { city: "Lisbon", country: "Portugal", flag: "🇵🇹" },
+  { city: "Copenhagen", country: "Denmark", flag: "🇩🇰" },
+  { city: "Stockholm", country: "Sweden", flag: "🇸🇪" },
+  { city: "Oslo", country: "Norway", flag: "🇳🇴" },
+  { city: "Helsinki", country: "Finland", flag: "🇫🇮" },
+  { city: "Dublin", country: "Ireland", flag: "🇮🇪" },
+  { city: "Brussels", country: "Belgium", flag: "🇧🇪" },
+  { city: "Luxembourg", country: "Luxembourg", flag: "🇱🇺" },
+  { city: "Prague", country: "Czech Republic", flag: "🇨🇿" },
+  { city: "Warsaw", country: "Poland", flag: "🇵🇱" },
+  { city: "Budapest", country: "Hungary", flag: "🇭🇺" },
+];
 import {
   MapPin,
   User,
