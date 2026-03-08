@@ -41,9 +41,14 @@ const expenseCategories: ExpenseCategory[] = [
   { id: "savings", label: "Pillar 3a / Savings", icon: PiggyBank, avg: 588, color: "text-success", tip: "Max CHF 7,056/year for Pillar 3a. Tax deductible!" },
 ];
 
+const cityMultipliers: Record<string, number> = {
+  Zurich: 1, Basel: 0.92, Bern: 0.88, Geneva: 1.05, Lausanne: 0.95,
+};
+
 export default function CalculatorPage() {
   const navigate = useNavigate();
   const [salary, setSalary] = useState(8000);
+  const [selectedCity, setSelectedCity] = useState("Zurich");
   const [expenses, setExpenses] = useState<Record<string, number>>(() => {
     const init: Record<string, number> = {};
     expenseCategories.forEach((c) => (init[c.id] = c.avg));
@@ -51,6 +56,15 @@ export default function CalculatorPage() {
   });
   const [includeChildcare, setIncludeChildcare] = useState(false);
   const [includeSchool, setIncludeSchool] = useState(false);
+
+  // Update expenses when city changes
+  const updateCity = (city: string) => {
+    setSelectedCity(city);
+    const mult = cityMultipliers[city] || 1;
+    const updated: Record<string, number> = {};
+    expenseCategories.forEach((c) => (updated[c.id] = Math.round(c.avg * mult)));
+    setExpenses(updated);
+  };
 
   const totalExpenses = Object.entries(expenses).reduce((sum, [id, val]) => {
     if (id === "childcare" && !includeChildcare) return sum;
