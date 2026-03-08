@@ -162,9 +162,10 @@ export default function EducationPage() {
 
         {/* Websites */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <Globe className="h-5 w-5 text-primary" /> Useful Resources
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Start with:</strong> Stadt Zürich Schulamt — they assign your child's public school based on address. Knowing the district school quality can even influence which apartment you choose.</p>
           <div className="grid sm:grid-cols-2 gap-4">
             {websites.map((site) => (
               <a key={site.name} href={site.url} target="_blank" rel="noopener noreferrer" className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elevated)] transition-all group block">
