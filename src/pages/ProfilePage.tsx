@@ -200,11 +200,11 @@ export default function ProfilePage() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
                         <h3 className="font-semibold text-foreground text-sm">{cat.label}</h3>
-                        <span className="text-sm font-bold text-foreground">{cat.progress}%</span>
+                        <span className="text-sm font-bold text-foreground">{catProgress}%</span>
                       </div>
                       <div className="flex items-center gap-2 mt-0.5">
-                        <span className="text-xs text-muted-foreground">{cat.completedTasks}/{cat.totalTasks} tasks</span>
-                        {cat.progress > 0 && (
+                        <span className="text-xs text-muted-foreground">{catStats.completed}/{catStats.total} tasks</span>
+                        {catProgress > 0 && (
                           <span className="text-xs font-medium px-1.5 py-0.5 rounded bg-primary/10 text-primary">
                             {current.emoji} {current.label}
                           </span>
@@ -213,7 +213,7 @@ export default function ProfilePage() {
                     </div>
                   </div>
                   <div className="relative">
-                    <Progress value={cat.progress} className="h-2 bg-muted" />
+                    <Progress value={catProgress} className="h-2 bg-muted" />
                     {/* Milestone markers */}
                     <div className="absolute inset-0 flex items-center pointer-events-none">
                       {cat.milestones.map((m) => (
