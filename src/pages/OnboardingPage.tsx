@@ -26,7 +26,14 @@ import {
   Coffee,
   TreePine,
   Dog,
+  Globe,
+  MessageCircle,
 } from "lucide-react";
+
+const genderOptions = ["Man", "Woman", "Non-binary", "Genderqueer", "Prefer not to say", "Other"];
+const orientationOptions = ["Straight", "Gay", "Lesbian", "Bisexual", "Pansexual", "Asexual", "Queer", "Prefer not to say", "Other"];
+const languageOptions = ["English", "German", "French", "Italian", "Spanish", "Portuguese", "Mandarin", "Japanese", "Korean", "Arabic", "Hindi", "Russian", "Dutch", "Swedish", "Turkish", "Polish"];
+const moveReasonOptions = ["Work / Career", "Studies", "Family", "Love / Partner", "Adventure", "Retirement", "Other"];
 
 const steps = [
   { icon: MapPin, label: "Your City" },
@@ -111,7 +118,7 @@ export default function OnboardingPage() {
   const canProceed = () => {
     switch (step) {
       case 0: return profile.city.trim().length > 0;
-      case 1: return profile.familyStatus && profile.age && profile.profession;
+      case 1: return profile.age.trim().length > 0;
       case 2: return profile.interests.length > 0;
       case 3: return profile.priorities.length > 0;
       default: return true;
@@ -229,11 +236,58 @@ export default function OnboardingPage() {
                 <div className="space-y-6">
                   <div className="text-center">
                     <h1 className="text-3xl font-display font-bold text-foreground mb-2">Tell us about yourself</h1>
-                    <p className="text-muted-foreground">This helps us personalize your experience.</p>
+                    <p className="text-muted-foreground">This helps us personalize your experience. All fields are optional.</p>
                   </div>
-                  <div className="space-y-4">
+                  <div className="space-y-5 max-h-[55vh] overflow-y-auto pr-1">
+                    {/* Gender */}
                     <div>
-                      <label className="text-sm font-medium text-foreground mb-1.5 block">Family Status</label>
+                      <label className="text-sm font-medium text-foreground mb-1.5 block">Gender</label>
+                      <div className="flex flex-wrap gap-2">
+                        {genderOptions.map((g) => (
+                          <button
+                            key={g}
+                            onClick={() => updateProfile({ gender: g, ...(g !== "Other" ? { genderCustom: "" } : {}) })}
+                            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border ${
+                              profile.gender === g
+                                ? "bg-primary text-primary-foreground border-primary"
+                                : "bg-card text-foreground border-border hover:border-primary/50"
+                            }`}
+                          >
+                            {g}
+                          </button>
+                        ))}
+                      </div>
+                      {profile.gender === "Other" && (
+                        <Input placeholder="How do you identify?" value={profile.genderCustom} onChange={(e) => updateProfile({ genderCustom: e.target.value })} className="h-10 mt-2" maxLength={50} />
+                      )}
+                    </div>
+
+                    {/* Orientation */}
+                    <div>
+                      <label className="text-sm font-medium text-foreground mb-1.5 block">Sexual Orientation</label>
+                      <div className="flex flex-wrap gap-2">
+                        {orientationOptions.map((o) => (
+                          <button
+                            key={o}
+                            onClick={() => updateProfile({ orientation: o, ...(o !== "Other" ? { orientationCustom: "" } : {}) })}
+                            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border ${
+                              profile.orientation === o
+                                ? "bg-primary text-primary-foreground border-primary"
+                                : "bg-card text-foreground border-border hover:border-primary/50"
+                            }`}
+                          >
+                            {o}
+                          </button>
+                        ))}
+                      </div>
+                      {profile.orientation === "Other" && (
+                        <Input placeholder="How do you identify?" value={profile.orientationCustom} onChange={(e) => updateProfile({ orientationCustom: e.target.value })} className="h-10 mt-2" maxLength={50} />
+                      )}
+                    </div>
+
+                    {/* Family Status */}
+                    <div>
+                      <label className="text-sm font-medium text-foreground mb-1.5 block">Relationship Status</label>
                       <div className="flex flex-wrap gap-2">
                         {familyStatuses.map((s) => (
                           <button
@@ -250,26 +304,69 @@ export default function OnboardingPage() {
                         ))}
                       </div>
                     </div>
+
+                    {/* Age & Profession */}
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <label className="text-sm font-medium text-foreground mb-1.5 block">Age</label>
-                        <Input
-                          placeholder="e.g., 32"
-                          value={profile.age}
-                          onChange={(e) => updateProfile({ age: e.target.value })}
-                          className="h-11"
-                        />
+                        <Input placeholder="e.g., 32" value={profile.age} onChange={(e) => updateProfile({ age: e.target.value })} className="h-11" maxLength={3} />
                       </div>
                       <div>
                         <label className="text-sm font-medium text-foreground mb-1.5 block">Profession</label>
-                        <Input
-                          placeholder="e.g., Engineer"
-                          value={profile.profession}
-                          onChange={(e) => updateProfile({ profession: e.target.value })}
-                          className="h-11"
-                        />
+                        <Input placeholder="e.g., Engineer" value={profile.profession} onChange={(e) => updateProfile({ profession: e.target.value })} className="h-11" maxLength={100} />
                       </div>
                     </div>
+
+                    {/* Nationality */}
+                    <div>
+                      <label className="text-sm font-medium text-foreground mb-1.5 block flex items-center gap-1.5"><Globe className="h-3.5 w-3.5 text-muted-foreground" />Nationality</label>
+                      <Input placeholder="e.g., Brazilian, German..." value={profile.nationality} onChange={(e) => updateProfile({ nationality: e.target.value })} className="h-11" maxLength={100} />
+                    </div>
+
+                    {/* Languages */}
+                    <div>
+                      <label className="text-sm font-medium text-foreground mb-1.5 block flex items-center gap-1.5"><MessageCircle className="h-3.5 w-3.5 text-muted-foreground" />Languages you speak</label>
+                      <div className="flex flex-wrap gap-2">
+                        {languageOptions.map((lang) => {
+                          const selected = profile.languages.includes(lang);
+                          return (
+                            <button
+                              key={lang}
+                              onClick={() => updateProfile({ languages: toggleArray(profile.languages, lang) })}
+                              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border ${
+                                selected
+                                  ? "bg-primary text-primary-foreground border-primary"
+                                  : "bg-card text-foreground border-border hover:border-primary/50"
+                              }`}
+                            >
+                              {lang}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Reason for moving */}
+                    <div>
+                      <label className="text-sm font-medium text-foreground mb-1.5 block">Why are you moving?</label>
+                      <div className="flex flex-wrap gap-2">
+                        {moveReasonOptions.map((r) => (
+                          <button
+                            key={r}
+                            onClick={() => updateProfile({ moveReason: r })}
+                            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border ${
+                              profile.moveReason === r
+                                ? "bg-primary text-primary-foreground border-primary"
+                                : "bg-card text-foreground border-border hover:border-primary/50"
+                            }`}
+                          >
+                            {r}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Children */}
                     <div className="flex items-center gap-3">
                       <button
                         onClick={() => updateProfile({ hasChildren: !profile.hasChildren })}
