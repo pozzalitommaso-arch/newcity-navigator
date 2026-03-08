@@ -59,6 +59,7 @@ const App = () => (
           <Route path="/my-info" element={<MyInfoPage />} />
           <Route path="/documents" element={<DocumentVaultPage />} />
           <Route path="/progress" element={<ProgressReportPage />} />
+          <Route path="/shopping" element={<ShoppingPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

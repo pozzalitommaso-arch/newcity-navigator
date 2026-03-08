@@ -29,6 +29,7 @@ const categoryData = [
   { id: "friends", icon: Users, label: "Friends & Community", color: "text-accent", bg: "bg-accent/10", desc: "Meet people, networking" },
   { id: "events", icon: CalendarDays, label: "Events & Culture", color: "text-warning", bg: "bg-warning/10", desc: "Local events, festivals" },
   { id: "public-services", icon: FileText, label: "Public Services", color: "text-info", bg: "bg-info/10", desc: "Registration, permits" },
+  { id: "shopping", icon: ShoppingBag, label: "Shopping & Furnishing", color: "text-warning", bg: "bg-warning/10", desc: "Furniture, wardrobe, markets" },
 ];
 
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.05 } } };
