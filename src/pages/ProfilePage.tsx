@@ -182,8 +182,10 @@ export default function ProfilePage() {
           </h2>
           <motion.div className="space-y-3" variants={container} initial="hidden" animate="show">
             {categories.map((cat) => {
-              const current = getCurrentMilestone(cat.progress, cat.milestones);
-              const next = getNextMilestone(cat.progress, cat.milestones);
+              const catProgress = checklistStore.getCategoryProgress(cat.id);
+              const catStats = checklistStore.getCategoryStats(cat.id);
+              const current = getCurrentMilestone(catProgress, cat.milestones);
+              const next = getNextMilestone(catProgress, cat.milestones);
               return (
                 <motion.div
                   key={cat.id}
