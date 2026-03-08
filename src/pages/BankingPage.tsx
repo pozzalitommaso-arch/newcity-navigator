@@ -63,7 +63,8 @@ export default function BankingPage() {
         </motion.div>
 
         <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Recommended Banks</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Recommended Banks</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Our pick:</strong> Open Neon (free, great app) for daily use + Wise for international transfers. If you prefer a traditional bank, ZKB is rock-solid with cantonal guarantee.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" animate="show">
             {bankOptions.map((b) => (<motion.div key={b.name} variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
               <div className="flex items-start justify-between mb-2"><h3 className="font-semibold text-foreground text-sm">{b.name}</h3><span className="text-xs font-medium bg-info/10 text-info px-2 py-0.5 rounded-full shrink-0">{b.tag}</span></div>
