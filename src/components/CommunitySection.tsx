@@ -64,6 +64,14 @@ const defaultTips: Record<string, Tip[]> = {
     { user: "Mia W.", text: "Furnished my entire apartment from Brocki + Tutti.ch for under CHF 400. Patience pays off!", likes: 35, timeAgo: "1d ago" },
     { user: "Tom K.", text: "Don't forget Züri-Sack! Regular trash bags don't work here. Buy the official ones at Migros.", likes: 29, timeAgo: "3d ago" },
   ],
+  groceries: [
+    { user: "Sarah L.", text: "Aldi's Wednesday specials are unreal. Got a full week of groceries for CHF 45.", likes: 41, timeAgo: "1d ago" },
+    { user: "Pedro M.", text: "Too Good To Go saved me hundreds. CHF 3.99 for a bag of bakery goods from Sprüngli!", likes: 33, timeAgo: "2d ago" },
+  ],
+  language: [
+    { user: "Yuki T.", text: "Migros Klubschule intensive course got me from A1 to B1 in 6 months. Best investment.", likes: 28, timeAgo: "3d ago" },
+    { user: "Anna M.", text: "Don't stress about Swiss German at first. Everyone understands Hochdeutsch. But learn 'Grüezi' day one!", likes: 22, timeAgo: "5d ago" },
+  ],
 };
 
 const defaultQuestions: Record<string, Question[]> = {

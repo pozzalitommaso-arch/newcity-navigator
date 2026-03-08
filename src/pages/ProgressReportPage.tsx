@@ -14,6 +14,7 @@ const categoryLabels: Record<string, string> = {
   insurance: "Insurance & Health", sports: "Sports & Leisure", finance: "Financial Planning",
   banking: "Banking", pension: "Pension", friends: "Friends & Community",
   events: "Events & Culture", "public-services": "Public Services", shopping: "Shopping & Furnishing",
+  groceries: "Groceries & Daily", language: "Language & Integration",
 };
 
 export default function ProgressReportPage() {

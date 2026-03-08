@@ -62,6 +62,8 @@ const App = () => (
           <Route path="/documents" element={<DocumentVaultPage />} />
           <Route path="/progress" element={<ProgressReportPage />} />
           <Route path="/shopping" element={<ShoppingPage />} />
+          <Route path="/groceries" element={<GroceriesPage />} />
+          <Route path="/language" element={<LanguagePage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
