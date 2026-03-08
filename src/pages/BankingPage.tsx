@@ -33,23 +33,14 @@ const tips = [
   { icon: Banknote, title: "Cash Still Matters", text: "Switzerland uses more cash than you'd expect. Keep some CHF on hand, especially for smaller shops and markets." },
 ];
 
-const checklist = [
-  { text: "Open a Swiss bank account (bring ID, permit, work contract)", done: false },
-  { text: "Set up TWINT mobile payment", done: false },
-  { text: "Transfer initial funds to Swiss account", done: false },
-  { text: "Give employer your Swiss IBAN", done: false },
-  { text: "Set up e-banking and mobile app", done: false },
-  { text: "Get a Swiss debit/credit card", done: false },
-  { text: "Set up international transfer solution (Wise)", done: false },
-];
-
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
 
 export default function BankingPage() {
   const navigate = useNavigate();
-  const completedCount = checklist.filter((c) => c.done).length;
-  const progress = Math.round((completedCount / checklist.length) * 100);
+  const { getCategoryProgress, getCategoryStats } = useChecklistStore();
+  const progress = getCategoryProgress("banking");
+  const { completed: completedCount, total } = getCategoryStats("banking");
 
   return (
     <div className="min-h-screen bg-background">
