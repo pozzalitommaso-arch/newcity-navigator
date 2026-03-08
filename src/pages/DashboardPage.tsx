@@ -76,8 +76,9 @@ const quickInfoCards = [
 export default function DashboardPage() {
   const navigate = useNavigate();
   const { profile, updateQuickInfo } = useOnboardingStore();
+  const { getOverallProgress, getCategoryProgress } = useChecklistStore();
   const city = profile.city || "Your City";
-  const overallProgress = Math.round(categoryData.reduce((a, c) => a + c.progress, 0) / categoryData.length);
+  const overallProgress = getOverallProgress();
   const [editingCard, setEditingCard] = useState<string | null>(null);
   const [editValue, setEditValue] = useState("");
 
