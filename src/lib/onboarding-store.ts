@@ -72,12 +72,12 @@ interface OnboardingStore {
 }
 
 const defaultQuickInfo: QuickInfo = {
-  address: '',
-  bank: '',
-  insurance: '',
-  doctor: '',
-  emergencyContact: '',
-  ahvNumber: '',
+  address: { street: '', postalCode: '', city: '' },
+  bank: { bankName: '', iban: '', accountType: '' },
+  insurance: { provider: '', policyNumber: '', plan: '' },
+  doctor: { name: '', phone: '', clinic: '' },
+  emergencyContact: { name: '', phone: '', relationship: '' },
+  ahvNumber: { number: '' },
 };
 
 const defaultProfile: UserProfile = {
