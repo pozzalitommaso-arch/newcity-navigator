@@ -99,11 +99,13 @@ const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transiti
 export default function ProfilePage() {
   const navigate = useNavigate();
   const { profile, updateProfile, reset } = useOnboardingStore();
+  const checklistStore = useChecklistStore();
 
-  const overallProgress = Math.round(categories.reduce((a, c) => a + c.progress, 0) / categories.length);
-  const totalCompleted = categories.reduce((a, c) => a + c.completedTasks, 0);
-  const totalTasks = categories.reduce((a, c) => a + c.totalTasks, 0);
-  const completedCategories = categories.filter(c => c.progress === 100).length;
+  const overallProgress = checklistStore.getOverallProgress();
+  const allCatIds = categories.map(c => c.id);
+  const totalCompleted = allCatIds.reduce((a, id) => a + checklistStore.getCategoryStats(id).completed, 0);
+  const totalTasks = allCatIds.reduce((a, id) => a + checklistStore.getCategoryStats(id).total, 0);
+  const completedCategories = allCatIds.filter(id => checklistStore.getCategoryProgress(id) === 100).length;
   const levelInfo = getLevelInfo(overallProgress);
   const LevelIcon = levelInfo.icon;
 
