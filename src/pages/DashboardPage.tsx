@@ -63,11 +63,22 @@ const notifications = [
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
 const item = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.4 } } };
 
+const quickInfoCards = [
+  { key: "address" as const, label: "My Address", icon: Home, color: "text-primary", bg: "bg-primary/10", placeholder: "e.g., Bahnhofstr. 12, 8001 Zürich" },
+  { key: "bank" as const, label: "Bank Account", icon: CreditCard, color: "text-info", bg: "bg-info/10", placeholder: "e.g., UBS, IBAN CH93..." },
+  { key: "insurance" as const, label: "Health Insurance", icon: Shield, color: "text-success", bg: "bg-success/10", placeholder: "e.g., CSS, Policy #123..." },
+  { key: "doctor" as const, label: "Doctor / GP", icon: Stethoscope, color: "text-accent", bg: "bg-accent/10", placeholder: "e.g., Dr. Müller, +41 44..." },
+  { key: "emergencyContact" as const, label: "Emergency Contact", icon: Phone, color: "text-warning", bg: "bg-warning/10", placeholder: "e.g., Anna, +41 79..." },
+  { key: "ahvNumber" as const, label: "AHV / Social Security", icon: FileText, color: "text-primary", bg: "bg-primary/10", placeholder: "e.g., 756.1234.5678.90" },
+];
+
 export default function DashboardPage() {
   const navigate = useNavigate();
-  const { profile } = useOnboardingStore();
+  const { profile, updateQuickInfo } = useOnboardingStore();
   const city = profile.city || "Your City";
   const overallProgress = Math.round(categoryData.reduce((a, c) => a + c.progress, 0) / categoryData.length);
+  const [editingCard, setEditingCard] = useState<string | null>(null);
+  const [editValue, setEditValue] = useState("");
 
   return (
     <div className="min-h-screen bg-background">
