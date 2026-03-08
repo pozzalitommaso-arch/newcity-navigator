@@ -181,12 +181,17 @@ export default function OnboardingPage() {
                     <p className="text-muted-foreground">Enter your new city so we can find local resources for you.</p>
                   </div>
                   <div className="relative" ref={suggestionsRef}>
-                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground z-10" />
+                    {selectedFlag ? (
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xl z-10">{selectedFlag}</span>
+                    ) : (
+                      <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground z-10" />
+                    )}
                     <Input
                       placeholder="Start typing a city..."
                       value={cityQuery}
                       onChange={(e) => {
                         setCityQuery(e.target.value);
+                        setSelectedFlag("");
                         updateProfile({ city: e.target.value });
                         setShowSuggestions(true);
                       }}
@@ -195,22 +200,23 @@ export default function OnboardingPage() {
                       autoComplete="off"
                     />
                     {showSuggestions && filteredCities.length > 0 && (
-                      <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-xl shadow-lg overflow-hidden z-50">
+                      <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-xl shadow-lg overflow-hidden z-50 max-h-64 overflow-y-auto">
                         {filteredCities.map((c) => (
                           <button
                             key={`${c.city}-${c.country}`}
                             onClick={() => {
-                              setCityQuery(c.city);
+                              setCityQuery(`${c.city}, ${c.country}`);
+                              setSelectedFlag(c.flag);
                               updateProfile({ city: c.city });
                               setShowSuggestions(false);
                             }}
                             className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-muted/50 transition-colors border-b border-border last:border-b-0"
                           >
                             <span className="text-xl">{c.flag}</span>
-                            <div>
+                            <span className="text-sm">
                               <span className="font-medium text-foreground">{c.city}</span>
-                              <span className="text-sm text-muted-foreground ml-2">{c.country}</span>
-                            </div>
+                              <span className="text-muted-foreground">, {c.country}</span>
+                            </span>
                           </button>
                         ))}
                       </div>
