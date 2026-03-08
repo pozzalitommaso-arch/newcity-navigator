@@ -37,6 +37,15 @@ interface OnboardingStore {
   reset: () => void;
 }
 
+const defaultQuickInfo: QuickInfo = {
+  address: '',
+  bank: '',
+  insurance: '',
+  doctor: '',
+  emergencyContact: '',
+  ahvNumber: '',
+};
+
 const defaultProfile: UserProfile = {
   city: '',
   familyStatus: '',
@@ -53,6 +62,7 @@ const defaultProfile: UserProfile = {
   moveReason: '',
   interests: [],
   priorities: [],
+  quickInfo: defaultQuickInfo,
 };
 
 export const useOnboardingStore = create<OnboardingStore>((set) => ({
@@ -61,5 +71,7 @@ export const useOnboardingStore = create<OnboardingStore>((set) => ({
   setStep: (step) => set({ step }),
   updateProfile: (data) =>
     set((state) => ({ profile: { ...state.profile, ...data } })),
+  updateQuickInfo: (data) =>
+    set((state) => ({ profile: { ...state.profile, quickInfo: { ...state.profile.quickInfo, ...data } } })),
   reset: () => set({ step: 0, profile: defaultProfile }),
 }));
