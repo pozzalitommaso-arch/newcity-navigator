@@ -136,7 +136,8 @@ export default function InsurancePage() {
 
         {/* Insurance Types */}
         <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Insurance Types</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Insurance Types</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">We strongly recommend</strong> getting Household Insurance (Hausrat) with theft coverage — break-ins do happen, and for ~CHF 300/year the cost-benefit ratio is excellent. Personal Liability is equally essential, especially with kids.</p>
           <motion.div className="grid sm:grid-cols-2 gap-4" variants={container} initial="hidden" animate="show">
             {insuranceTypes.map((ins) => (
               <motion.div key={ins.name} variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
