@@ -28,12 +28,8 @@ import {
   Users,
   CalendarDays,
   FileText,
-  Pencil,
-  Check,
-  Stethoscope,
-  Phone,
-  CreditCard,
 } from "lucide-react";
+import type { QuickInfo } from "@/lib/onboarding-store";
 
 const categoryData = [
   { id: "education", icon: GraduationCap, label: "Education", progress: 20, color: "text-info", bg: "bg-info/10", tasks: 3, desc: "Schools, courses, enrollment", nextStep: "Research international schools and start enrollment process" },
