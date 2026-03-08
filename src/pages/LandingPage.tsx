@@ -14,6 +14,7 @@ import {
   Bell,
   BarChart3,
   MapPin,
+  User,
 } from "lucide-react";
 
 const features = [
