@@ -97,7 +97,7 @@ export default function CalculatorPage() {
           className="flex gap-2 flex-wrap">
           {(["Zurich", "Basel", "Bern", "Geneva", "Lausanne"] as const).map((c) => (
             <button key={c}
-              onClick={() => setSelectedCity(c)}
+              onClick={() => updateCity(c)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border ${
                 selectedCity === c ? "bg-primary text-primary-foreground border-primary" : "bg-card text-foreground border-border"
               }`}>
