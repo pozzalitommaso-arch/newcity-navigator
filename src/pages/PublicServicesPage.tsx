@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import CategoryChecklist from "@/components/CategoryChecklist";
+import { useChecklistStore } from "@/lib/checklist-store";
 import {
   ArrowLeft, MapPin, ExternalLink, CheckCircle2, Lightbulb,
   FileText, Building2, Stamp, Clock, Globe, AlertTriangle, Car, Home, CreditCard, Scale,
