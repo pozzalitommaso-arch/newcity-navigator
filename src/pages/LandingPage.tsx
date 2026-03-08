@@ -66,10 +66,11 @@ export default function LandingPage() {
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="container mx-auto flex items-center justify-between h-16 px-4">
-          <span className="font-display text-2xl font-bold text-primary">NewBe</span>
-          <Button variant="hero" size="lg" onClick={() => navigate("/onboarding")}>
-            Get Started
-          </Button>
+          <span className="font-display text-2xl font-bold text-primary cursor-pointer" onClick={() => navigate("/")}>NewBe</span>
+          <div className="flex items-center gap-3">
+            <Button variant="ghost" size="sm" onClick={() => navigate("/pricing")}>Pricing</Button>
+            <Button variant="hero" size="lg" onClick={() => navigate("/onboarding")}>Get Started</Button>
+          </div>
         </div>
       </nav>
 
