@@ -64,12 +64,10 @@ const essentialsKeys: (keyof QuickInfo)[] = ["address", "bank", "insurance", "do
 
 export default function DashboardPage() {
   const navigate = useNavigate();
-  const { profile, updateQuickInfo } = useOnboardingStore();
+  const { profile } = useOnboardingStore();
   const { getOverallProgress, getCategoryProgress } = useChecklistStore();
   const city = profile.city || "Your City";
   const overallProgress = getOverallProgress();
-  const [editingCard, setEditingCard] = useState<string | null>(null);
-  const [editValue, setEditValue] = useState("");
 
   return (
     <div className="min-h-screen bg-background">
