@@ -78,24 +78,14 @@ const tips = [
   { icon: BookOpen, title: "Homework Culture", text: "Swiss schools assign regular homework. Many families use Aufgabenhilfe (homework help) programs offered by the city." },
 ];
 
-const checklist = [
-  { text: "Research school options for your children's ages", done: true },
-  { text: "Check public school assignment for your address", done: false },
-  { text: "Visit/apply to international schools if needed", done: false },
-  { text: "Register for German language courses (DaZ)", done: false },
-  { text: "Gather required documents (residence permit, vaccination records)", done: false },
-  { text: "Complete enrollment at assigned school", done: false },
-  { text: "Arrange after-school care (Hort) if needed", done: false },
-  { text: "Connect with school parent community", done: false },
-];
-
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
 
 export default function EducationPage() {
   const navigate = useNavigate();
-  const completedCount = checklist.filter((c) => c.done).length;
-  const progress = Math.round((completedCount / checklist.length) * 100);
+  const { getCategoryProgress, getCategoryStats } = useChecklistStore();
+  const progress = getCategoryProgress("education");
+  const { completed: completedCount, total } = getCategoryStats("education");
 
   return (
     <div className="min-h-screen bg-background">
