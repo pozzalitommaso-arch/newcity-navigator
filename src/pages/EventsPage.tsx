@@ -92,7 +92,8 @@ export default function EventsPage() {
         ))}
 
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Resources</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Resources</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Subscribe to:</strong> Ron Orp daily newsletter — it's the local's secret weapon for knowing what's happening in Zurich. ZürichUnbezahlbar is perfect for finding free events.</p>
           <div className="grid sm:grid-cols-2 gap-4">
             {websites.map((s) => (<a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elevated)] transition-all group block">
               <div className="flex items-start justify-between mb-2"><h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">{s.name}</h3><ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary shrink-0" /></div>
