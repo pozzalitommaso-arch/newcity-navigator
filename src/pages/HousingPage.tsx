@@ -190,9 +190,10 @@ export default function HousingPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <Banknote className="h-5 w-5 text-primary" /> Price Overview — Zurich 2026
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Budget tip:</strong> A 3.5-room apartment in a good district runs CHF 2'000–2'800/month. Plan for 3 months deposit upfront. Buying only makes sense if you're staying 7+ years.</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { label: "Studio / 1.5 room", rent: "1'200–1'800", buy: "8'000–14'000" },
