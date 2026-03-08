@@ -67,10 +67,22 @@ const interestOptions = [
   { id: "arts", label: "Arts & Culture", icon: Palette },
   { id: "music", label: "Music", icon: Music },
   { id: "reading", label: "Reading", icon: BookOpen },
-  { id: "outdoors", label: "Outdoors", icon: TreePine },
-  { id: "food", label: "Food & Dining", icon: Coffee },
-  { id: "pets", label: "Pets", icon: Dog },
+  { id: "outdoors", label: "Outdoors & Hiking", icon: TreePine },
+  { id: "food", label: "Food & Cooking", icon: Utensils },
+  { id: "dining", label: "Restaurants & Bars", icon: Wine },
+  { id: "pets", label: "Pets & Animals", icon: Dog },
   { id: "education", label: "Education", icon: GraduationCap },
+  { id: "photography", label: "Photography", icon: Camera },
+  { id: "gaming", label: "Gaming", icon: Gamepad2 },
+  { id: "cycling", label: "Cycling", icon: Bike },
+  { id: "travel", label: "Travel", icon: Plane },
+  { id: "tech", label: "Tech & Startups", icon: Laptop },
+  { id: "film", label: "Film & Cinema", icon: Film },
+  { id: "swimming", label: "Swimming & Water", icon: Waves },
+  { id: "gardening", label: "Gardening", icon: Flower2 },
+  { id: "volunteering", label: "Volunteering", icon: HandHeart },
+  { id: "languages", label: "Language Learning", icon: Languages },
+  { id: "coffee", label: "Coffee & Cafés", icon: Coffee },
 ];
 
 const priorityOptions = [
@@ -80,8 +92,15 @@ const priorityOptions = [
   { id: "insurance", label: "Insurance & Health", icon: Shield },
   { id: "sports", label: "Sports & Leisure", icon: Dumbbell },
   { id: "finance", label: "Financial Planning", icon: Landmark },
+  { id: "banking", label: "Banking", icon: Building2 },
+  { id: "pension", label: "Pension & Retirement", icon: PiggyBank },
+  { id: "friends", label: "Friends & Community", icon: Users },
+  { id: "events", label: "Events & Culture", icon: CalendarDays },
+  { id: "public-services", label: "Public Services", icon: FileText },
   { id: "safety", label: "Safety & Security", icon: Shield },
   { id: "career", label: "Career", icon: Briefcase },
+  { id: "transport", label: "Transport & Mobility", icon: Car },
+  { id: "healthcare", label: "Healthcare & Doctors", icon: Stethoscope },
 ];
 
 const familyStatuses = ["Single", "In a Relationship", "Married", "Divorced", "Widowed"];
