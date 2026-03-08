@@ -93,25 +93,14 @@ const tips = [
   { icon: Shield, title: "Emergency Fund", text: "Keep 3–6 months of expenses in a savings account before investing. Swiss job protection is weaker than many EU countries." },
 ];
 
-const checklist = [
-  { text: "Open a Swiss bank account", done: false },
-  { text: "Set up salary payment to Swiss IBAN", done: false },
-  { text: "Understand your Quellensteuer (withholding tax)", done: false },
-  { text: "Open a Pillar 3a account (VIAC, Finpension, or bank)", done: false },
-  { text: "Check Pillar 2 pension fund details with employer", done: false },
-  { text: "Set up a monthly budget for Zurich cost of living", done: false },
-  { text: "Register for online tax filing (ZüriTax)", done: false },
-  { text: "Research mortgage options if planning to buy", done: false },
-  { text: "Get a Swiss credit card (if needed)", done: false },
-];
-
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
 
 export default function FinancePage() {
   const navigate = useNavigate();
-  const completedCount = checklist.filter((c) => c.done).length;
-  const progress = Math.round((completedCount / checklist.length) * 100);
+  const { getCategoryProgress, getCategoryStats } = useChecklistStore();
+  const progress = getCategoryProgress("finance");
+  const { completed: completedCount, total } = getCategoryStats("finance");
 
   return (
     <div className="min-h-screen bg-background">
