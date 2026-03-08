@@ -20,6 +20,8 @@ import PublicServicesPage from "./pages/PublicServicesPage";
 import ProfilePage from "./pages/ProfilePage";
 import ChatPage from "./pages/ChatPage";
 import PricingPage from "./pages/PricingPage";
+import TimelinePage from "./pages/TimelinePage";
+import CalculatorPage from "./pages/CalculatorPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -48,6 +50,8 @@ const App = () => (
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/chat" element={<ChatPage />} />
           <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/timeline" element={<TimelinePage />} />
+          <Route path="/calculator" element={<CalculatorPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import CategoryChecklist from "@/components/CategoryChecklist";
+import { useChecklistStore } from "@/lib/checklist-store";
 import {
   ArrowLeft,
   Shield,
@@ -97,25 +99,14 @@ const tips = [
   { icon: Heart, title: "Keep Foreign Records", text: "Bring medical records, vaccination certificates, and previous insurance documentation. Supplementary insurers will ask about medical history." },
 ];
 
-const checklist = [
-  { text: "Compare basic health insurance premiums on Comparis", done: false },
-  { text: "Choose franchise level and insurance model", done: false },
-  { text: "Register for Grundversicherung within 3 months", done: false },
-  { text: "Apply for supplementary insurance if needed", done: false },
-  { text: "Get household + liability insurance (Hausrat + Haftpflicht)", done: false },
-  { text: "Transfer/set up car insurance if applicable", done: false },
-  { text: "Check premium subsidy eligibility", done: false },
-  { text: "Register children for health insurance", done: false },
-  { text: "Find a local GP (Hausarzt) and dentist", done: false },
-];
-
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
 
 export default function InsurancePage() {
   const navigate = useNavigate();
-  const completedCount = checklist.filter((c) => c.done).length;
-  const progress = Math.round((completedCount / checklist.length) * 100);
+  const { getCategoryProgress, getCategoryStats } = useChecklistStore();
+  const progress = getCategoryProgress("insurance");
+  const { completed: completedCount, total } = getCategoryStats("insurance");
 
   return (
     <div className="min-h-screen bg-background">
@@ -216,17 +207,7 @@ export default function InsurancePage() {
 
         {/* Checklist */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="pb-8">
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2"><CheckCircle2 className="h-5 w-5 text-success" /> Insurance Checklist</h2>
-          <div className="max-w-2xl p-6 rounded-2xl bg-card border border-border shadow-[var(--shadow-card)]">
-            <div className="space-y-3">
-              {checklist.map((c, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${c.done ? "bg-success" : "border-2 border-muted"}`}>{c.done && <CheckCircle2 className="h-3 w-3 text-success-foreground" />}</div>
-                  <span className={`text-sm ${c.done ? "line-through text-muted-foreground" : "text-foreground"}`}>{c.text}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <CategoryChecklist categoryId="insurance" title="Insurance Checklist" />
         </motion.section>
       </div>
     </div>

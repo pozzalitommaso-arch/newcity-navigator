@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import CategoryChecklist from "@/components/CategoryChecklist";
+import { useChecklistStore } from "@/lib/checklist-store";
 import {
   ArrowLeft, MapPin, ExternalLink, CheckCircle2, Lightbulb,
   FileText, Building2, Stamp, Clock, Globe, AlertTriangle, Car, Home, CreditCard, Scale,
@@ -61,25 +63,14 @@ const tips = [
   { icon: Home, title: "Abmeldung When Leaving", text: "If you move away, deregister (Abmeldung) at the Kreisbüro. Required for tax final settlement and pension withdrawal." },
 ];
 
-const checklist = [
-  { text: "Register at Einwohnerkontrolle (within 14 days)", done: false },
-  { text: "Apply for / receive residence permit", done: false },
-  { text: "Register for health insurance (within 3 months)", done: false },
-  { text: "Open Swiss bank account", done: false },
-  { text: "Exchange driver's license (within 12 months)", done: false },
-  { text: "Order Betreibungsauskunft for apartment search", done: false },
-  { text: "Set up mail forwarding (Post.ch)", done: false },
-  { text: "Register with tax office if needed", done: false },
-  { text: "Get apostille on foreign documents", done: false },
-];
-
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
 
 export default function PublicServicesPage() {
   const navigate = useNavigate();
-  const completedCount = checklist.filter((c) => c.done).length;
-  const progress = Math.round((completedCount / checklist.length) * 100);
+  const { getCategoryProgress, getCategoryStats } = useChecklistStore();
+  const progress = getCategoryProgress("public-services");
+  const { completed: completedCount, total } = getCategoryStats("public-services");
 
   return (
     <div className="min-h-screen bg-background">
@@ -138,10 +129,7 @@ export default function PublicServicesPage() {
         </motion.section>
 
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="pb-8">
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2"><CheckCircle2 className="h-5 w-5 text-success" /> Admin Checklist</h2>
-          <div className="max-w-2xl p-6 rounded-2xl bg-card border border-border shadow-[var(--shadow-card)]"><div className="space-y-3">
-            {checklist.map((c, i) => (<div key={i} className="flex items-center gap-3"><div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${c.done ? "bg-success" : "border-2 border-muted"}`}>{c.done && <CheckCircle2 className="h-3 w-3 text-success-foreground" />}</div><span className={`text-sm ${c.done ? "line-through text-muted-foreground" : "text-foreground"}`}>{c.text}</span></div>))}
-          </div></div>
+          <CategoryChecklist categoryId="public-services" title="Admin Checklist" />
         </motion.section>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useOnboardingStore } from "@/lib/onboarding-store";
+import { useChecklistStore } from "@/lib/checklist-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
@@ -98,11 +99,13 @@ const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transiti
 export default function ProfilePage() {
   const navigate = useNavigate();
   const { profile, updateProfile, reset } = useOnboardingStore();
+  const checklistStore = useChecklistStore();
 
-  const overallProgress = Math.round(categories.reduce((a, c) => a + c.progress, 0) / categories.length);
-  const totalCompleted = categories.reduce((a, c) => a + c.completedTasks, 0);
-  const totalTasks = categories.reduce((a, c) => a + c.totalTasks, 0);
-  const completedCategories = categories.filter(c => c.progress === 100).length;
+  const overallProgress = checklistStore.getOverallProgress();
+  const allCatIds = categories.map(c => c.id);
+  const totalCompleted = allCatIds.reduce((a, id) => a + checklistStore.getCategoryStats(id).completed, 0);
+  const totalTasks = allCatIds.reduce((a, id) => a + checklistStore.getCategoryStats(id).total, 0);
+  const completedCategories = allCatIds.filter(id => checklistStore.getCategoryProgress(id) === 100).length;
   const levelInfo = getLevelInfo(overallProgress);
   const LevelIcon = levelInfo.icon;
 
@@ -161,8 +164,8 @@ export default function ProfilePage() {
           className="grid grid-cols-3 gap-4">
           {[
             { label: "Tasks Done", value: totalCompleted, icon: Star, color: "text-warning" },
-            { label: "In Progress", value: categories.filter(c => c.progress > 0 && c.progress < 100).length, icon: Flame, color: "text-accent" },
-            { label: "Not Started", value: categories.filter(c => c.progress === 0).length, icon: Target, color: "text-muted-foreground" },
+            { label: "In Progress", value: allCatIds.filter(id => { const p = checklistStore.getCategoryProgress(id); return p > 0 && p < 100; }).length, icon: Flame, color: "text-accent" },
+            { label: "Not Started", value: allCatIds.filter(id => checklistStore.getCategoryProgress(id) === 0).length, icon: Target, color: "text-muted-foreground" },
           ].map((stat) => (
             <div key={stat.label} className="p-4 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] text-center">
               <stat.icon className={`h-5 w-5 mx-auto mb-1 ${stat.color}`} />
@@ -179,8 +182,10 @@ export default function ProfilePage() {
           </h2>
           <motion.div className="space-y-3" variants={container} initial="hidden" animate="show">
             {categories.map((cat) => {
-              const current = getCurrentMilestone(cat.progress, cat.milestones);
-              const next = getNextMilestone(cat.progress, cat.milestones);
+              const catProgress = checklistStore.getCategoryProgress(cat.id);
+              const catStats = checklistStore.getCategoryStats(cat.id);
+              const current = getCurrentMilestone(catProgress, cat.milestones);
+              const next = getNextMilestone(catProgress, cat.milestones);
               return (
                 <motion.div
                   key={cat.id}
@@ -195,11 +200,11 @@ export default function ProfilePage() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
                         <h3 className="font-semibold text-foreground text-sm">{cat.label}</h3>
-                        <span className="text-sm font-bold text-foreground">{cat.progress}%</span>
+                        <span className="text-sm font-bold text-foreground">{catProgress}%</span>
                       </div>
                       <div className="flex items-center gap-2 mt-0.5">
-                        <span className="text-xs text-muted-foreground">{cat.completedTasks}/{cat.totalTasks} tasks</span>
-                        {cat.progress > 0 && (
+                        <span className="text-xs text-muted-foreground">{catStats.completed}/{catStats.total} tasks</span>
+                        {catProgress > 0 && (
                           <span className="text-xs font-medium px-1.5 py-0.5 rounded bg-primary/10 text-primary">
                             {current.emoji} {current.label}
                           </span>
@@ -208,7 +213,7 @@ export default function ProfilePage() {
                     </div>
                   </div>
                   <div className="relative">
-                    <Progress value={cat.progress} className="h-2 bg-muted" />
+                    <Progress value={catProgress} className="h-2 bg-muted" />
                     {/* Milestone markers */}
                     <div className="absolute inset-0 flex items-center pointer-events-none">
                       {cat.milestones.map((m) => (
@@ -218,7 +223,7 @@ export default function ProfilePage() {
                           style={{ left: `${m.at}%`, transform: `translateX(-50%) translateY(-50%)` }}
                         >
                           <div className={`w-2.5 h-2.5 rounded-full border-2 ${
-                            cat.progress >= m.at
+                          cat.progress >= m.at
                               ? "bg-primary border-primary"
                               : "bg-card border-border"
                           }`} />

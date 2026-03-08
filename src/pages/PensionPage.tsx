@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import CategoryChecklist from "@/components/CategoryChecklist";
+import { useChecklistStore } from "@/lib/checklist-store";
 import {
   ArrowLeft, MapPin, ExternalLink, CheckCircle2, Lightbulb,
   PiggyBank, TrendingUp, Shield, Calculator, Banknote, Building2, Clock,
@@ -63,23 +65,14 @@ const websites = [
   { name: "VZ Vermögenszentrum", url: "https://www.vermoegenszentrum.ch", desc: "Independent pension planning and retirement advice.", tag: "Advisory" },
 ];
 
-const checklist = [
-  { text: "Understand the 3-pillar system", done: false },
-  { text: "Open a Pillar 3a account (VIAC or Finpension)", done: false },
-  { text: "Set up monthly 3a contribution (max CHF 588/month)", done: false },
-  { text: "Review Pillar 2 pension certificate from employer", done: false },
-  { text: "Check if BVG voluntary buy-in is possible", done: false },
-  { text: "Request AHV contribution statement", done: false },
-  { text: "Plan multiple 3a accounts for tax-efficient withdrawal", done: false },
-];
-
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
 
 export default function PensionPage() {
   const navigate = useNavigate();
-  const completedCount = checklist.filter((c) => c.done).length;
-  const progress = Math.round((completedCount / checklist.length) * 100);
+  const { getCategoryProgress, getCategoryStats } = useChecklistStore();
+  const progress = getCategoryProgress("pension");
+  const { completed: completedCount, total } = getCategoryStats("pension");
 
   return (
     <div className="min-h-screen bg-background">
@@ -147,10 +140,7 @@ export default function PensionPage() {
         </motion.section>
 
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="pb-8">
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2"><CheckCircle2 className="h-5 w-5 text-success" /> Pension Checklist</h2>
-          <div className="max-w-2xl p-6 rounded-2xl bg-card border border-border shadow-[var(--shadow-card)]"><div className="space-y-3">
-            {checklist.map((c, i) => (<div key={i} className="flex items-center gap-3"><div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${c.done ? "bg-success" : "border-2 border-muted"}`}>{c.done && <CheckCircle2 className="h-3 w-3 text-success-foreground" />}</div><span className={`text-sm ${c.done ? "line-through text-muted-foreground" : "text-foreground"}`}>{c.text}</span></div>))}
-          </div></div>
+          <CategoryChecklist categoryId="pension" title="Pension Checklist" />
         </motion.section>
       </div>
     </div>

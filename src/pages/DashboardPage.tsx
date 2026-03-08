@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useOnboardingStore } from "@/lib/onboarding-store";
+import { useChecklistStore } from "@/lib/checklist-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
@@ -75,8 +76,9 @@ const quickInfoCards = [
 export default function DashboardPage() {
   const navigate = useNavigate();
   const { profile, updateQuickInfo } = useOnboardingStore();
+  const { getOverallProgress, getCategoryProgress } = useChecklistStore();
   const city = profile.city || "Your City";
-  const overallProgress = Math.round(categoryData.reduce((a, c) => a + c.progress, 0) / categoryData.length);
+  const overallProgress = getOverallProgress();
   const [editingCard, setEditingCard] = useState<string | null>(null);
   const [editValue, setEditValue] = useState("");
 
@@ -216,7 +218,9 @@ export default function DashboardPage() {
             <div>
               <h2 className="font-display text-xl font-semibold text-foreground mb-4">Life Categories</h2>
               <motion.div className="grid sm:grid-cols-2 gap-4" variants={container} initial="hidden" animate="show">
-                {categoryData.map((cat) => (
+                {categoryData.map((cat) => {
+                  const catProgress = getCategoryProgress(cat.id);
+                  return (
                   <motion.div
                     key={cat.id}
                     variants={item}
@@ -234,12 +238,13 @@ export default function DashboardPage() {
                       <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                     </div>
                     <div className="flex items-center gap-3">
-                      <Progress value={cat.progress} className="h-2 flex-1 bg-muted" />
-                      <span className="text-sm font-medium text-muted-foreground">{cat.progress}%</span>
+                      <Progress value={catProgress} className="h-2 flex-1 bg-muted" />
+                      <span className="text-sm font-medium text-muted-foreground">{catProgress}%</span>
                     </div>
                     <p className="text-xs text-muted-foreground mt-2">{cat.tasks} tasks pending</p>
                   </motion.div>
-                ))}
+                  );
+                })}
               </motion.div>
             </div>
           </div>

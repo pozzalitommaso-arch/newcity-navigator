@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import CategoryChecklist from "@/components/CategoryChecklist";
+import { useChecklistStore } from "@/lib/checklist-store";
 import {
   ArrowLeft, MapPin, ExternalLink, CheckCircle2, Lightbulb,
   Building2, CreditCard, Globe, Banknote, Wallet, Shield, Smartphone,
@@ -31,23 +33,14 @@ const tips = [
   { icon: Banknote, title: "Cash Still Matters", text: "Switzerland uses more cash than you'd expect. Keep some CHF on hand, especially for smaller shops and markets." },
 ];
 
-const checklist = [
-  { text: "Open a Swiss bank account (bring ID, permit, work contract)", done: false },
-  { text: "Set up TWINT mobile payment", done: false },
-  { text: "Transfer initial funds to Swiss account", done: false },
-  { text: "Give employer your Swiss IBAN", done: false },
-  { text: "Set up e-banking and mobile app", done: false },
-  { text: "Get a Swiss debit/credit card", done: false },
-  { text: "Set up international transfer solution (Wise)", done: false },
-];
-
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
 
 export default function BankingPage() {
   const navigate = useNavigate();
-  const completedCount = checklist.filter((c) => c.done).length;
-  const progress = Math.round((completedCount / checklist.length) * 100);
+  const { getCategoryProgress, getCategoryStats } = useChecklistStore();
+  const progress = getCategoryProgress("banking");
+  const { completed: completedCount, total } = getCategoryStats("banking");
 
   return (
     <div className="min-h-screen bg-background">
@@ -102,10 +95,7 @@ export default function BankingPage() {
         </motion.section>
 
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="pb-8">
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2"><CheckCircle2 className="h-5 w-5 text-success" /> Banking Checklist</h2>
-          <div className="max-w-2xl p-6 rounded-2xl bg-card border border-border shadow-[var(--shadow-card)]"><div className="space-y-3">
-            {checklist.map((c, i) => (<div key={i} className="flex items-center gap-3"><div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${c.done ? "bg-success" : "border-2 border-muted"}`}>{c.done && <CheckCircle2 className="h-3 w-3 text-success-foreground" />}</div><span className={`text-sm ${c.done ? "line-through text-muted-foreground" : "text-foreground"}`}>{c.text}</span></div>))}
-          </div></div>
+          <CategoryChecklist categoryId="banking" title="Banking Checklist" />
         </motion.section>
       </div>
     </div>
