@@ -99,25 +99,14 @@ const tips = [
   { icon: Heart, title: "Keep Foreign Records", text: "Bring medical records, vaccination certificates, and previous insurance documentation. Supplementary insurers will ask about medical history." },
 ];
 
-const checklist = [
-  { text: "Compare basic health insurance premiums on Comparis", done: false },
-  { text: "Choose franchise level and insurance model", done: false },
-  { text: "Register for Grundversicherung within 3 months", done: false },
-  { text: "Apply for supplementary insurance if needed", done: false },
-  { text: "Get household + liability insurance (Hausrat + Haftpflicht)", done: false },
-  { text: "Transfer/set up car insurance if applicable", done: false },
-  { text: "Check premium subsidy eligibility", done: false },
-  { text: "Register children for health insurance", done: false },
-  { text: "Find a local GP (Hausarzt) and dentist", done: false },
-];
-
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
 
 export default function InsurancePage() {
   const navigate = useNavigate();
-  const completedCount = checklist.filter((c) => c.done).length;
-  const progress = Math.round((completedCount / checklist.length) * 100);
+  const { getCategoryProgress, getCategoryStats } = useChecklistStore();
+  const progress = getCategoryProgress("insurance");
+  const { completed: completedCount, total } = getCategoryStats("insurance");
 
   return (
     <div className="min-h-screen bg-background">
