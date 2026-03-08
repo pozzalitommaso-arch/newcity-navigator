@@ -259,6 +259,8 @@ export default function HousingPage() {
         >
           <CategoryChecklist categoryId="housing" title="Housing Checklist" />
         </motion.section>
+
+        <CommunitySection category="housing" />
       </div>
     </div>
   );
