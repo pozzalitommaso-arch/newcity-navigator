@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import ZurichMap from "@/components/ZurichMap";
+import CategoryChecklist from "@/components/CategoryChecklist";
+import { useChecklistStore } from "@/lib/checklist-store";
 import {
   ArrowLeft,
   Home,
