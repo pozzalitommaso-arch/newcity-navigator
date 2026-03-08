@@ -109,7 +109,8 @@ export default function PensionPage() {
         ))}
 
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Best Pillar 3a Providers</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Best Pillar 3a Providers</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Our top pick:</strong> Finpension (0.39% fees) or VIAC (0.44%) — both invest in low-cost index funds. Avoid bank savings 3a accounts that earn near 0%. Over 30 years, investing returns 3x more.</p>
           <div className="grid sm:grid-cols-2 gap-4">
             {providers.map((p) => (<div key={p.name} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
               <div className="flex items-start justify-between mb-2"><h3 className="font-semibold text-foreground">{p.name}</h3><span className="text-xs font-medium bg-success/10 text-success px-2 py-0.5 rounded-full">{p.tag}</span></div>
