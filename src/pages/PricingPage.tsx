@@ -12,6 +12,9 @@ import {
   Users,
   Shield,
   Headphones,
+  MapPinned,
+  Coffee,
+  CalendarCheck,
 } from "lucide-react";
 
 const plans = [
