@@ -1,3 +1,4 @@
+import CommunitySection from "@/components/CommunitySection";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -100,6 +101,8 @@ export default function BankingPage() {
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="pb-8">
           <CategoryChecklist categoryId="banking" title="Banking Checklist" />
         </motion.section>
+
+        <CommunitySection category="banking" />
       </div>
     </div>
   );

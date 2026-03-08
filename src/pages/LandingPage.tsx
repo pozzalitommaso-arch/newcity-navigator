@@ -20,6 +20,8 @@ import {
   CheckCircle,
   Zap,
   Globe,
+  FileText,
+  Users,
 } from "lucide-react";
 
 const features = [
@@ -87,85 +89,104 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* Hero — with mesh gradient background */}
+      {/* Hero — Emotional Hook */}
       <section className="relative pt-16 overflow-hidden gradient-mesh-bg">
-        {/* Decorative orbs */}
         <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
         <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-accent/8 blur-3xl pointer-events-none" />
 
-        <div className="container mx-auto px-4 py-20 lg:py-32 flex flex-col lg:flex-row items-center gap-12 relative z-10">
+        <div className="container mx-auto px-4 py-20 lg:py-28 relative z-10">
           <motion.div
-            className="flex-1 text-center lg:text-left"
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
+            className="text-center max-w-3xl mx-auto mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.2 }}
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6"
             >
               <Sparkles className="h-4 w-4" /> AI-Powered Relocation
             </motion.div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground leading-tight mb-6">
-              Your AI Guide to{" "}
-              <span className="gradient-text">Feeling at Home</span> in a New City
+              Moving to a new city?<br />
+              <span className="gradient-text">We know the feeling.</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0">
-              NewBe helps you navigate every aspect of relocating — from schools
-              and insurance to sports clubs and local services. Powered by AI,
-              personalized for you.
+            <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
+              Bureaucracy, housing, insurance, making friends — it's overwhelming.
+              NewBe turns chaos into a clear, personalized action plan.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button size="lg" onClick={() => navigate("/onboarding")} className="text-base px-8 h-12 shadow-lg hover:shadow-xl transition-shadow">
-                Start Your Journey <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button variant="outline" size="lg" className="text-base px-8 h-12" onClick={() => {
-                document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
-              }}>
-                Learn More
-              </Button>
-            </div>
+          </motion.div>
 
-            {/* Stats row */}
-            <motion.div
-              className="flex flex-wrap gap-8 mt-12 justify-center lg:justify-start"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              {stats.map((stat) => (
-                <div key={stat.label} className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-primary/10">
-                    <stat.icon className="h-4 w-4 text-primary" />
+          {/* "What's your biggest worry?" cards */}
+          <motion.div
+            className="max-w-3xl mx-auto mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            <h2 className="text-center text-lg font-display font-semibold text-foreground mb-6">
+              What worries you most about moving?
+            </h2>
+            <div className="grid sm:grid-cols-3 gap-4">
+              {[
+                { icon: FileText, label: "Paperwork & Bureaucracy", desc: "Permits, registration, insurance deadlines", color: "text-info", bg: "bg-info/10", path: "/onboarding" },
+                { icon: Home, label: "Housing & Setup", desc: "Finding an apartment, setting up utilities", color: "text-primary", bg: "bg-primary/10", path: "/onboarding" },
+                { icon: Users, label: "Making Friends", desc: "Meeting people, finding your community", color: "text-accent", bg: "bg-accent/10", path: "/onboarding" },
+              ].map((card) => (
+                <motion.button
+                  key={card.label}
+                  whileHover={{ y: -4 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => navigate(card.path)}
+                  className="bento-card text-left !p-5 cursor-pointer group"
+                >
+                  <div className={`p-3 rounded-xl ${card.bg} w-fit mb-3 transition-transform group-hover:scale-110`}>
+                    <card.icon className={`h-6 w-6 ${card.color}`} />
                   </div>
-                  <div>
-                    <div className="font-bold text-foreground text-lg leading-none">{stat.value}</div>
-                    <div className="text-xs text-muted-foreground">{stat.label}</div>
-                  </div>
-                </div>
+                  <h3 className="font-display text-base font-semibold text-foreground mb-1">{card.label}</h3>
+                  <p className="text-xs text-muted-foreground">{card.desc}</p>
+                </motion.button>
               ))}
-            </motion.div>
+            </div>
           </motion.div>
 
           <motion.div
-            className="flex-1 relative"
-            initial={{ opacity: 0, x: 40, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45 }}
           >
-            <div className="relative">
-              <img
-                src={heroCity}
-                alt="Vibrant city community illustration"
-                className="rounded-2xl w-full relative z-10"
-                style={{ boxShadow: 'var(--shadow-elevated)' }}
-              />
-              {/* Glow behind image */}
-              <div className="absolute -inset-4 rounded-3xl bg-primary/10 blur-2xl -z-10" />
-            </div>
+            <Button size="lg" onClick={() => navigate("/onboarding")} className="text-base px-8 h-12 shadow-lg hover:shadow-xl transition-shadow">
+              Start Your Journey <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+            <Button variant="outline" size="lg" className="text-base px-8 h-12" onClick={() => {
+              document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
+            }}>
+              Learn More
+            </Button>
+          </motion.div>
+
+          {/* Stats row */}
+          <motion.div
+            className="flex flex-wrap gap-8 mt-12 justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.55 }}
+          >
+            {stats.map((stat) => (
+              <div key={stat.label} className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-primary/10">
+                  <stat.icon className="h-4 w-4 text-primary" />
+                </div>
+                <div>
+                  <div className="font-bold text-foreground text-lg leading-none">{stat.value}</div>
+                  <div className="text-xs text-muted-foreground">{stat.label}</div>
+                </div>
+              </div>
+            ))}
           </motion.div>
         </div>
       </section>

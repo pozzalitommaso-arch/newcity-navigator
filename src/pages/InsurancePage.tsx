@@ -1,3 +1,4 @@
+import CommunitySection from "@/components/CommunitySection";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -213,6 +214,8 @@ export default function InsurancePage() {
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="pb-8">
           <CategoryChecklist categoryId="insurance" title="Insurance Checklist" />
         </motion.section>
+
+        <CommunitySection category="insurance" />
       </div>
     </div>
   );

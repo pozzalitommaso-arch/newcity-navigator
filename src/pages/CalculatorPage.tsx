@@ -41,9 +41,14 @@ const expenseCategories: ExpenseCategory[] = [
   { id: "savings", label: "Pillar 3a / Savings", icon: PiggyBank, avg: 588, color: "text-success", tip: "Max CHF 7,056/year for Pillar 3a. Tax deductible!" },
 ];
 
+const cityMultipliers: Record<string, number> = {
+  Zurich: 1, Basel: 0.92, Bern: 0.88, Geneva: 1.05, Lausanne: 0.95,
+};
+
 export default function CalculatorPage() {
   const navigate = useNavigate();
   const [salary, setSalary] = useState(8000);
+  const [selectedCity, setSelectedCity] = useState("Zurich");
   const [expenses, setExpenses] = useState<Record<string, number>>(() => {
     const init: Record<string, number> = {};
     expenseCategories.forEach((c) => (init[c.id] = c.avg));
@@ -51,6 +56,15 @@ export default function CalculatorPage() {
   });
   const [includeChildcare, setIncludeChildcare] = useState(false);
   const [includeSchool, setIncludeSchool] = useState(false);
+
+  // Update expenses when city changes
+  const updateCity = (city: string) => {
+    setSelectedCity(city);
+    const mult = cityMultipliers[city] || 1;
+    const updated: Record<string, number> = {};
+    expenseCategories.forEach((c) => (updated[c.id] = Math.round(c.avg * mult)));
+    setExpenses(updated);
+  };
 
   const totalExpenses = Object.entries(expenses).reduce((sum, [id, val]) => {
     if (id === "childcare" && !includeChildcare) return sum;
@@ -74,8 +88,22 @@ export default function CalculatorPage() {
 
       <div className="container mx-auto px-4 py-12 max-w-3xl space-y-8">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-2">Cost of Living Calculator</h1>
-          <p className="text-muted-foreground text-lg">Compare your salary against typical Zurich expenses.</p>
+          <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-2">Cost of Living Simulator</h1>
+          <p className="text-muted-foreground text-lg">See exactly what life costs in Swiss cities — and plan accordingly.</p>
+        </motion.div>
+
+        {/* City Comparison Toggle */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.03 }}
+          className="flex gap-2 flex-wrap">
+          {(["Zurich", "Basel", "Bern", "Geneva", "Lausanne"] as const).map((c) => (
+            <button key={c}
+              onClick={() => updateCity(c)}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border ${
+                selectedCity === c ? "bg-primary text-primary-foreground border-primary" : "bg-card text-foreground border-border"
+              }`}>
+              {c}
+            </button>
+          ))}
         </motion.div>
 
         {/* Salary Input */}
@@ -115,6 +143,11 @@ export default function CalculatorPage() {
             <Progress value={Math.min(100, (totalExpenses / Math.max(1, salary)) * 100)} className="h-3 bg-muted flex-1" />
             <span className="text-sm font-medium text-muted-foreground">{savingsRate}% saved</span>
           </div>
+          {selectedCity !== "Zurich" && (
+            <p className="text-xs text-muted-foreground mt-3 flex items-center gap-1">
+              💡 {selectedCity} is typically {cityMultipliers[selectedCity] < 1 ? `${Math.round((1 - cityMultipliers[selectedCity]) * 100)}% cheaper` : `${Math.round((cityMultipliers[selectedCity] - 1) * 100)}% more expensive`} than Zurich overall.
+            </p>
+          )}
         </motion.div>
 
         {/* Toggle optional expenses */}
@@ -141,7 +174,7 @@ export default function CalculatorPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
           className="space-y-3">
           <h2 className="font-display text-xl font-semibold text-foreground flex items-center gap-2">
-            <Calculator className="h-5 w-5 text-primary" /> Monthly Expenses
+            <Calculator className="h-5 w-5 text-primary" /> Monthly Expenses — {selectedCity}
           </h2>
           {expenseCategories.map((cat) => {
             if (cat.id === "childcare" && !includeChildcare) return null;
@@ -172,6 +205,16 @@ export default function CalculatorPage() {
               </div>
             );
           })}
+        </motion.div>
+
+        {/* Shareable summary */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+          className="p-5 rounded-2xl bg-card border border-border shadow-[var(--shadow-card)] text-center">
+          <h3 className="font-display text-lg font-semibold text-foreground mb-1">Your {selectedCity} Budget Summary</h3>
+          <p className="text-sm text-muted-foreground mb-3">
+            On a CHF {salary.toLocaleString()}/month salary, you'll spend ~CHF {totalExpenses.toLocaleString()} and save ~CHF {Math.max(0, remaining).toLocaleString()}/month ({savingsRate}%).
+          </p>
+          <p className="text-xs text-muted-foreground">💡 Share this with your partner or employer to plan your move.</p>
         </motion.div>
       </div>
     </div>

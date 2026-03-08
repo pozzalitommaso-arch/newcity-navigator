@@ -1,3 +1,4 @@
+import CommunitySection from "@/components/CommunitySection";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -258,6 +259,8 @@ export default function HousingPage() {
         >
           <CategoryChecklist categoryId="housing" title="Housing Checklist" />
         </motion.section>
+
+        <CommunitySection category="housing" />
       </div>
     </div>
   );
