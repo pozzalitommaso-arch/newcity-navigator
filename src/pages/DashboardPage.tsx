@@ -243,7 +243,8 @@ export default function DashboardPage() {
                     </div>
                     <p className="text-xs text-muted-foreground mt-2">{cat.tasks} tasks pending</p>
                   </motion.div>
-                ))}
+                  );
+                })}
               </motion.div>
             </div>
           </div>
