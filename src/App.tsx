@@ -22,6 +22,7 @@ import ChatPage from "./pages/ChatPage";
 import PricingPage from "./pages/PricingPage";
 import TimelinePage from "./pages/TimelinePage";
 import CalculatorPage from "./pages/CalculatorPage";
+import MyInfoPage from "./pages/MyInfoPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
