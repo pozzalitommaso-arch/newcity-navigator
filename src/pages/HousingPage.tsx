@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import zurichMap from "@/assets/zurich-map.jpg";
+import ZurichMap from "@/components/ZurichMap";
 import {
   ArrowLeft,
   Home,
@@ -118,12 +118,12 @@ export default function HousingPage() {
             <MapPin className="h-5 w-5 text-primary" /> Zurich Districts & Price Map
           </h2>
           <div className="grid lg:grid-cols-2 gap-6">
-            <div className="rounded-2xl overflow-hidden shadow-[var(--shadow-elevated)] border border-border">
-              <img src={zurichMap} alt="Map of Zurich districts with neighborhoods" className="w-full h-auto" />
-              <div className="p-4 bg-card">
+            <div>
+              <ZurichMap />
+              <div className="mt-3 p-3 rounded-lg bg-muted/50">
                 <div className="flex items-start gap-2 text-sm text-muted-foreground">
                   <Info className="h-4 w-4 mt-0.5 shrink-0 text-info" />
-                  <p>Prices shown are monthly rent (CHF) for a 3.5-room apartment and buy prices per m² (CHF). Data is approximate for 2026.</p>
+                  <p>Click markers for prices. Monthly rent (CHF) for 3.5-room apartments. Buy prices per m² (CHF). Approximate 2026 data.</p>
                 </div>
               </div>
             </div>
