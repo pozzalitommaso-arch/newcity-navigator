@@ -7,6 +7,13 @@ export interface UserProfile {
   hasChildren: boolean;
   childrenCount: number;
   profession: string;
+  gender: string;
+  genderCustom: string;
+  orientation: string;
+  orientationCustom: string;
+  nationality: string;
+  languages: string[];
+  moveReason: string;
   interests: string[];
   priorities: string[];
 }
@@ -26,6 +33,13 @@ const defaultProfile: UserProfile = {
   hasChildren: false,
   childrenCount: 0,
   profession: '',
+  gender: '',
+  genderCustom: '',
+  orientation: '',
+  orientationCustom: '',
+  nationality: '',
+  languages: [],
+  moveReason: '',
   interests: [],
   priorities: [],
 };

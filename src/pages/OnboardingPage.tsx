@@ -26,7 +26,14 @@ import {
   Coffee,
   TreePine,
   Dog,
+  Globe,
+  MessageCircle,
 } from "lucide-react";
+
+const genderOptions = ["Man", "Woman", "Non-binary", "Genderqueer", "Prefer not to say", "Other"];
+const orientationOptions = ["Straight", "Gay", "Lesbian", "Bisexual", "Pansexual", "Asexual", "Queer", "Prefer not to say", "Other"];
+const languageOptions = ["English", "German", "French", "Italian", "Spanish", "Portuguese", "Mandarin", "Japanese", "Korean", "Arabic", "Hindi", "Russian", "Dutch", "Swedish", "Turkish", "Polish"];
+const moveReasonOptions = ["Work / Career", "Studies", "Family", "Love / Partner", "Adventure", "Retirement", "Other"];
 
 const steps = [
   { icon: MapPin, label: "Your City" },
