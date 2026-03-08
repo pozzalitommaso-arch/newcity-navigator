@@ -93,6 +93,16 @@ const defaultChecklists: ChecklistData = {
     { text: "Set up SBB Half-Fare card or GA", done: false },
     { text: "Register for Serafe (TV/radio fee)", done: false },
   ],
+  shopping: [
+    { text: "Browse IKEA Zürich for essential furniture", done: false },
+    { text: "Check Ricardo.ch for second-hand deals", done: false },
+    { text: "Join Facebook Marketplace Zürich group", done: false },
+    { text: "Visit a Brockenhaus (charity thrift store)", done: false },
+    { text: "Get kitchen essentials (pots, pans, utensils)", done: false },
+    { text: "Buy bedding, towels, and linens", done: false },
+    { text: "Set up cleaning supplies and basics", done: false },
+    { text: "Check Tutti.ch for free furniture listings", done: false },
+  ],
 };
 
 interface ChecklistStore {
