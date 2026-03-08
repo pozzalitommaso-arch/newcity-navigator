@@ -127,9 +127,10 @@ export default function SportsPage() {
         {/* Sport Categories */}
         {sportCategories.map((section) => (
           <motion.section key={section.category} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+            <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
               <section.icon className="h-5 w-5 text-warning" /> {section.category}
             </h2>
+            <p className="text-sm text-muted-foreground mb-4">🔑 {section.category === "Swimming & Water Sports" ? <><strong className="text-foreground">Don't miss:</strong> Lake swimming is a quintessential Zurich experience — Seebad Enge and Utoquai are iconic. Best from June to September, it's free and unforgettable.</> : section.category === "Gym & Fitness" ? <><strong className="text-foreground">Best value:</strong> ASVZ (university sports) at CHF 100/semester is unbeatable if you're affiliated. Otherwise, Migros FitnessCenter offers the best quality-price ratio.</> : section.category === "Outdoor & Hiking" ? <><strong className="text-foreground">Must-do:</strong> Uetliberg is just 30 minutes away and gives you panoramic Alpine views. Join SAC (Swiss Alpine Club) for mountain hut discounts and a great hiking community.</> : <><strong className="text-foreground">Great option:</strong> Parkrun is free every Saturday at Irchelpark — no signup needed. Perfect way to start running and meet people in a friendly, international community.</>}</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {section.spots.map((s) => (
                 <div key={s.name} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
