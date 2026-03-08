@@ -162,7 +162,8 @@ export default function InsurancePage() {
 
         {/* Providers */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Top Health Insurance Providers</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Top Health Insurance Providers</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Our pick:</strong> CSS or Swica for excellent service; compare premiums on Comparis.ch — the exact same coverage varies by CHF 100+/month between providers.</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {providers.map((p) => (
               <div key={p.name} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
