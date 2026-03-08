@@ -439,20 +439,20 @@ export default function OnboardingPage() {
                     <h1 className="text-3xl font-display font-bold text-foreground mb-2">What are your interests?</h1>
                     <p className="text-muted-foreground">Select all that apply — we'll match you with local activities.</p>
                   </div>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto pr-1">
                     {interestOptions.map((opt) => {
                       const selected = profile.interests.includes(opt.id);
                       return (
                         <button
                           key={opt.id}
                           onClick={() => updateProfile({ interests: toggleArray(profile.interests, opt.id) })}
-                          className={`flex items-center gap-3 p-4 rounded-xl border transition-all duration-200 ${
+                          className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all duration-200 ${
                             selected
                               ? "bg-primary/10 border-primary text-foreground shadow-sm"
                               : "bg-card border-border text-foreground hover:border-primary/30"
                           }`}
                         >
-                          <opt.icon className={`h-5 w-5 ${selected ? "text-primary" : "text-muted-foreground"}`} />
+                          <opt.icon className={`h-5 w-5 shrink-0 ${selected ? "text-primary" : "text-muted-foreground"}`} />
                           <span className="text-sm font-medium">{opt.label}</span>
                         </button>
                       );
@@ -467,20 +467,36 @@ export default function OnboardingPage() {
                     <h1 className="text-3xl font-display font-bold text-foreground mb-2">Set your priorities</h1>
                     <p className="text-muted-foreground">What matters most as you settle in?</p>
                   </div>
-                  <div className="grid grid-cols-2 gap-3">
+                  {/* All button */}
+                  <button
+                    onClick={() => {
+                      const allIds = priorityOptions.map(o => o.id);
+                      const allSelected = allIds.every(id => profile.priorities.includes(id));
+                      updateProfile({ priorities: allSelected ? [] : allIds });
+                    }}
+                    className={`w-full flex items-center justify-center gap-2 p-3 rounded-xl border transition-all duration-200 ${
+                      priorityOptions.every(o => profile.priorities.includes(o.id))
+                        ? "bg-accent/10 border-accent text-foreground shadow-sm"
+                        : "bg-card border-border text-foreground hover:border-accent/30"
+                    }`}
+                  >
+                    <CheckCheck className={`h-5 w-5 ${priorityOptions.every(o => profile.priorities.includes(o.id)) ? "text-accent" : "text-muted-foreground"}`} />
+                    <span className="text-sm font-semibold">Select All</span>
+                  </button>
+                  <div className="grid grid-cols-2 gap-3 max-h-[42vh] overflow-y-auto pr-1">
                     {priorityOptions.map((opt) => {
                       const selected = profile.priorities.includes(opt.id);
                       return (
                         <button
                           key={opt.id}
                           onClick={() => updateProfile({ priorities: toggleArray(profile.priorities, opt.id) })}
-                          className={`flex items-center gap-3 p-4 rounded-xl border transition-all duration-200 ${
+                          className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all duration-200 ${
                             selected
                               ? "bg-accent/10 border-accent text-foreground shadow-sm"
                               : "bg-card border-border text-foreground hover:border-accent/30"
                           }`}
                         >
-                          <opt.icon className={`h-5 w-5 ${selected ? "text-accent" : "text-muted-foreground"}`} />
+                          <opt.icon className={`h-5 w-5 shrink-0 ${selected ? "text-accent" : "text-muted-foreground"}`} />
                           <span className="text-sm font-medium">{opt.label}</span>
                         </button>
                       );
