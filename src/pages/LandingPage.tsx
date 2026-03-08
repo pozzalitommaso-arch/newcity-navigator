@@ -70,6 +70,9 @@ export default function LandingPage() {
           <span className="font-display text-2xl font-bold text-primary cursor-pointer" onClick={() => navigate("/")}>NewBe</span>
           <div className="flex items-center gap-3">
             <Button variant="ghost" size="sm" onClick={() => navigate("/pricing")}>Pricing</Button>
+            <Button variant="ghost" size="icon" onClick={() => navigate("/profile")} title="Profile">
+              <User className="h-5 w-5" />
+            </Button>
             <Button variant="hero" size="lg" onClick={() => navigate("/onboarding")}>Get Started</Button>
           </div>
         </div>
