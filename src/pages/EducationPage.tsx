@@ -116,9 +116,10 @@ export default function EducationPage() {
 
         {/* School Types */}
         <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <GraduationCap className="h-5 w-5 text-info" /> School Types in Switzerland
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Our advice:</strong> Swiss public schools are excellent and free — don't default to expensive international schools. If your child is under 8, they'll pick up German remarkably fast with DaZ support classes.</p>
           <div className="grid sm:grid-cols-2 gap-4">
             {schoolTypes.map((s) => (
               <div key={s.type} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
