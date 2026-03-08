@@ -35,17 +35,17 @@ import {
 } from "lucide-react";
 
 const categoryData = [
-  { id: "education", icon: GraduationCap, label: "Education", progress: 20, color: "text-info", bg: "bg-info/10", tasks: 3, desc: "Schools, courses, enrollment" },
-  { id: "family", icon: Heart, label: "Family Services", progress: 10, color: "text-accent", bg: "bg-accent/10", tasks: 4, desc: "Childcare, family support" },
-  { id: "housing", icon: Home, label: "Housing", progress: 35, color: "text-primary", bg: "bg-primary/10", tasks: 2, desc: "Neighborhood, utilities" },
-  { id: "insurance", icon: Shield, label: "Insurance & Health", progress: 0, color: "text-success", bg: "bg-success/10", tasks: 5, desc: "Health, liability, home" },
-  { id: "sports", icon: Dumbbell, label: "Sports & Leisure", progress: 15, color: "text-warning", bg: "bg-warning/10", tasks: 2, desc: "Clubs, gyms, activities" },
-  { id: "finance", icon: Landmark, label: "Financial Planning", progress: 5, color: "text-primary", bg: "bg-primary/10", tasks: 4, desc: "Retirement, taxes, banking" },
-  { id: "banking", icon: Building2, label: "Banking", progress: 0, color: "text-info", bg: "bg-info/10", tasks: 3, desc: "Accounts, payments, transfers" },
-  { id: "pension", icon: PiggyBank, label: "Pension & Retirement", progress: 0, color: "text-success", bg: "bg-success/10", tasks: 3, desc: "Pillars, 3a, planning" },
-  { id: "friends", icon: Users, label: "Friends & Community", progress: 5, color: "text-accent", bg: "bg-accent/10", tasks: 2, desc: "Meet people, networking" },
-  { id: "events", icon: CalendarDays, label: "Events & Culture", progress: 10, color: "text-warning", bg: "bg-warning/10", tasks: 2, desc: "Local events, festivals" },
-  { id: "public-services", icon: FileText, label: "Public Services", progress: 0, color: "text-info", bg: "bg-info/10", tasks: 5, desc: "Registration, permits, bureaucracy" },
+  { id: "education", icon: GraduationCap, label: "Education", progress: 20, color: "text-info", bg: "bg-info/10", tasks: 3, desc: "Schools, courses, enrollment", nextStep: "Research international schools and start enrollment process" },
+  { id: "family", icon: Heart, label: "Family Services", progress: 10, color: "text-accent", bg: "bg-accent/10", tasks: 4, desc: "Childcare, family support", nextStep: "Register for Kita (daycare) waiting list — spots fill fast" },
+  { id: "housing", icon: Home, label: "Housing", progress: 35, color: "text-primary", bg: "bg-primary/10", tasks: 2, desc: "Neighborhood, utilities", nextStep: "Set up electricity & internet with local providers" },
+  { id: "insurance", icon: Shield, label: "Insurance & Health", progress: 0, color: "text-success", bg: "bg-success/10", tasks: 5, desc: "Health, liability, home", nextStep: "Compare & register for mandatory health insurance (Grundversicherung)" },
+  { id: "sports", icon: Dumbbell, label: "Sports & Leisure", progress: 15, color: "text-warning", bg: "bg-warning/10", tasks: 2, desc: "Clubs, gyms, activities", nextStep: "Browse local sports clubs and sign up for a trial class" },
+  { id: "finance", icon: Landmark, label: "Financial Planning", progress: 5, color: "text-primary", bg: "bg-primary/10", tasks: 4, desc: "Retirement, taxes, banking", nextStep: "Set up a tax filing system and understand deductions" },
+  { id: "banking", icon: Building2, label: "Banking", progress: 0, color: "text-info", bg: "bg-info/10", tasks: 3, desc: "Accounts, payments, transfers", nextStep: "Open a Swiss bank account and set up TWINT" },
+  { id: "pension", icon: PiggyBank, label: "Pension & Retirement", progress: 0, color: "text-success", bg: "bg-success/10", tasks: 3, desc: "Pillars, 3a, planning", nextStep: "Open a Pillar 3a account before year-end for tax savings" },
+  { id: "friends", icon: Users, label: "Friends & Community", progress: 5, color: "text-accent", bg: "bg-accent/10", tasks: 2, desc: "Meet people, networking", nextStep: "Join a local expat meetup or Verein (club)" },
+  { id: "events", icon: CalendarDays, label: "Events & Culture", progress: 10, color: "text-warning", bg: "bg-warning/10", tasks: 2, desc: "Local events, festivals", nextStep: "Check upcoming local events and add them to your calendar" },
+  { id: "public-services", icon: FileText, label: "Public Services", progress: 0, color: "text-info", bg: "bg-info/10", tasks: 5, desc: "Registration, permits, bureaucracy", nextStep: "Register at the Einwohnerkontrolle within 14 days of arrival" },
 ];
 
 const recommendations = [
