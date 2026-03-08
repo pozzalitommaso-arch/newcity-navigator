@@ -223,7 +223,7 @@ export default function ProfilePage() {
                           style={{ left: `${m.at}%`, transform: `translateX(-50%) translateY(-50%)` }}
                         >
                           <div className={`w-2.5 h-2.5 rounded-full border-2 ${
-                            cat.progress >= m.at
+                          cat.progress >= m.at
                               ? "bg-primary border-primary"
                               : "bg-card border-border"
                           }`} />
