@@ -56,6 +56,8 @@ const App = () => (
           <Route path="/timeline" element={<TimelinePage />} />
           <Route path="/calculator" element={<CalculatorPage />} />
           <Route path="/my-info" element={<MyInfoPage />} />
+          <Route path="/documents" element={<DocumentVaultPage />} />
+          <Route path="/progress" element={<ProgressReportPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
