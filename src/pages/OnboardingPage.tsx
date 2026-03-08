@@ -108,6 +108,26 @@ export default function OnboardingPage() {
   const navigate = useNavigate();
   const { step, setStep, profile, updateProfile } = useOnboardingStore();
   const [direction, setDirection] = useState(1);
+  const [cityQuery, setCityQuery] = useState(profile.city);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const suggestionsRef = useRef<HTMLDivElement>(null);
+
+  const filteredCities = cityQuery.trim().length > 0
+    ? cityDatabase.filter(c =>
+        c.city.toLowerCase().includes(cityQuery.toLowerCase()) ||
+        c.country.toLowerCase().includes(cityQuery.toLowerCase())
+      ).slice(0, 6)
+    : [];
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (suggestionsRef.current && !suggestionsRef.current.contains(e.target as Node)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
   const goNext = () => {
     if (step < 3) {
