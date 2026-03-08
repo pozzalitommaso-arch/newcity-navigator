@@ -33,6 +33,7 @@ interface OnboardingStore {
   profile: UserProfile;
   setStep: (step: number) => void;
   updateProfile: (data: Partial<UserProfile>) => void;
+  updateQuickInfo: (data: Partial<QuickInfo>) => void;
   reset: () => void;
 }
 
