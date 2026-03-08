@@ -20,6 +20,8 @@ import {
   CheckCircle,
   Zap,
   Globe,
+  FileText,
+  Users,
 } from "lucide-react";
 
 const features = [

@@ -8,32 +8,11 @@ import { Progress } from "@/components/ui/progress";
 import ThemeToggle from "@/components/ThemeToggle";
 import PageTransition from "@/components/PageTransition";
 import {
-  GraduationCap,
-  Home,
-  Shield,
-  Heart,
-  Dumbbell,
-  Landmark,
-  Bell,
-  Sparkles,
-  MapPin,
-  ArrowRight,
-  CheckCircle2,
-  Clock,
-  AlertCircle,
-  ChevronRight,
-  User,
-  MessageCircle,
-  Building2,
-  PiggyBank,
-  Users,
-  CalendarDays,
-  FileText,
-  Zap,
-  TrendingUp,
-  Calendar,
-  Calculator,
-  Rocket,
+  GraduationCap, Home, Shield, Heart, Dumbbell, Landmark, Bell,
+  Sparkles, MapPin, ArrowRight, CheckCircle2, Clock, AlertCircle,
+  ChevronRight, User, MessageCircle, Building2, PiggyBank, Users,
+  CalendarDays, FileText, Zap, TrendingUp, Calendar, Calculator,
+  Rocket, Timer, PartyPopper, UserPlus, FolderOpen, BarChart3,
 } from "lucide-react";
 import type { QuickInfo } from "@/lib/onboarding-store";
 
@@ -51,30 +30,41 @@ const categoryData = [
   { id: "public-services", icon: FileText, label: "Public Services", color: "text-info", bg: "bg-info/10", desc: "Registration, permits" },
 ];
 
-// Urgent next actions — simulated, could be dynamic
-const urgentActions = [
-  { title: "Register for health insurance", desc: "Required within 3 months of arrival", icon: Shield, color: "text-accent", bg: "bg-accent/10", path: "/insurance", urgent: true },
-  { title: "Register at Einwohnerkontrolle", desc: "Must register within 14 days", icon: FileText, color: "text-info", bg: "bg-info/10", path: "/public-services", urgent: true },
-  { title: "Open a Swiss bank account", desc: "Needed for salary and rent payments", icon: Building2, color: "text-primary", bg: "bg-primary/10", path: "/banking", urgent: false },
-];
-
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.05 } } };
 const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const } } };
 
 const essentialsKeys: (keyof QuickInfo)[] = ["address", "bank", "insurance", "doctor", "emergencyContact", "ahvNumber"];
 
+// Simulated local events
+const localEvents = [
+  { title: "Flohmarkt Bürkliplatz", when: "Saturday, 8am–4pm", type: "Market" },
+  { title: "Free German Tandem Meetup", when: "Wednesday, 7pm", type: "Social" },
+  { title: "Newcomers Brunch — Kreis 5", when: "Sunday, 11am", type: "Community" },
+];
+
 export default function DashboardPage() {
   const navigate = useNavigate();
   const { profile } = useOnboardingStore();
-  const { getOverallProgress, getCategoryProgress, getCategoryStats } = useChecklistStore();
+  const { getOverallProgress, getCategoryProgress, getCategoryStats, checklists } = useChecklistStore();
   const city = profile.city || "Your City";
   const overallProgress = getOverallProgress();
 
-  // Sort categories: in-progress first, then not-started
+  // Compute days since arrival for deadline radar
+  const arrivalDate = profile.arrivalDate ? new Date(profile.arrivalDate) : new Date();
+  const daysSinceArrival = Math.floor((Date.now() - arrivalDate.getTime()) / (1000 * 60 * 60 * 24));
+
+  // Dynamic urgent actions based on arrival date
+  const urgentActions = [
+    { title: "Register at Einwohnerkontrolle", desc: `${Math.max(0, 14 - daysSinceArrival)} days left — required within 14 days`, icon: FileText, color: "text-info", bg: "bg-info/10", path: "/public-services", urgent: daysSinceArrival < 14, daysLeft: Math.max(0, 14 - daysSinceArrival) },
+    { title: "Register for health insurance", desc: `${Math.max(0, 90 - daysSinceArrival)} days left — mandatory within 3 months`, icon: Shield, color: "text-accent", bg: "bg-accent/10", path: "/insurance", urgent: daysSinceArrival < 90, daysLeft: Math.max(0, 90 - daysSinceArrival) },
+    { title: "Open a Swiss bank account", desc: "Needed for salary and rent payments", icon: Building2, color: "text-primary", bg: "bg-primary/10", path: "/banking", urgent: false, daysLeft: 999 },
+    { title: "Prepare your documents", desc: "Track all required paperwork in one place", icon: FolderOpen, color: "text-warning", bg: "bg-warning/10", path: "/documents", urgent: false, daysLeft: 999 },
+  ].filter(a => a.daysLeft > 0 || !a.urgent).slice(0, 4);
+
+  // Sort categories: in-progress first
   const sortedCategories = [...categoryData].sort((a, b) => {
     const pA = getCategoryProgress(a.id);
     const pB = getCategoryProgress(b.id);
-    // In-progress (>0, <100) first, then not started, then completed
     const scoreA = pA > 0 && pA < 100 ? 0 : pA === 0 ? 1 : 2;
     const scoreB = pB > 0 && pB < 100 ? 0 : pB === 0 ? 1 : 2;
     return scoreA - scoreB;
@@ -87,13 +77,11 @@ export default function DashboardPage() {
         <div className="container mx-auto flex items-center justify-between h-16 px-4">
           <span className="font-display text-2xl font-bold gradient-text cursor-pointer" onClick={() => navigate("/")}>NewBe</span>
           <div className="flex items-center gap-1">
+            <Button variant="ghost" size="icon" onClick={() => navigate("/documents")} title="Documents"><FolderOpen className="h-5 w-5" /></Button>
             <Button variant="ghost" size="icon" onClick={() => navigate("/timeline")} title="Timeline"><Calendar className="h-5 w-5" /></Button>
-            <Button variant="ghost" size="icon" onClick={() => navigate("/calculator")} title="Calculator"><Calculator className="h-5 w-5" /></Button>
+            <Button variant="ghost" size="icon" onClick={() => navigate("/calculator")} title="Cost Simulator"><Calculator className="h-5 w-5" /></Button>
+            <Button variant="ghost" size="icon" onClick={() => navigate("/progress")} title="Progress Report"><BarChart3 className="h-5 w-5" /></Button>
             <Button variant="ghost" size="icon" onClick={() => navigate("/chat")} title="AI Assistant"><MessageCircle className="h-5 w-5" /></Button>
-            <Button variant="ghost" size="icon" className="relative" title="Notifications">
-              <Bell className="h-5 w-5" />
-              <span className="absolute -top-0.5 -right-0.5 h-3.5 w-3.5 bg-accent rounded-full border-2 border-background animate-pulse" />
-            </Button>
             <ThemeToggle />
             <Button variant="ghost" size="icon" onClick={() => navigate("/profile")} title="Profile"><User className="h-5 w-5" /></Button>
           </div>
@@ -101,22 +89,31 @@ export default function DashboardPage() {
       </nav>
 
       <div className="container mx-auto px-4 py-8 max-w-5xl space-y-6">
-        {/* Welcome — compact */}
+        {/* Welcome */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <div className="flex items-center gap-2 text-muted-foreground mb-1">
             <MapPin className="h-4 w-4 text-primary" /> <span className="font-medium text-sm">{city}</span>
+            {daysSinceArrival >= 0 && daysSinceArrival < 365 && (
+              <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full ml-2">Day {daysSinceArrival + 1} in {city}</span>
+            )}
           </div>
           <h1 className="text-2xl md:text-3xl font-display font-bold text-foreground">
             Welcome to your <span className="gradient-text">new life!</span>
           </h1>
         </motion.div>
 
-        {/* ── WHAT TO DO NEXT — the focal point ── */}
+        {/* ── FIRST 72 HOURS / DEADLINE RADAR ── */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
           className="p-5 rounded-2xl bg-card border border-accent/20 shadow-[var(--shadow-card)]">
-          <h2 className="font-display text-lg font-semibold text-foreground flex items-center gap-2 mb-3">
-            <Rocket className="h-5 w-5 text-accent" /> What to do next
+          <h2 className="font-display text-lg font-semibold text-foreground flex items-center gap-2 mb-1">
+            <Rocket className="h-5 w-5 text-accent" />
+            {daysSinceArrival <= 3 ? "Your First 72 Hours" : "What to do next"}
           </h2>
+          <p className="text-xs text-muted-foreground mb-3">
+            {daysSinceArrival <= 3
+              ? "Focus on these critical tasks first — they have real deadlines and consequences."
+              : "Your personalized action list based on deadlines and progress."}
+          </p>
           <div className="space-y-2">
             {urgentActions.map((action, i) => (
               <motion.div key={i} variants={fadeUp} initial="hidden" animate="show" transition={{ delay: 0.1 + i * 0.05 }}
@@ -128,9 +125,9 @@ export default function DashboardPage() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <h3 className="text-sm font-semibold text-foreground">{action.title}</h3>
-                    {action.urgent && (
+                    {action.urgent && action.daysLeft <= 14 && (
                       <span className="text-[10px] font-semibold bg-accent/15 text-accent px-2 py-0.5 rounded-full flex items-center gap-0.5">
-                        <Zap className="h-2.5 w-2.5" /> Urgent
+                        <Timer className="h-2.5 w-2.5" /> {action.daysLeft}d left
                       </span>
                     )}
                   </div>
@@ -142,25 +139,81 @@ export default function DashboardPage() {
           </div>
         </motion.div>
 
-        {/* Progress + Info Hub — side by side on desktop */}
+        {/* ── This Week Near You + People Like You ── */}
         <div className="grid sm:grid-cols-2 gap-4">
-          {/* Progress Card */}
+          {/* This week near you */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}
+            className="p-5 rounded-2xl bg-card border border-border shadow-[var(--shadow-card)]">
+            <h2 className="font-display text-base font-semibold text-foreground flex items-center gap-2 mb-3">
+              <PartyPopper className="h-4 w-4 text-warning" /> This Week Near You
+            </h2>
+            <div className="space-y-2.5">
+              {localEvents.map((ev, i) => (
+                <div key={i} className="flex items-start gap-2.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-warning mt-2 shrink-0" />
+                  <div>
+                    <p className="text-sm font-medium text-foreground">{ev.title}</p>
+                    <p className="text-[11px] text-muted-foreground">{ev.when} · {ev.type}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <Button variant="ghost" size="sm" className="mt-3 text-xs" onClick={() => navigate("/events")}>
+              See all events <ArrowRight className="h-3 w-3 ml-1" />
+            </Button>
+          </motion.div>
+
+          {/* People like you */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+            className="p-5 rounded-2xl bg-card border border-primary/20 shadow-[var(--shadow-card)]">
+            <h2 className="font-display text-base font-semibold text-foreground flex items-center gap-2 mb-3">
+              <UserPlus className="h-4 w-4 text-primary" /> People Like You
+            </h2>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="flex -space-x-2">
+                  {[...Array(4)].map((_, i) => (
+                    <div key={i} className="w-8 h-8 rounded-full bg-primary/10 border-2 border-card flex items-center justify-center">
+                      <User className="h-3.5 w-3.5 text-primary" />
+                    </div>
+                  ))}
+                </div>
+                <p className="text-sm text-foreground">
+                  <span className="font-semibold">23 newcomers</span> also moved to {city} this month
+                </p>
+              </div>
+              {profile.nationality && (
+                <p className="text-xs text-muted-foreground">
+                  🌍 8 {profile.nationality} expats are in your area
+                </p>
+              )}
+              <p className="text-xs text-muted-foreground">
+                🎯 Most popular first step: Health insurance registration
+              </p>
+            </div>
+            <Button variant="ghost" size="sm" className="mt-2 text-xs" onClick={() => navigate("/friends")}>
+              Find your community <ArrowRight className="h-3 w-3 ml-1" />
+            </Button>
+          </motion.div>
+        </div>
+
+        {/* Progress + Info Hub */}
+        <div className="grid sm:grid-cols-2 gap-4">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }}
             className="p-5 rounded-2xl glass-strong border border-border/50 cursor-pointer group"
-            onClick={() => navigate("/profile")}>
+            onClick={() => navigate("/progress")}>
             <div className="flex items-center gap-3 mb-3">
               <div className="p-2 rounded-xl bg-primary/10"><TrendingUp className="h-5 w-5 text-primary" /></div>
               <div className="flex-1">
                 <h2 className="font-display text-base font-semibold text-foreground">Progress</h2>
-                <p className="text-xs text-muted-foreground">View achievements →</p>
+                <p className="text-xs text-muted-foreground">View full report →</p>
               </div>
               <span className="text-2xl font-bold gradient-text">{overallProgress}%</span>
             </div>
             <Progress value={overallProgress} className="h-2 bg-muted" />
           </motion.div>
 
-          {/* Family Info Hub */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.14 }}
             onClick={() => navigate("/my-info")}
             className="p-5 rounded-2xl glass-strong border border-primary/20 cursor-pointer group hover:border-primary/40 transition-all">
             <div className="flex items-center gap-3 mb-3">
@@ -217,9 +270,8 @@ export default function DashboardPage() {
           </motion.div>
         </div>
 
-        {/* ── Bottom row: AI + Notifications compact ── */}
+        {/* ── Bottom row: AI + Document Vault ── */}
         <div className="grid sm:grid-cols-2 gap-4 pb-8">
-          {/* AI Chat CTA */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
             onClick={() => navigate("/chat")}
             className="p-5 rounded-2xl cursor-pointer group relative overflow-hidden"
@@ -234,26 +286,17 @@ export default function DashboardPage() {
             </div>
           </motion.div>
 
-          {/* Notifications — compact */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
-            className="p-5 rounded-2xl bg-card border border-border shadow-[var(--shadow-card)]">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="font-display text-base font-semibold text-foreground">Notifications</h3>
-              <Bell className="h-4 w-4 text-muted-foreground" />
-            </div>
-            <div className="space-y-2">
-              {[
-                { text: "School enrollment deadline in 2 weeks", icon: AlertCircle, time: "2h ago", urgent: true },
-                { text: "New family-friendly events this weekend", icon: Heart, time: "5h ago", urgent: false },
-              ].map((n, i) => (
-                <div key={i} className="flex items-start gap-2 text-sm">
-                  <n.icon className={`h-3.5 w-3.5 mt-0.5 shrink-0 ${n.urgent ? "text-accent" : "text-muted-foreground"}`} />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs text-foreground leading-snug">{n.text}</p>
-                    <span className="text-[10px] text-muted-foreground">{n.time}</span>
-                  </div>
-                </div>
-              ))}
+            onClick={() => navigate("/calculator")}
+            className="p-5 rounded-2xl cursor-pointer group relative overflow-hidden"
+            style={{ background: 'var(--gradient-warm)' }}>
+            <div className="relative z-10 flex items-center gap-3">
+              <Calculator className="h-6 w-6 text-primary-foreground" />
+              <div>
+                <h3 className="font-display text-base font-semibold text-primary-foreground">Cost Simulator</h3>
+                <p className="text-xs text-primary-foreground/80">Know your monthly budget before you move</p>
+              </div>
+              <ArrowRight className="h-5 w-5 text-primary-foreground/60 ml-auto group-hover:translate-x-1 transition-transform" />
             </div>
           </motion.div>
         </div>
