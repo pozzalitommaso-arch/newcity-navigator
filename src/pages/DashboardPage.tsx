@@ -4,7 +4,7 @@ import { useOnboardingStore } from "@/lib/onboarding-store";
 import { useChecklistStore } from "@/lib/checklist-store";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import EssentialsCard from "@/components/EssentialsCard";
+
 import ThemeToggle from "@/components/ThemeToggle";
 import PageTransition from "@/components/PageTransition";
 import {
