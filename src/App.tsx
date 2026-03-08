@@ -26,6 +26,8 @@ import MyInfoPage from "./pages/MyInfoPage";
 import DocumentVaultPage from "./pages/DocumentVaultPage";
 import ProgressReportPage from "./pages/ProgressReportPage";
 import ShoppingPage from "./pages/ShoppingPage";
+import GroceriesPage from "./pages/GroceriesPage";
+import LanguagePage from "./pages/LanguagePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
