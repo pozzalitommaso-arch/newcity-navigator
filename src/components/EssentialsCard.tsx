@@ -72,7 +72,7 @@ function getSummary(category: QuickInfoKey, data: Record<string, string>): strin
 
 export default function EssentialsCard({ category }: { category: QuickInfoKey }) {
   const { profile, updateQuickInfo } = useOnboardingStore();
-  const stored = profile.quickInfo[category] as Record<string, string>;
+  const stored = profile.quickInfo[category] as unknown as Record<string, string>;
   const [isEditing, setIsEditing] = useState(false);
   const [draft, setDraft] = useState<Record<string, string>>({});
 

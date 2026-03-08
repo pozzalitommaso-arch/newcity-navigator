@@ -123,53 +123,9 @@ export default function DashboardPage() {
             <CheckCircle2 className="h-5 w-5 text-primary" /> My Essentials
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {quickInfoCards.map((card) => {
-              const value = profile.quickInfo[card.key];
-              const isEditing = editingCard === card.key;
-              return (
-                <div key={card.key} className="p-4 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] group">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <div className={`p-1.5 rounded-lg ${card.bg}`}>
-                        <card.icon className={`h-4 w-4 ${card.color}`} />
-                      </div>
-                      <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">{card.label}</span>
-                    </div>
-                    {!isEditing && (
-                      <button
-                        onClick={() => { setEditingCard(card.key); setEditValue(value); }}
-                        className="opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded hover:bg-muted"
-                      >
-                        <Pencil className="h-3 w-3 text-muted-foreground" />
-                      </button>
-                    )}
-                  </div>
-                  {isEditing ? (
-                    <div className="flex gap-1.5">
-                      <Input
-                        value={editValue}
-                        onChange={(e) => setEditValue(e.target.value)}
-                        placeholder={card.placeholder}
-                        className="h-8 text-sm"
-                        autoFocus
-                        maxLength={200}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter") { updateQuickInfo({ [card.key]: editValue }); setEditingCard(null); }
-                          if (e.key === "Escape") setEditingCard(null);
-                        }}
-                      />
-                      <Button size="icon" variant="ghost" className="h-8 w-8 shrink-0" onClick={() => { updateQuickInfo({ [card.key]: editValue }); setEditingCard(null); }}>
-                        <Check className="h-3.5 w-3.5 text-primary" />
-                      </Button>
-                    </div>
-                  ) : (
-                    <p className={`text-sm truncate ${value ? "text-foreground font-medium" : "text-muted-foreground italic"}`}>
-                      {value || "Not set yet — click to add"}
-                    </p>
-                  )}
-                </div>
-              );
-            })}
+            {essentialsKeys.map((key) => (
+              <EssentialsCard key={key} category={key} />
+            ))}
           </div>
         </motion.div>
 
