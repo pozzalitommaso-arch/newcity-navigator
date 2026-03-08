@@ -104,7 +104,8 @@ export default function FamilyPage() {
         {/* Services by Category */}
         {services.map((section) => (
           <motion.section key={section.category} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <h2 className="font-display text-2xl font-bold text-foreground mb-4">{section.category}</h2>
+            <h2 className="font-display text-2xl font-bold text-foreground mb-1">{section.category}</h2>
+            <p className="text-sm text-muted-foreground mb-4">🔑 {section.category === "Childcare & Daycare (Kita)" ? <><strong className="text-foreground">Register ASAP:</strong> Zurich Kita waitlists are 6–12 months. Register during pregnancy or before moving. City Kitas are income-based and much cheaper than private ones — the quality difference is minimal.</> : section.category === "After-School Care (Hort)" ? <><strong className="text-foreground">Good to know:</strong> School-based Hort is affordable and gives your child supervised time for homework and play. Mittagstisch (lunch table) is a lifesaver for working parents.</> : <><strong className="text-foreground">Don't overlook:</strong> Mütter- und Väterberatung is completely free and incredibly helpful for new parents. The Elternnotruf 24/7 helpline is a safety net every parent should know about.</>}</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {section.items.map((s) => (
                 <div key={s.name} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
