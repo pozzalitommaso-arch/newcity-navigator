@@ -109,7 +109,8 @@ export default function PensionPage() {
         ))}
 
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Best Pillar 3a Providers</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Best Pillar 3a Providers</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Our top pick:</strong> Finpension (0.39% fees) or VIAC (0.44%) — both invest in low-cost index funds. Avoid bank savings 3a accounts that earn near 0%. Over 30 years, investing returns 3x more.</p>
           <div className="grid sm:grid-cols-2 gap-4">
             {providers.map((p) => (<div key={p.name} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
               <div className="flex items-start justify-between mb-2"><h3 className="font-semibold text-foreground">{p.name}</h3><span className="text-xs font-medium bg-success/10 text-success px-2 py-0.5 rounded-full">{p.tag}</span></div>
@@ -120,7 +121,8 @@ export default function PensionPage() {
         </motion.section>
 
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Resources</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Resources</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Must-check:</strong> Request your AHV statement to see your projected Pillar 1 pension. If you moved from abroad, ask HR about voluntary Pillar 2 buy-ins — they're fully tax-deductible.</p>
           <div className="grid sm:grid-cols-2 gap-4">
             {websites.map((s) => (<a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elevated)] transition-all group block">
               <div className="flex items-start justify-between mb-2"><h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">{s.name}</h3><ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary shrink-0" /></div>
@@ -130,7 +132,8 @@ export default function PensionPage() {
         </motion.section>
 
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2"><Lightbulb className="h-5 w-5 text-warning" /> Practical Advice</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2"><Lightbulb className="h-5 w-5 text-warning" /> Practical Advice</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Pro strategy:</strong> Open up to 5 separate 3a accounts from the start. When you retire, withdraw them in different tax years to spread the withdrawal tax and save thousands.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {tips.map((t) => (<motion.div key={t.title} variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
               <div className="flex items-center gap-2 mb-2"><div className="p-2 rounded-lg bg-warning/10"><t.icon className="h-4 w-4 text-warning" /></div><h3 className="font-semibold text-foreground text-sm">{t.title}</h3></div>

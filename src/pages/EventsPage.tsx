@@ -80,7 +80,8 @@ export default function EventsPage() {
 
         {eventCategories.map((section) => (
           <motion.section key={section.category} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2"><section.icon className="h-5 w-5 text-warning" /> {section.category}</h2>
+            <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2"><section.icon className="h-5 w-5 text-warning" /> {section.category}</h2>
+            <p className="text-sm text-muted-foreground mb-4">🔑 {section.category === "Annual Highlights" ? <><strong className="text-foreground">Must-attend:</strong> Sechseläuten in April and Street Parade in August are quintessential Zurich experiences. Mark them on your calendar — they're free and unforgettable.</> : section.category === "Arts & Culture" ? <><strong className="text-foreground">Pro tip:</strong> Kunsthaus is free on Wednesdays! The Zurich Film Festival in September brings world premieres. Theater Spektakel in August is pure magic on the lake.</> : section.category === "Music & Nightlife" ? <><strong className="text-foreground">Worth knowing:</strong> Tonhalle offers affordable lunchtime concerts. For nightlife, Langstrasse in Kreis 4 is the hub — diverse bars, live music, and open until late.</> : <><strong className="text-foreground">Save money:</strong> Farmers markets at Bürkliplatz (Tue/Fri) have the freshest local produce. Christmas markets in November are magical — Hauptbahnhof's Swarovski tree is iconic.</>}</p>
             <div className="grid sm:grid-cols-2 gap-4">
               {section.items.map((e) => (<div key={e.name} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
                 <div className="flex items-start justify-between mb-1"><h3 className="font-semibold text-foreground text-sm">{e.name}</h3><span className="text-xs font-medium bg-warning/10 text-warning px-2 py-0.5 rounded-full shrink-0">{e.tag}</span></div>
@@ -92,7 +93,8 @@ export default function EventsPage() {
         ))}
 
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Resources</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Resources</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Subscribe to:</strong> Ron Orp daily newsletter — it's the local's secret weapon for knowing what's happening in Zurich. ZürichUnbezahlbar is perfect for finding free events.</p>
           <div className="grid sm:grid-cols-2 gap-4">
             {websites.map((s) => (<a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elevated)] transition-all group block">
               <div className="flex items-start justify-between mb-2"><h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">{s.name}</h3><ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary shrink-0" /></div>
@@ -102,7 +104,8 @@ export default function EventsPage() {
         </motion.section>
 
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2"><Lightbulb className="h-5 w-5 text-warning" /> Practical Advice</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2"><Lightbulb className="h-5 w-5 text-warning" /> Practical Advice</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Save big:</strong> Apply for a Kulturlegi card if eligible — it gives 50–70% discounts on museums, concerts, and sports. Also, many museums are free on the first Sunday of the month.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {tips.map((t) => (<motion.div key={t.title} variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
               <div className="flex items-center gap-2 mb-2"><div className="p-2 rounded-lg bg-warning/10"><t.icon className="h-4 w-4 text-warning" /></div><h3 className="font-semibold text-foreground text-sm">{t.title}</h3></div>

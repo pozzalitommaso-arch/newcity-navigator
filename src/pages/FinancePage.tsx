@@ -153,9 +153,10 @@ export default function FinancePage() {
 
         {/* Banks */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <Building2 className="h-5 w-5 text-primary" /> Recommended Banks
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Smart combo:</strong> Use a free digital bank (Neon/Yuh) for daily spending + Wise for international transfers. Traditional banks only if you need mortgage or investment products.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {banks.map((bank) => (
               <motion.div key={bank.name} variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
@@ -172,7 +173,8 @@ export default function FinancePage() {
 
         {/* Websites */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Useful Resources</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Useful Resources</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Essential:</strong> Moneyland.ch is the Swiss financial comparison bible. Use the ESTV tax calculator to estimate your tax burden before negotiating salary.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {websites.map((site) => (
               <motion.a key={site.name} href={site.url} target="_blank" rel="noopener noreferrer" variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elevated)] transition-all group block">
@@ -189,7 +191,8 @@ export default function FinancePage() {
 
         {/* Tips */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2"><Lightbulb className="h-5 w-5 text-warning" /> Practical Advice</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2"><Lightbulb className="h-5 w-5 text-warning" /> Practical Advice</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Top priority:</strong> Open a Pillar 3a account on Day 1 — every year you delay is CHF 1'500–2'500 in lost tax savings. VIAC or Finpension with index fund investing is the smartest choice.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {tips.map((tip) => (
               <motion.div key={tip.title} variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">

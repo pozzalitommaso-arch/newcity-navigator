@@ -116,9 +116,10 @@ export default function EducationPage() {
 
         {/* School Types */}
         <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <GraduationCap className="h-5 w-5 text-info" /> School Types in Switzerland
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Our advice:</strong> Swiss public schools are excellent and free — don't default to expensive international schools. If your child is under 8, they'll pick up German remarkably fast with DaZ support classes.</p>
           <div className="grid sm:grid-cols-2 gap-4">
             {schoolTypes.map((s) => (
               <div key={s.type} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
@@ -138,9 +139,10 @@ export default function EducationPage() {
 
         {/* Top Schools */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <Star className="h-5 w-5 text-warning" /> Top Schools Near Zurich
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Plan ahead:</strong> ZIS and ICS have 6–12 month waitlists. If you're considering international schools, apply immediately — even before you have a confirmed move date.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {topSchools.map((school) => (
               <motion.div key={school.name} variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-soft)] transition-shadow">
@@ -160,9 +162,10 @@ export default function EducationPage() {
 
         {/* Websites */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <Globe className="h-5 w-5 text-primary" /> Useful Resources
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Start with:</strong> Stadt Zürich Schulamt — they assign your child's public school based on address. Knowing the district school quality can even influence which apartment you choose.</p>
           <div className="grid sm:grid-cols-2 gap-4">
             {websites.map((site) => (
               <a key={site.name} href={site.url} target="_blank" rel="noopener noreferrer" className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elevated)] transition-all group block">
@@ -179,9 +182,10 @@ export default function EducationPage() {
 
         {/* Tips */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <Lightbulb className="h-5 w-5 text-warning" /> Practical Advice
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Key insight:</strong> Kindergarten is mandatory from age 4 in Zurich — your child will be automatically assigned. Enroll early for any after-school Hort care as spots fill fast.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {tips.map((tip) => (
               <motion.div key={tip.title} variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">

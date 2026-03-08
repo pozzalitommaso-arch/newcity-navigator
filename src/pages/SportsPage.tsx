@@ -127,9 +127,10 @@ export default function SportsPage() {
         {/* Sport Categories */}
         {sportCategories.map((section) => (
           <motion.section key={section.category} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+            <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
               <section.icon className="h-5 w-5 text-warning" /> {section.category}
             </h2>
+            <p className="text-sm text-muted-foreground mb-4">🔑 {section.category === "Swimming & Water Sports" ? <><strong className="text-foreground">Don't miss:</strong> Lake swimming is a quintessential Zurich experience — Seebad Enge and Utoquai are iconic. Best from June to September, it's free and unforgettable.</> : section.category === "Gym & Fitness" ? <><strong className="text-foreground">Best value:</strong> ASVZ (university sports) at CHF 100/semester is unbeatable if you're affiliated. Otherwise, Migros FitnessCenter offers the best quality-price ratio.</> : section.category === "Outdoor & Hiking" ? <><strong className="text-foreground">Must-do:</strong> Uetliberg is just 30 minutes away and gives you panoramic Alpine views. Join SAC (Swiss Alpine Club) for mountain hut discounts and a great hiking community.</> : <><strong className="text-foreground">Great option:</strong> Parkrun is free every Saturday at Irchelpark — no signup needed. Perfect way to start running and meet people in a friendly, international community.</>}</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {section.spots.map((s) => (
                 <div key={s.name} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
@@ -147,9 +148,10 @@ export default function SportsPage() {
 
         {/* Clubs */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <Trophy className="h-5 w-5 text-warning" /> Popular Sports Clubs
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Integration tip:</strong> Joining a Swiss Verein (sports club) is the #1 way to make local friends. Most offer trial sessions — try 2-3 clubs before committing. The social life is as valuable as the sport.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {clubs.map((club) => (
               <motion.div key={club.name} variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
@@ -169,7 +171,8 @@ export default function SportsPage() {
 
         {/* Websites */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Useful Resources</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Useful Resources</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Bookmark these:</strong> ASVZ.ch and ZürichSport are your go-to portals for finding everything from pool schedules to Vita Parcours trail maps.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {websites.map((site) => (
               <motion.a key={site.name} href={site.url} target="_blank" rel="noopener noreferrer" variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elevated)] transition-all group block">
@@ -186,7 +189,8 @@ export default function SportsPage() {
 
         {/* Tips */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2"><Lightbulb className="h-5 w-5 text-warning" /> Practical Advice</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2"><Lightbulb className="h-5 w-5 text-warning" /> Practical Advice</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Save money:</strong> Children's sports fees are tax-deductible (up to CHF 500/child/year). Keep all receipts! Also, most outdoor activities — running, hiking, swimming, Vita Parcours — are completely free.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {tips.map((tip) => (
               <motion.div key={tip.title} variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">

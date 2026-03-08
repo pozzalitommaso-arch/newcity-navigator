@@ -136,7 +136,8 @@ export default function InsurancePage() {
 
         {/* Insurance Types */}
         <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Insurance Types</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Insurance Types</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">We strongly recommend</strong> getting Household Insurance (Hausrat) with theft coverage — break-ins do happen, and for ~CHF 300/year the cost-benefit ratio is excellent. Personal Liability is equally essential, especially with kids.</p>
           <motion.div className="grid sm:grid-cols-2 gap-4" variants={container} initial="hidden" animate="show">
             {insuranceTypes.map((ins) => (
               <motion.div key={ins.name} variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
@@ -161,7 +162,8 @@ export default function InsurancePage() {
 
         {/* Providers */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Top Health Insurance Providers</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Top Health Insurance Providers</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Our pick:</strong> CSS or Swica for excellent service; compare premiums on Comparis.ch — the exact same coverage varies by CHF 100+/month between providers.</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {providers.map((p) => (
               <div key={p.name} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
@@ -177,7 +179,8 @@ export default function InsurancePage() {
 
         {/* Websites */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Comparison Platforms</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Comparison Platforms</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Start here:</strong> Comparis.ch is the gold standard — 5 minutes of comparison can save you CHF 1'000+/year. Always check Priminfo for the official government data too.</p>
           <div className="grid sm:grid-cols-2 gap-4">
             {websites.map((site) => (
               <a key={site.name} href={site.url} target="_blank" rel="noopener noreferrer" className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elevated)] transition-all group block">
@@ -194,7 +197,8 @@ export default function InsurancePage() {
 
         {/* Tips */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2"><Lightbulb className="h-5 w-5 text-warning" /> Practical Advice</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2"><Lightbulb className="h-5 w-5 text-warning" /> Practical Advice</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Critical reminder:</strong> Don't miss the 3-month deadline for health insurance — late registration means the canton assigns you one at a higher premium with no choice.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {tips.map((tip) => (
               <motion.div key={tip.title} variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">

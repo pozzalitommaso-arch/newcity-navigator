@@ -105,9 +105,10 @@ export default function HousingPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <MapPin className="h-5 w-5 text-primary" /> Zurich Districts & Price Map
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Our recommendation:</strong> Kreis 3 and 9 offer the best value for families. Kreis 4 & 5 are perfect for young professionals. Always check commute times — a 10-min difference saves hours weekly.</p>
           <div className="grid lg:grid-cols-2 gap-6">
             <div>
               <ZurichMap />
@@ -157,9 +158,10 @@ export default function HousingPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <TrendingUp className="h-5 w-5 text-primary" /> Best Websites to Find Apartments
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Pro tip:</strong> Use Homegate + Flatfox simultaneously. Set up alerts for new listings — in Zurich's tight market, the first applicant often wins. Apply within hours, not days.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {websites.map((site) => (
               <motion.a
@@ -188,9 +190,10 @@ export default function HousingPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <Banknote className="h-5 w-5 text-primary" /> Price Overview — Zurich 2026
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Budget tip:</strong> A 3.5-room apartment in a good district runs CHF 2'000–2'800/month. Plan for 3 months deposit upfront. Buying only makes sense if you're staying 7+ years.</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { label: "Studio / 1.5 room", rent: "1'200–1'800", buy: "8'000–14'000" },
@@ -222,9 +225,10 @@ export default function HousingPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
             <Lightbulb className="h-5 w-5 text-warning" /> Practical Advice
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Don't skip this:</strong> Prepare your dossier before you even start viewing. A complete application (ID, salary slips, Betreibungsauskunft, references) gives you a huge advantage.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {tips.map((tip) => (
               <motion.div

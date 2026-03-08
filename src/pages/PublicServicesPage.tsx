@@ -98,6 +98,7 @@ export default function PublicServicesPage() {
               {section.category}
               {section.urgent && <span className="text-xs font-medium bg-accent/10 text-accent px-2 py-0.5 rounded-full">Urgent</span>}
             </h2>
+            <p className="text-sm text-muted-foreground mb-3">🔑 {section.category === "First Steps (Within 14 Days)" ? <><strong className="text-foreground">Do this immediately:</strong> Registration at Einwohnerkontrolle and your residence permit are legally required within 14 days. Bring all documents on your first visit — missing items mean a second trip.</> : section.category === "Within First 3 Months" ? <><strong className="text-foreground">Don't delay:</strong> Health insurance is legally mandatory within 3 months. Opening a bank account early also speeds up everything else — salary, rent, and setting up TWINT.</> : section.category === "Vehicle & Driving" ? <><strong className="text-foreground">Good to know:</strong> EU licenses can be swapped easily. Non-EU licenses require a driving test. Start the process early as appointment wait times can be 2-3 months.</> : <><strong className="text-foreground">As needed:</strong> Order your Betreibungsauskunft (debt certificate) before apartment hunting — landlords always request this. It takes 1-3 days to arrive by post.</>}</p>
             <div className="grid sm:grid-cols-2 gap-4 mt-3">
               {section.items.map((s) => (<div key={s.name} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
                 <div className="flex items-start justify-between mb-2"><h3 className="font-semibold text-foreground text-sm">{s.name}</h3><span className="text-xs font-medium bg-info/10 text-info px-2 py-0.5 rounded-full shrink-0">{s.tag}</span></div>
@@ -109,7 +110,8 @@ export default function PublicServicesPage() {
         ))}
 
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Official Resources</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Official Resources</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Bookmark:</strong> stadt-zuerich.ch and ch.ch are your lifelines for all government services. Book appointments online to avoid queues — walk-ins often mean 1+ hour waits.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {websites.map((s) => (<motion.a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elevated)] transition-all group block">
               <div className="flex items-start justify-between mb-2"><h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">{s.name}</h3><ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary shrink-0" /></div>
@@ -119,7 +121,8 @@ export default function PublicServicesPage() {
         </motion.section>
 
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2"><Lightbulb className="h-5 w-5 text-warning" /> Practical Advice</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2"><Lightbulb className="h-5 w-5 text-warning" /> Practical Advice</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Critical:</strong> Register at Einwohnerkontrolle within 14 days — fines apply for late registration. Apostille your foreign documents (marriage cert, diplomas) before you leave your home country.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {tips.map((t) => (<motion.div key={t.title} variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
               <div className="flex items-center gap-2 mb-2"><div className="p-2 rounded-lg bg-warning/10"><t.icon className="h-4 w-4 text-warning" /></div><h3 className="font-semibold text-foreground text-sm">{t.title}</h3></div>

@@ -104,7 +104,8 @@ export default function FamilyPage() {
         {/* Services by Category */}
         {services.map((section) => (
           <motion.section key={section.category} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <h2 className="font-display text-2xl font-bold text-foreground mb-4">{section.category}</h2>
+            <h2 className="font-display text-2xl font-bold text-foreground mb-1">{section.category}</h2>
+            <p className="text-sm text-muted-foreground mb-4">🔑 {section.category === "Childcare & Daycare (Kita)" ? <><strong className="text-foreground">Register ASAP:</strong> Zurich Kita waitlists are 6–12 months. Register during pregnancy or before moving. City Kitas are income-based and much cheaper than private ones — the quality difference is minimal.</> : section.category === "After-School Care (Hort)" ? <><strong className="text-foreground">Good to know:</strong> School-based Hort is affordable and gives your child supervised time for homework and play. Mittagstisch (lunch table) is a lifesaver for working parents.</> : <><strong className="text-foreground">Don't overlook:</strong> Mütter- und Väterberatung is completely free and incredibly helpful for new parents. The Elternnotruf 24/7 helpline is a safety net every parent should know about.</>}</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {section.items.map((s) => (
                 <div key={s.name} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
@@ -122,7 +123,8 @@ export default function FamilyPage() {
 
         {/* Websites */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Useful Resources</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Useful Resources</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Start here:</strong> kinderbetreuung.stadt-zuerich.ch is your one-stop portal for searching, applying, and checking subsidy eligibility for all city-run daycare.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {websites.map((site) => (
               <motion.a key={site.name} href={site.url} target="_blank" rel="noopener noreferrer" variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elevated)] transition-all group block">
@@ -139,7 +141,8 @@ export default function FamilyPage() {
 
         {/* Tips */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4 flex items-center gap-2"><Lightbulb className="h-5 w-5 text-warning" /> Practical Advice</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1 flex items-center gap-2"><Lightbulb className="h-5 w-5 text-warning" /> Practical Advice</h2>
+          <p className="text-sm text-muted-foreground mb-4">🔑 <strong className="text-foreground">Family neighborhoods:</strong> Kreis 2, 6, 7, and 10 are the most family-friendly — close to parks, schools, and playgrounds. Factor in school district quality when choosing where to live.</p>
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {tips.map((tip) => (
               <motion.div key={tip.title} variants={item} className="p-5 rounded-xl bg-card border border-border shadow-[var(--shadow-card)]">
