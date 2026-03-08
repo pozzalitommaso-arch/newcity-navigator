@@ -164,8 +164,8 @@ export default function ProfilePage() {
           className="grid grid-cols-3 gap-4">
           {[
             { label: "Tasks Done", value: totalCompleted, icon: Star, color: "text-warning" },
-            { label: "In Progress", value: categories.filter(c => c.progress > 0 && c.progress < 100).length, icon: Flame, color: "text-accent" },
-            { label: "Not Started", value: categories.filter(c => c.progress === 0).length, icon: Target, color: "text-muted-foreground" },
+            { label: "In Progress", value: allCatIds.filter(id => { const p = checklistStore.getCategoryProgress(id); return p > 0 && p < 100; }).length, icon: Flame, color: "text-accent" },
+            { label: "Not Started", value: allCatIds.filter(id => checklistStore.getCategoryProgress(id) === 0).length, icon: Target, color: "text-muted-foreground" },
           ].map((stat) => (
             <div key={stat.label} className="p-4 rounded-xl bg-card border border-border shadow-[var(--shadow-card)] text-center">
               <stat.icon className={`h-5 w-5 mx-auto mb-1 ${stat.color}`} />
