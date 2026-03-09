@@ -263,7 +263,7 @@ export default function OnboardingPage() {
   const filteredCities = cityQuery.trim().length > 0
     ? cityDatabase.filter(c =>
         c.city.toLowerCase().includes(cityQuery.toLowerCase()) ||
-        c.country.toLowerCase().includes(cityQuery.toLowerCase())
+        c.canton.toLowerCase().includes(cityQuery.toLowerCase())
       ).slice(0, 6)
     : [];
 
