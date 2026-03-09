@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
 import PageTransition from "@/components/PageTransition";
 import heroCity from "@/assets/hero-city.jpg";
+import newbeLogo from "@/assets/newbe-logo.png";
 import {
   GraduationCap,
   Home,
