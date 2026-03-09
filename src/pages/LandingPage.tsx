@@ -301,7 +301,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="py-8 border-t border-border">
         <div className="container mx-auto px-4 text-center text-muted-foreground text-sm">
-          © 2026 NewBe. Your personal relocation assistant.
+          © 2026 NewBE. Your personal relocation assistant.
         </div>
       </footer>
     </PageTransition>
