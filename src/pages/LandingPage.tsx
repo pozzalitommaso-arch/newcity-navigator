@@ -238,7 +238,7 @@ export default function LandingPage() {
               Everything You Need to <span className="gradient-text">Settle In</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              NewBe combines AI intelligence with local knowledge to make your
+              NewBE combines AI intelligence with local knowledge to make your
               relocation seamless and stress-free.
             </p>
           </motion.div>
