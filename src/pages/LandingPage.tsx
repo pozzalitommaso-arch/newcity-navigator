@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
 import PageTransition from "@/components/PageTransition";
 import heroCity from "@/assets/hero-city.jpg";
+import newbeLogo from "@/assets/newbe-logo.png";
 import {
   GraduationCap,
   Home,
@@ -77,7 +78,10 @@ export default function LandingPage() {
       {/* Glass Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
         <div className="container mx-auto flex items-center justify-between h-16 px-4">
-          <span className="font-display text-2xl font-bold gradient-text cursor-pointer" onClick={() => navigate("/")}>NewBe</span>
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
+            <img src={newbeLogo} alt="NewBE logo" className="h-8 w-8" />
+            <span className="font-display text-2xl font-bold gradient-text">NewBE</span>
+          </div>
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="sm" onClick={() => navigate("/pricing")}>Pricing</Button>
             <ThemeToggle />
@@ -112,13 +116,14 @@ export default function LandingPage() {
               <Sparkles className="h-4 w-4" /> AI-Powered Relocation
             </motion.div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground leading-tight mb-4">
               Moving to a new city?<br />
               <span className="gradient-text">We know the feeling.</span>
             </h1>
+            <p className="text-base md:text-lg text-primary font-medium mb-4 tracking-wide">Your New Beginning starts here.</p>
             <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
               Bureaucracy, housing, insurance, making friends — it's overwhelming.
-              NewBe turns chaos into a clear, personalized action plan.
+              NewBE turns chaos into a clear, personalized action plan.
             </p>
           </motion.div>
 
@@ -233,7 +238,7 @@ export default function LandingPage() {
               Everything You Need to <span className="gradient-text">Settle In</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              NewBe combines AI intelligence with local knowledge to make your
+              NewBE combines AI intelligence with local knowledge to make your
               relocation seamless and stress-free.
             </p>
           </motion.div>
@@ -278,7 +283,7 @@ export default function LandingPage() {
               Ready to Feel at Home?
             </h2>
             <p className="text-lg text-primary-foreground/80 mb-8 max-w-xl mx-auto">
-              Create your profile in minutes and let NewBe guide you through
+              Create your profile in minutes and let NewBE guide you through
               your new city.
             </p>
             <Button
@@ -296,7 +301,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="py-8 border-t border-border">
         <div className="container mx-auto px-4 text-center text-muted-foreground text-sm">
-          © 2026 NewBe. Your personal relocation assistant.
+          © 2026 NewBE. Your personal relocation assistant.
         </div>
       </footer>
     </PageTransition>
