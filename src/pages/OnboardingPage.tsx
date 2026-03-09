@@ -380,7 +380,7 @@ export default function OnboardingPage() {
                             <span className="text-xl">{c.flag}</span>
                             <span className="text-sm">
                               <span className="font-medium text-foreground">{c.city}</span>
-                              <span className="text-muted-foreground">, {c.country}</span>
+                              <span className="text-muted-foreground"> ({c.canton})</span>
                             </span>
                           </button>
                         ))}
