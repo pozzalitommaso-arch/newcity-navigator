@@ -116,13 +116,14 @@ export default function LandingPage() {
               <Sparkles className="h-4 w-4" /> AI-Powered Relocation
             </motion.div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground leading-tight mb-4">
               Moving to a new city?<br />
               <span className="gradient-text">We know the feeling.</span>
             </h1>
+            <p className="text-base md:text-lg text-primary font-medium mb-4 tracking-wide">Your New Beginning starts here.</p>
             <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
               Bureaucracy, housing, insurance, making friends — it's overwhelming.
-              NewBe turns chaos into a clear, personalized action plan.
+              NewBE turns chaos into a clear, personalized action plan.
             </p>
           </motion.div>
 
