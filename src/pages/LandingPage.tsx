@@ -79,7 +79,7 @@ export default function LandingPage() {
       <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
         <div className="container mx-auto flex items-center justify-between h-16 px-4">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src={newbeLogo} alt="NewBE logo" className="h-7 w-7" />
+            <img src={newbeLogo} alt="NewBE logo" className="h-10 w-10" />
             <span className="font-display text-2xl font-bold gradient-text">NewBE</span>
           </div>
           <div className="flex items-center gap-2">
