@@ -283,7 +283,7 @@ export default function LandingPage() {
               Ready to Feel at Home?
             </h2>
             <p className="text-lg text-primary-foreground/80 mb-8 max-w-xl mx-auto">
-              Create your profile in minutes and let NewBe guide you through
+              Create your profile in minutes and let NewBE guide you through
               your new city.
             </p>
             <Button
