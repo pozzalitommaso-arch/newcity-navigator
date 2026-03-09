@@ -110,7 +110,7 @@ export default function LandingPage() {
               transition={{ delay: 0.2 }}
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6"
             >
-              <Sparkles className="h-4 w-4" /> AI-Powered Relocation
+              <Sparkles className="h-4 w-4" /> 🇨🇭 Currently available in Switzerland
             </motion.div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground leading-tight mb-4">

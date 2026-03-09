@@ -263,7 +263,7 @@ export default function OnboardingPage() {
   const filteredCities = cityQuery.trim().length > 0
     ? cityDatabase.filter(c =>
         c.city.toLowerCase().includes(cityQuery.toLowerCase()) ||
-        c.country.toLowerCase().includes(cityQuery.toLowerCase())
+        c.canton.toLowerCase().includes(cityQuery.toLowerCase())
       ).slice(0, 6)
     : [];
 
@@ -368,9 +368,9 @@ export default function OnboardingPage() {
                       <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-xl shadow-lg overflow-hidden z-50 max-h-64 overflow-y-auto">
                         {filteredCities.map((c) => (
                           <button
-                            key={`${c.city}-${c.country}`}
+                            key={`${c.city}-${c.canton}`}
                             onClick={() => {
-                              setCityQuery(`${c.city}, ${c.country}`);
+                              setCityQuery(`${c.city}, ${c.canton}`);
                               setSelectedFlag(c.flag);
                               updateProfile({ city: c.city });
                               setShowSuggestions(false);
@@ -380,7 +380,7 @@ export default function OnboardingPage() {
                             <span className="text-xl">{c.flag}</span>
                             <span className="text-sm">
                               <span className="font-medium text-foreground">{c.city}</span>
-                              <span className="text-muted-foreground">, {c.country}</span>
+                              <span className="text-muted-foreground"> ({c.canton})</span>
                             </span>
                           </button>
                         ))}
