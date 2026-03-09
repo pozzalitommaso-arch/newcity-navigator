@@ -368,9 +368,9 @@ export default function OnboardingPage() {
                       <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-xl shadow-lg overflow-hidden z-50 max-h-64 overflow-y-auto">
                         {filteredCities.map((c) => (
                           <button
-                            key={`${c.city}-${c.country}`}
+                            key={`${c.city}-${c.canton}`}
                             onClick={() => {
-                              setCityQuery(`${c.city}, ${c.country}`);
+                              setCityQuery(`${c.city}, ${c.canton}`);
                               setSelectedFlag(c.flag);
                               updateProfile({ city: c.city });
                               setShowSuggestions(false);
