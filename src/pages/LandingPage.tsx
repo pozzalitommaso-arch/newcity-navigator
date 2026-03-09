@@ -90,9 +90,11 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero — Emotional Hook */}
-      <section className="relative pt-16 overflow-hidden gradient-mesh-bg">
-        <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-accent/8 blur-3xl pointer-events-none" />
+      <section className="relative pt-16 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img src={heroCity} alt="" className="w-full h-full object-cover object-bottom" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
+        </div>
 
         <div className="container mx-auto px-4 py-20 lg:py-28 relative z-10">
           <motion.div
