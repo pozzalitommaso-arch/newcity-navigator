@@ -185,6 +185,7 @@ const fadeUp = { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transi
 export default function MyInfoPage() {
   const navigate = useNavigate();
   const { profile, addFamilyMember, removeFamilyMember } = useOnboardingStore();
+  const extras = useExtrasStore();
   const [expandedMember, setExpandedMember] = useState<string | null>("self");
 
   const handleAddMember = (type: FamilyMemberType, name: string) => {
