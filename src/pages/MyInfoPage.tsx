@@ -2,7 +2,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useOnboardingStore, defaultQuickInfo, defaultPetInfo, FamilyMember, FamilyMemberType, QuickInfo, PetInfo } from "@/lib/onboarding-store";
+import { useExtrasStore } from "@/lib/extras-store";
 import EssentialsCard, { cardMeta, QuickInfoKey } from "@/components/EssentialsCard";
+import ListInfoSection, { FieldDef } from "@/components/ListInfoSection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -10,6 +12,7 @@ import PageTransition from "@/components/PageTransition";
 import {
   ArrowLeft, User, Users, Baby, Heart, PawPrint, Plus, Trash2, ChevronDown, ChevronRight,
   Home, CreditCard, Shield, Stethoscope, Phone, FileText, Pencil, Check, X,
+  Wallet, ShieldPlus, Tag, Key, Briefcase, Train,
 } from "lucide-react";
 
 const essentialsKeys: QuickInfoKey[] = ["address", "bank", "insurance", "doctor", "emergencyContact", "ahvNumber"];
@@ -182,6 +185,7 @@ const fadeUp = { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transi
 export default function MyInfoPage() {
   const navigate = useNavigate();
   const { profile, addFamilyMember, removeFamilyMember } = useOnboardingStore();
+  const extras = useExtrasStore();
   const [expandedMember, setExpandedMember] = useState<string | null>("self");
 
   const handleAddMember = (type: FamilyMemberType, name: string) => {
@@ -276,7 +280,7 @@ export default function MyInfoPage() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="mt-2 space-y-3"
+                    className="mt-2 space-y-5"
                   >
                     {/* For pets: show pet-specific card first */}
                     {member.type === "pet" && familyMember && (
@@ -294,6 +298,122 @@ export default function MyInfoPage() {
                         />
                       ))}
                     </div>
+
+                    {/* ── Bank Accounts ── */}
+                    <ListInfoSection
+                      title="Bank Accounts"
+                      icon={Wallet}
+                      iconColor="text-info"
+                      iconBg="bg-info/10"
+                      items={extras.bankAccounts}
+                      fields={[
+                        { key: "bankName", label: "Bank Name", placeholder: "e.g., UBS, PostFinance" },
+                        { key: "iban", label: "IBAN", placeholder: "e.g., CH93 0076 2011 6238 5295 7" },
+                        { key: "accountType", label: "Account Type", placeholder: "e.g., Savings, Current, Joint" },
+                      ]}
+                      getSummary={(item) => [item.bankName, item.accountType, item.iban].filter(Boolean).join(" · ")}
+                      onAdd={extras.addBankAccount}
+                      onUpdate={extras.updateBankAccount}
+                      onRemove={extras.removeBankAccount}
+                      emptyText="No bank accounts added"
+                    />
+
+                    {/* ── Complementary Insurance ── */}
+                    <ListInfoSection
+                      title="Complementary Insurance"
+                      icon={ShieldPlus}
+                      iconColor="text-success"
+                      iconBg="bg-success/10"
+                      items={extras.complementaryInsurances}
+                      fields={[
+                        { key: "type", label: "Type", placeholder: "e.g., Dental, Hospital, Travel, Legal" },
+                        { key: "provider", label: "Provider", placeholder: "e.g., CSS, Helsana, Swica" },
+                        { key: "policyNumber", label: "Policy Number", placeholder: "e.g., POL-123456" },
+                        { key: "plan", label: "Plan / Model", placeholder: "e.g., Premium, Basic" },
+                      ]}
+                      getSummary={(item) => [item.type, item.provider, item.plan].filter(Boolean).join(" · ")}
+                      onAdd={extras.addComplementaryInsurance}
+                      onUpdate={extras.updateComplementaryInsurance}
+                      onRemove={extras.removeComplementaryInsurance}
+                      emptyText="No complementary insurance added"
+                    />
+
+                    {/* ── Loyalty / Store Cards ── */}
+                    <ListInfoSection
+                      title="Cards & Loyalty"
+                      icon={Tag}
+                      iconColor="text-accent"
+                      iconBg="bg-accent/10"
+                      items={extras.loyaltyCards}
+                      fields={[
+                        { key: "name", label: "Card Name", placeholder: "e.g., Migros Cumulus, Coop Supercard" },
+                        { key: "cardNumber", label: "Card Number", placeholder: "e.g., 1234 5678 9012" },
+                        { key: "notes", label: "Notes", placeholder: "e.g., linked to email", optional: true },
+                      ]}
+                      getSummary={(item) => [item.name, item.cardNumber].filter(Boolean).join(" · ")}
+                      onAdd={extras.addLoyaltyCard}
+                      onUpdate={extras.updateLoyaltyCard}
+                      onRemove={extras.removeLoyaltyCard}
+                      emptyText="No cards added"
+                    />
+
+                    {/* ── Spare Keys ── */}
+                    <ListInfoSection
+                      title="Spare Keys"
+                      icon={Key}
+                      iconColor="text-warning"
+                      iconBg="bg-warning/10"
+                      items={extras.spareKeys}
+                      fields={[
+                        { key: "name", label: "Left with (Name)", placeholder: "e.g., Anna, Neighbor" },
+                        { key: "date", label: "Date Given", placeholder: "e.g., 2024-01-15", type: "date" },
+                        { key: "number", label: "Phone Number", placeholder: "e.g., +41 79 123 45 67", type: "tel", optional: true },
+                      ]}
+                      getSummary={(item) => [item.name, item.date, item.number].filter(Boolean).join(" · ")}
+                      onAdd={extras.addSpareKey}
+                      onUpdate={extras.updateSpareKey}
+                      onRemove={extras.removeSpareKey}
+                      emptyText="No spare keys tracked"
+                    />
+
+                    {/* ── Work Permit ── */}
+                    <ListInfoSection
+                      title="Work Permit"
+                      icon={Briefcase}
+                      iconColor="text-primary"
+                      iconBg="bg-primary/10"
+                      items={extras.workPermits}
+                      fields={[
+                        { key: "permitType", label: "Permit Type", placeholder: "e.g., B, C, G, L" },
+                        { key: "number", label: "Permit Number", placeholder: "e.g., ZH-123456" },
+                        { key: "expiryDate", label: "Expiry Date", placeholder: "e.g., 2026-12-31", type: "date" },
+                        { key: "issuedBy", label: "Issued By", placeholder: "e.g., Migration Office Zurich" },
+                      ]}
+                      getSummary={(item) => [item.permitType && `Permit ${item.permitType}`, item.number, item.expiryDate].filter(Boolean).join(" · ")}
+                      onAdd={extras.addWorkPermit}
+                      onUpdate={extras.updateWorkPermit}
+                      onRemove={extras.removeWorkPermit}
+                      emptyText="No work permit added"
+                    />
+
+                    {/* ── Swiss Pass ── */}
+                    <ListInfoSection
+                      title="Swiss Pass"
+                      icon={Train}
+                      iconColor="text-destructive"
+                      iconBg="bg-destructive/10"
+                      items={extras.swissPasses}
+                      fields={[
+                        { key: "number", label: "Swiss Pass Number", placeholder: "e.g., S1234567890" },
+                        { key: "validUntil", label: "Valid Until", placeholder: "e.g., 2026-05-31", type: "date" },
+                        { key: "travelClass", label: "Travel Class", placeholder: "e.g., 1st, 2nd" },
+                      ]}
+                      getSummary={(item) => [item.number, item.travelClass && `${item.travelClass} class`, item.validUntil].filter(Boolean).join(" · ")}
+                      onAdd={(item) => extras.addSwissPass({ ...item, halfFare: false } as any)}
+                      onUpdate={extras.updateSwissPass}
+                      onRemove={extras.removeSwissPass}
+                      emptyText="No Swiss Pass added"
+                    />
                   </motion.div>
                 )}
               </motion.div>
