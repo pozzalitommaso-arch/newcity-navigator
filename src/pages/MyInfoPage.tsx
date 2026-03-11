@@ -2,7 +2,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useOnboardingStore, defaultQuickInfo, defaultPetInfo, FamilyMember, FamilyMemberType, QuickInfo, PetInfo } from "@/lib/onboarding-store";
+import { useExtrasStore } from "@/lib/extras-store";
 import EssentialsCard, { cardMeta, QuickInfoKey } from "@/components/EssentialsCard";
+import ListInfoSection, { FieldDef } from "@/components/ListInfoSection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -10,6 +12,7 @@ import PageTransition from "@/components/PageTransition";
 import {
   ArrowLeft, User, Users, Baby, Heart, PawPrint, Plus, Trash2, ChevronDown, ChevronRight,
   Home, CreditCard, Shield, Stethoscope, Phone, FileText, Pencil, Check, X,
+  Wallet, ShieldPlus, Tag, Key, Briefcase, Train,
 } from "lucide-react";
 
 const essentialsKeys: QuickInfoKey[] = ["address", "bank", "insurance", "doctor", "emergencyContact", "ahvNumber"];
