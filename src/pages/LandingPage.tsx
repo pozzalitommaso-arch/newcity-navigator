@@ -22,50 +22,50 @@ import {
   Zap,
   Globe,
   FileText,
-  Users,
-} from "lucide-react";
+  Users } from
+"lucide-react";
 
 const features = [
-  {
-    icon: Sparkles,
-    title: "AI-Powered Recommendations",
-    desc: "Personalized suggestions for schools, insurance, housing, and more based on your profile.",
-    gradient: "from-primary/10 to-primary/5",
-  },
-  {
-    icon: Bell,
-    title: "Proactive Notifications",
-    desc: "Never miss a deadline — enrollment periods, insurance reviews, local opportunities.",
-    gradient: "from-accent/10 to-accent/5",
-  },
-  {
-    icon: BarChart3,
-    title: "Progress Tracker",
-    desc: "Visualize your settling-in journey across all life categories.",
-    gradient: "from-info/10 to-info/5",
-  },
-  {
-    icon: MapPin,
-    title: "City-Specific Knowledge",
-    desc: "Curated local data about neighborhoods, services, and community life.",
-    gradient: "from-success/10 to-success/5",
-  },
-];
+{
+  icon: Sparkles,
+  title: "AI-Powered Recommendations",
+  desc: "Personalized suggestions for schools, insurance, housing, and more based on your profile.",
+  gradient: "from-primary/10 to-primary/5"
+},
+{
+  icon: Bell,
+  title: "Proactive Notifications",
+  desc: "Never miss a deadline — enrollment periods, insurance reviews, local opportunities.",
+  gradient: "from-accent/10 to-accent/5"
+},
+{
+  icon: BarChart3,
+  title: "Progress Tracker",
+  desc: "Visualize your settling-in journey across all life categories.",
+  gradient: "from-info/10 to-info/5"
+},
+{
+  icon: MapPin,
+  title: "City-Specific Knowledge",
+  desc: "Curated local data about neighborhoods, services, and community life.",
+  gradient: "from-success/10 to-success/5"
+}];
+
 
 const categories = [
-  { icon: GraduationCap, label: "Education", color: "text-info", bg: "bg-info/10" },
-  { icon: Heart, label: "Family", color: "text-accent", bg: "bg-accent/10" },
-  { icon: Home, label: "Housing", color: "text-primary", bg: "bg-primary/10" },
-  { icon: Shield, label: "Insurance", color: "text-success", bg: "bg-success/10" },
-  { icon: Dumbbell, label: "Sports", color: "text-warning", bg: "bg-warning/10" },
-  { icon: Landmark, label: "Finance", color: "text-primary", bg: "bg-primary/10" },
-];
+{ icon: GraduationCap, label: "Education", color: "text-info", bg: "bg-info/10" },
+{ icon: Heart, label: "Family", color: "text-accent", bg: "bg-accent/10" },
+{ icon: Home, label: "Housing", color: "text-primary", bg: "bg-primary/10" },
+{ icon: Shield, label: "Insurance", color: "text-success", bg: "bg-success/10" },
+{ icon: Dumbbell, label: "Sports", color: "text-warning", bg: "bg-warning/10" },
+{ icon: Landmark, label: "Finance", color: "text-primary", bg: "bg-primary/10" }];
+
 
 const stats = [
-  { value: "11", label: "Life Categories", icon: Globe },
-  { value: "50+", label: "Checklist Items", icon: CheckCircle },
-  { value: "AI", label: "Powered Assistant", icon: Zap },
-];
+{ value: "11", label: "Life Categories", icon: Globe },
+{ value: "50+", label: "Checklist Items", icon: CheckCircle },
+{ value: "AI", label: "Powered Assistant", icon: Zap }];
+
 
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
 const fadeUp = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const } } };
@@ -102,14 +102,14 @@ export default function LandingPage() {
             className="text-center max-w-3xl mx-auto mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+            transition={{ duration: 0.6 }}>
+            
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6"
-            >
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">Currently available in Switzerland
+
               <Sparkles className="h-4 w-4" /> 🇨🇭 Currently available in Switzerland
             </motion.div>
 
@@ -129,31 +129,31 @@ export default function LandingPage() {
             className="max-w-3xl mx-auto mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
+            transition={{ delay: 0.3 }}>
+            
             <h2 className="text-center text-lg font-display font-semibold text-foreground mb-6">
               What worries you most about moving?
             </h2>
             <div className="grid sm:grid-cols-3 gap-4">
               {[
-                { icon: FileText, label: "Paperwork & Bureaucracy", desc: "Permits, registration, insurance deadlines", color: "text-info", bg: "bg-info/10", path: "/onboarding" },
-                { icon: Home, label: "Housing & Setup", desc: "Finding an apartment, setting up utilities", color: "text-primary", bg: "bg-primary/10", path: "/onboarding" },
-                { icon: Users, label: "Making Friends", desc: "Meeting people, finding your community", color: "text-accent", bg: "bg-accent/10", path: "/onboarding" },
-              ].map((card) => (
-                <motion.button
-                  key={card.label}
-                  whileHover={{ y: -4 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => navigate(card.path)}
-                  className="bento-card text-left !p-5 cursor-pointer group"
-                >
+              { icon: FileText, label: "Paperwork & Bureaucracy", desc: "Permits, registration, insurance deadlines", color: "text-info", bg: "bg-info/10", path: "/onboarding" },
+              { icon: Home, label: "Housing & Setup", desc: "Finding an apartment, setting up utilities", color: "text-primary", bg: "bg-primary/10", path: "/onboarding" },
+              { icon: Users, label: "Making Friends", desc: "Meeting people, finding your community", color: "text-accent", bg: "bg-accent/10", path: "/onboarding" }].
+              map((card) =>
+              <motion.button
+                key={card.label}
+                whileHover={{ y: -4 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => navigate(card.path)}
+                className="bento-card text-left !p-5 cursor-pointer group">
+                
                   <div className={`p-3 rounded-xl ${card.bg} w-fit mb-3 transition-transform group-hover:scale-110`}>
                     <card.icon className={`h-6 w-6 ${card.color}`} />
                   </div>
                   <h3 className="font-display text-base font-semibold text-foreground mb-1">{card.label}</h3>
                   <p className="text-xs text-muted-foreground">{card.desc}</p>
                 </motion.button>
-              ))}
+              )}
             </div>
           </motion.div>
 
@@ -161,8 +161,8 @@ export default function LandingPage() {
             className="flex flex-col sm:flex-row gap-4 justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45 }}
-          >
+            transition={{ delay: 0.45 }}>
+            
             <Button size="lg" onClick={() => navigate("/onboarding")} className="text-base px-8 h-12 shadow-lg hover:shadow-xl transition-shadow">
               Start Your Journey <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
@@ -178,10 +178,10 @@ export default function LandingPage() {
             className="flex flex-wrap gap-8 mt-12 justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.55 }}
-          >
-            {stats.map((stat) => (
-              <div key={stat.label} className="flex items-center gap-3">
+            transition={{ delay: 0.55 }}>
+            
+            {stats.map((stat) =>
+            <div key={stat.label} className="flex items-center gap-3">
                 <div className="p-2 rounded-lg bg-primary/10">
                   <stat.icon className="h-4 w-4 text-primary" />
                 </div>
@@ -190,7 +190,7 @@ export default function LandingPage() {
                   <div className="text-xs text-muted-foreground">{stat.label}</div>
                 </div>
               </div>
-            ))}
+            )}
           </motion.div>
         </div>
       </section>
@@ -203,20 +203,20 @@ export default function LandingPage() {
             variants={stagger}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
-          >
-            {categories.map((cat) => (
-              <motion.div
-                key={cat.label}
-                variants={fadeUp}
-                className="flex items-center gap-2.5 px-5 py-3 rounded-xl bento-card"
-              >
+            viewport={{ once: true }}>
+            
+            {categories.map((cat) =>
+            <motion.div
+              key={cat.label}
+              variants={fadeUp}
+              className="flex items-center gap-2.5 px-5 py-3 rounded-xl bento-card">
+              
                 <span className={`p-2 rounded-lg ${cat.bg}`}>
                   <cat.icon className={`h-5 w-5 ${cat.color}`} />
                 </span>
                 <span className="font-medium text-foreground">{cat.label}</span>
               </motion.div>
-            ))}
+            )}
           </motion.div>
         </div>
       </section>
@@ -229,8 +229,8 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
+            transition={{ duration: 0.5 }}>
+            
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
               Everything You Need to <span className="gradient-text">Settle In</span>
             </h2>
@@ -245,14 +245,14 @@ export default function LandingPage() {
             variants={stagger}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
-          >
-            {features.map((feat) => (
-              <motion.div
-                key={feat.title}
-                variants={fadeUp}
-                className={`bento-card bg-gradient-to-br ${feat.gradient} !border-border/50`}
-              >
+            viewport={{ once: true }}>
+            
+            {features.map((feat) =>
+            <motion.div
+              key={feat.title}
+              variants={fadeUp}
+              className={`bento-card bg-gradient-to-br ${feat.gradient} !border-border/50`}>
+              
                 <div className="p-3 rounded-xl bg-card w-fit mb-4 shadow-sm">
                   <feat.icon className="h-6 w-6 text-primary" />
                 </div>
@@ -261,7 +261,7 @@ export default function LandingPage() {
                 </h3>
                 <p className="text-muted-foreground">{feat.desc}</p>
               </motion.div>
-            ))}
+            )}
           </motion.div>
         </div>
       </section>
@@ -274,8 +274,8 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
+            transition={{ duration: 0.5 }}>
+            
             <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-foreground mb-4">
               Ready to Feel at Home?
             </h2>
@@ -287,8 +287,8 @@ export default function LandingPage() {
               variant="secondary"
               size="lg"
               onClick={() => navigate("/onboarding")}
-              className="font-semibold text-base px-8 h-12 shadow-lg hover:shadow-xl transition-shadow"
-            >
+              className="font-semibold text-base px-8 h-12 shadow-lg hover:shadow-xl transition-shadow">
+              
               Get Started Free <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </motion.div>
@@ -301,6 +301,6 @@ export default function LandingPage() {
           © 2026 NewBE. Your personal relocation assistant.
         </div>
       </footer>
-    </PageTransition>
-  );
+    </PageTransition>);
+
 }
