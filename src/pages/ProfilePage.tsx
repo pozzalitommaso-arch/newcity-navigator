@@ -148,7 +148,7 @@ export default function ProfilePage() {
   const userName = profile.familyMembers.find(m => m.type === 'self')?.name || profile.city || "User";
   const initials = userName.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || "NB";
 
-  const hasPersonalDetails = profile.city || profile.familyStatus || profile.age || profile.profession;
+  const hasPersonalDetails = profile.city || profile.familyStatus || profile.birthday || profile.profession;
   const hasInterests = profile.interests.length > 0;
   const hasPriorities = profile.priorities.length > 0;
 
