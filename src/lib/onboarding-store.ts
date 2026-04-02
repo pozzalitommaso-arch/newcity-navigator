@@ -125,7 +125,7 @@ export const defaultPetInfo: PetInfo = {
 const defaultProfile: UserProfile = {
   city: '',
   familyStatus: '',
-  age: '',
+  birthday: '',
   hasChildren: false,
   childrenCount: 0,
   hasPets: false,

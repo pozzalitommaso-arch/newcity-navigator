@@ -449,11 +449,37 @@ export default function OnboardingPage() {
                       </div>
                     </div>
 
-                    {/* Age & Profession */}
+                    {/* Birthday & Profession */}
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="text-sm font-medium text-foreground mb-1.5 block">Age</label>
-                        <Input placeholder="e.g., 32" value={profile.age} onChange={(e) => updateProfile({ age: e.target.value })} className="h-11" maxLength={3} />
+                        <label className="text-sm font-medium text-foreground mb-1.5 block">Birthday</label>
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <Button
+                              variant="outline"
+                              className={cn(
+                                "w-full h-11 justify-start text-left font-normal",
+                                !profile.birthday && "text-muted-foreground"
+                              )}
+                            >
+                              <CalendarDays className="mr-2 h-4 w-4" />
+                              {profile.birthday ? format(new Date(profile.birthday), "PPP") : "Pick your birthday"}
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={profile.birthday ? new Date(profile.birthday) : undefined}
+                              onSelect={(date) => updateProfile({ birthday: date ? date.toISOString() : '' })}
+                              disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
+                              initialFocus
+                              captionLayout="dropdown-buttons"
+                              fromYear={1930}
+                              toYear={new Date().getFullYear()}
+                              className={cn("p-3 pointer-events-auto")}
+                            />
+                          </PopoverContent>
+                        </Popover>
                       </div>
                       <div>
                         <label className="text-sm font-medium text-foreground mb-1.5 block">Profession</label>
