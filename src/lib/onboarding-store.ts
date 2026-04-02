@@ -68,7 +68,7 @@ export interface FamilyMember {
 export interface UserProfile {
   city: string;
   familyStatus: string;
-  age: string;
+  birthday: string; // ISO date string
   hasChildren: boolean;
   childrenCount: number;
   hasPets: boolean;
