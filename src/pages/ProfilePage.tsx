@@ -305,10 +305,10 @@ export default function ProfilePage() {
                       <Input value={profile.familyStatus} onChange={(e) => updateProfile({ familyStatus: e.target.value })} className="h-10" />
                     </div>
                   )}
-                  {profile.age && (
+                  {profile.birthday && (
                     <div>
-                      <label className="text-xs font-medium text-muted-foreground mb-1 flex items-center gap-1"><Calendar className="h-3 w-3" />Age</label>
-                      <Input value={profile.age} onChange={(e) => updateProfile({ age: e.target.value })} className="h-10" />
+                      <label className="text-xs font-medium text-muted-foreground mb-1 flex items-center gap-1"><Calendar className="h-3 w-3" />Birthday</label>
+                      <Input value={new Date(profile.birthday).toLocaleDateString()} readOnly className="h-10" />
                     </div>
                   )}
                   {profile.profession && (
