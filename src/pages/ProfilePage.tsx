@@ -148,7 +148,7 @@ export default function ProfilePage() {
   const userName = profile.familyMembers.find(m => m.type === 'self')?.name || profile.city || "User";
   const initials = userName.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || "NB";
 
-  const hasPersonalDetails = profile.city || profile.familyStatus || profile.age || profile.profession;
+  const hasPersonalDetails = profile.city || profile.familyStatus || profile.birthday || profile.profession;
   const hasInterests = profile.interests.length > 0;
   const hasPriorities = profile.priorities.length > 0;
 
@@ -305,10 +305,10 @@ export default function ProfilePage() {
                       <Input value={profile.familyStatus} onChange={(e) => updateProfile({ familyStatus: e.target.value })} className="h-10" />
                     </div>
                   )}
-                  {profile.age && (
+                  {profile.birthday && (
                     <div>
-                      <label className="text-xs font-medium text-muted-foreground mb-1 flex items-center gap-1"><Calendar className="h-3 w-3" />Age</label>
-                      <Input value={profile.age} onChange={(e) => updateProfile({ age: e.target.value })} className="h-10" />
+                      <label className="text-xs font-medium text-muted-foreground mb-1 flex items-center gap-1"><Calendar className="h-3 w-3" />Birthday</label>
+                      <Input value={new Date(profile.birthday).toLocaleDateString()} readOnly className="h-10" />
                     </div>
                   )}
                   {profile.profession && (

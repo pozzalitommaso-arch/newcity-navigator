@@ -68,7 +68,7 @@ export interface FamilyMember {
 export interface UserProfile {
   city: string;
   familyStatus: string;
-  age: string;
+  birthday: string; // ISO date string
   hasChildren: boolean;
   childrenCount: number;
   hasPets: boolean;
@@ -125,7 +125,7 @@ export const defaultPetInfo: PetInfo = {
 const defaultProfile: UserProfile = {
   city: '',
   familyStatus: '',
-  age: '',
+  birthday: '',
   hasChildren: false,
   childrenCount: 0,
   hasPets: false,
