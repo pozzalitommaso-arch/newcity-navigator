@@ -3,304 +3,268 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
 import PageTransition from "@/components/PageTransition";
-import heroCity from "@/assets/hero-city.jpg";
-import newbeLogo from "@/assets/newbe-logo.png";
 import {
-  GraduationCap,
-  Home,
-  Shield,
-  Heart,
-  Dumbbell,
-  Landmark,
-  Sparkles,
-  ArrowRight,
-  Bell,
-  BarChart3,
-  MapPin,
-  User,
-  CheckCircle,
-  Zap,
-  Globe,
-  FileText,
-  Users } from
-"lucide-react";
+  GraduationCap, Home, Shield, Heart, Dumbbell, Landmark,
+  ArrowRight, Bell, BarChart3, MapPin, User, Sparkles,
+  FileText, Users,
+} from "lucide-react";
 
 const features = [
-{
-  icon: Sparkles,
-  title: "AI-Powered Recommendations",
-  desc: "Personalized suggestions for schools, insurance, housing, and more based on your profile.",
-  gradient: "from-primary/10 to-primary/5"
-},
-{
-  icon: Bell,
-  title: "Proactive Notifications",
-  desc: "Never miss a deadline — enrollment periods, insurance reviews, local opportunities.",
-  gradient: "from-accent/10 to-accent/5"
-},
-{
-  icon: BarChart3,
-  title: "Progress Tracker",
-  desc: "Visualize your settling-in journey across all life categories.",
-  gradient: "from-info/10 to-info/5"
-},
-{
-  icon: MapPin,
-  title: "City-Specific Knowledge",
-  desc: "Curated local data about neighborhoods, services, and community life.",
-  gradient: "from-success/10 to-success/5"
-}];
-
+  { num: "01", icon: Sparkles, title: "AI-powered guidance", desc: "Personalised suggestions for schools, insurance and housing — built around the life you actually live." },
+  { num: "02", icon: Bell, title: "Proactive deadlines", desc: "Permits, insurance windows, registration cut-offs. Surfaced before they bite." },
+  { num: "03", icon: BarChart3, title: "Quiet progress", desc: "A calm, honest view of how settled you really are. No streaks. No noise." },
+  { num: "04", icon: MapPin, title: "Local, not generic", desc: "Curated knowledge by canton and city — neighbourhoods, services, community." },
+];
 
 const categories = [
-{ icon: GraduationCap, label: "Education", color: "text-info", bg: "bg-info/10" },
-{ icon: Heart, label: "Family", color: "text-accent", bg: "bg-accent/10" },
-{ icon: Home, label: "Housing", color: "text-primary", bg: "bg-primary/10" },
-{ icon: Shield, label: "Insurance", color: "text-success", bg: "bg-success/10" },
-{ icon: Dumbbell, label: "Sports", color: "text-warning", bg: "bg-warning/10" },
-{ icon: Landmark, label: "Finance", color: "text-primary", bg: "bg-primary/10" }];
+  { icon: GraduationCap, label: "Education" },
+  { icon: Heart, label: "Family" },
+  { icon: Home, label: "Housing" },
+  { icon: Shield, label: "Insurance" },
+  { icon: Dumbbell, label: "Sport" },
+  { icon: Landmark, label: "Finance" },
+];
 
-
-const stats = [
-{ value: "11", label: "Life Categories", icon: Globe },
-{ value: "50+", label: "Checklist Items", icon: CheckCircle },
-{ value: "AI", label: "Powered Assistant", icon: Zap }];
-
-
-const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
-const fadeUp = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const } } };
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
+const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const } } };
 
 export default function LandingPage() {
   const navigate = useNavigate();
 
   return (
     <PageTransition className="min-h-screen bg-background">
-      {/* Glass Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
-        <div className="container mx-auto flex items-center justify-between h-16 px-4">
-          <span className="font-display text-2xl font-bold gradient-text cursor-pointer" onClick={() => navigate("/")}>NewBE</span>
-          <div className="flex items-center gap-2">
+      {/* Editorial nav */}
+      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border">
+        <div className="container mx-auto flex items-center justify-between h-14 px-4">
+          <div className="flex items-baseline gap-3 cursor-pointer" onClick={() => navigate("/")}>
+            <span className="display-serif text-2xl text-foreground">NewBE</span>
+            <span className="eyebrow hidden sm:inline">N°01 — Switzerland</span>
+          </div>
+          <div className="flex items-center gap-1">
             <Button variant="ghost" size="sm" onClick={() => navigate("/pricing")}>Pricing</Button>
             <ThemeToggle />
             <Button variant="ghost" size="icon" onClick={() => navigate("/profile")} title="Profile">
               <User className="h-5 w-5" />
             </Button>
-            <Button size="sm" className="font-semibold" onClick={() => navigate("/onboarding")}>Get Started</Button>
+            <Button size="sm" onClick={() => navigate("/onboarding")}>Get started</Button>
           </div>
         </div>
       </nav>
 
-      {/* Hero — Emotional Hook */}
-      <section className="relative pt-16 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img src={heroCity} alt="" className="w-full h-full object-cover object-bottom" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
-        </div>
+      {/* HERO — editorial masthead */}
+      <section className="pt-28 pb-20 lg:pt-36 lg:pb-28">
+        <div className="container mx-auto px-4">
+          {/* Masthead row */}
+          <div className="flex items-center justify-between mb-10 lg:mb-16">
+            <span className="eyebrow">Issue 01 · Spring 2026</span>
+            <span className="eyebrow hidden md:inline">A field guide for newcomers</span>
+            <span className="eyebrow mono">CH · 🇨🇭</span>
+          </div>
 
-        <div className="container mx-auto px-4 py-20 lg:py-28 relative z-10">
+          <div className="rule-ink mb-10 lg:mb-14" />
+
+          {/* Headline grid */}
           <motion.div
-            className="text-center max-w-3xl mx-auto mb-12"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">Currently available in Switzerland
+            transition={{ duration: 0.7 }}
+            className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end"
+          >
+            <div className="lg:col-span-8">
+              <h1 className="display-serif text-foreground text-[3.25rem] sm:text-7xl lg:text-[8.5rem] leading-[0.92]">
+                Moving<br />
+                <span className="display-italic">is hard.</span><br />
+                Settling in<br />
+                <span className="accent-mark">shouldn’t&nbsp;be.</span>
+              </h1>
+            </div>
 
-              <Sparkles className="h-4 w-4" /> 🇨🇭 Currently available in Switzerland
-            </motion.div>
-
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground leading-tight mb-4">
-              Moving to a new city?<br />
-              <span className="gradient-text">We know the feeling.</span>
-            </h1>
-            <p className="text-base md:text-lg text-primary font-medium mb-4 tracking-wide">Your New Beginning starts here.</p>
-            <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-              Bureaucracy, housing, insurance, making friends — it's overwhelming.
-              NewBE turns chaos into a clear, personalized action plan.
-            </p>
-          </motion.div>
-
-          {/* "What's your biggest worry?" cards */}
-          <motion.div
-            className="max-w-3xl mx-auto mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}>
-            
-            <h2 className="text-center text-lg font-display font-semibold text-foreground mb-6">
-              What worries you most about moving?
-            </h2>
-            <div className="grid sm:grid-cols-3 gap-4">
-              {[
-              { icon: FileText, label: "Paperwork & Bureaucracy", desc: "Permits, registration, insurance deadlines", color: "text-info", bg: "bg-info/10", path: "/onboarding" },
-              { icon: Home, label: "Housing & Setup", desc: "Finding an apartment, setting up utilities", color: "text-primary", bg: "bg-primary/10", path: "/onboarding" },
-              { icon: Users, label: "Making Friends", desc: "Meeting people, finding your community", color: "text-accent", bg: "bg-accent/10", path: "/onboarding" }].
-              map((card) =>
-              <motion.button
-                key={card.label}
-                whileHover={{ y: -4 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => navigate(card.path)}
-                className="bento-card text-left !p-5 cursor-pointer group">
-                
-                  <div className={`p-3 rounded-xl ${card.bg} w-fit mb-3 transition-transform group-hover:scale-110`}>
-                    <card.icon className={`h-6 w-6 ${card.color}`} />
-                  </div>
-                  <h3 className="font-display text-base font-semibold text-foreground mb-1">{card.label}</h3>
-                  <p className="text-xs text-muted-foreground">{card.desc}</p>
-                </motion.button>
-              )}
+            <div className="lg:col-span-4 lg:pb-6">
+              <span className="eyebrow block mb-3">The thesis</span>
+              <p className="text-base text-foreground/80 leading-relaxed mb-6">
+                Bureaucracy, housing, insurance, friendship — twelve months of admin
+                compressed into a single, calm checklist. Tailored to your canton,
+                your family, your week ahead.
+              </p>
+              <div className="flex items-center gap-3">
+                <Button size="lg" onClick={() => navigate("/onboarding")}>
+                  Begin your file <ArrowRight className="ml-1 h-4 w-4" />
+                </Button>
+                <button
+                  onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}
+                  className="eyebrow underline underline-offset-4 hover:text-foreground transition-colors"
+                >
+                  Read more ↓
+                </button>
+              </div>
             </div>
           </motion.div>
 
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45 }}>
-            
-            <Button size="lg" onClick={() => navigate("/onboarding")} className="text-base px-8 h-12 shadow-lg hover:shadow-xl transition-shadow">
-              Start Your Journey <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button variant="outline" size="lg" className="text-base px-8 h-12" onClick={() => {
-              document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
-            }}>
-              Learn More
-            </Button>
-          </motion.div>
-
-          {/* Stats row */}
-          <motion.div
-            className="flex flex-wrap gap-8 mt-12 justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.55 }}>
-            
-            {stats.map((stat) =>
-            <div key={stat.label} className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-primary/10">
-                  <stat.icon className="h-4 w-4 text-primary" />
-                </div>
-                <div>
-                  <div className="font-bold text-foreground text-lg leading-none">{stat.value}</div>
-                  <div className="text-xs text-muted-foreground">{stat.label}</div>
-                </div>
+          {/* Sub-stats row */}
+          <div className="rule mt-16 mb-6" />
+          <div className="grid grid-cols-3 gap-6">
+            {[
+              { k: "11", v: "Life categories" },
+              { k: "50+", v: "Curated checks" },
+              { k: "AI", v: "Guidance, on tap" },
+            ].map((s) => (
+              <div key={s.v} className="flex flex-col">
+                <span className="display-serif text-4xl md:text-6xl text-foreground leading-none">{s.k}</span>
+                <span className="eyebrow mt-2">{s.v}</span>
               </div>
-            )}
-          </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Categories Strip */}
-      <section className="py-16 relative overflow-hidden">
+      {/* WORRIES — three-column editorial */}
+      <section className="py-20 border-t border-foreground">
         <div className="container mx-auto px-4">
-          <motion.div
-            className="flex flex-wrap justify-center gap-4"
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}>
-            
-            {categories.map((cat) =>
-            <motion.div
-              key={cat.label}
-              variants={fadeUp}
-              className="flex items-center gap-2.5 px-5 py-3 rounded-xl bento-card">
-              
-                <span className={`p-2 rounded-lg ${cat.bg}`}>
-                  <cat.icon className={`h-5 w-5 ${cat.color}`} />
-                </span>
-                <span className="font-medium text-foreground">{cat.label}</span>
-              </motion.div>
-            )}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section id="features" className="py-20 lg:py-28 gradient-mesh-bg">
-        <div className="container mx-auto px-4">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}>
-            
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-              Everything You Need to <span className="gradient-text">Settle In</span>
+          <div className="flex items-baseline justify-between mb-10">
+            <h2 className="display-serif text-3xl md:text-5xl text-foreground">
+              What’s on your mind?
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              NewBE combines AI intelligence with local knowledge to make your
-              relocation seamless and stress-free.
-            </p>
-          </motion.div>
+            <span className="eyebrow hidden md:inline">§ 02 — Concerns</span>
+          </div>
 
           <motion.div
-            className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto"
+            className="grid md:grid-cols-3 border-t border-border"
             variants={stagger}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}>
-            
-            {features.map((feat) =>
-            <motion.div
-              key={feat.title}
-              variants={fadeUp}
-              className={`bento-card bg-gradient-to-br ${feat.gradient} !border-border/50`}>
-              
-                <div className="p-3 rounded-xl bg-card w-fit mb-4 shadow-sm">
-                  <feat.icon className="h-6 w-6 text-primary" />
+            viewport={{ once: true }}
+          >
+            {[
+              { num: "01", icon: FileText, label: "Paperwork & bureaucracy", desc: "Permits, registration, insurance deadlines — sequenced for your arrival date." },
+              { num: "02", icon: Home, label: "Housing & setup", desc: "Apartment hunt, utilities, internet, the deposit dance — explained plainly." },
+              { num: "03", icon: Users, label: "Making friends", desc: "Meet-ups, clubs, language tandems — a soft landing into a new community." },
+            ].map((card, i) => (
+              <motion.button
+                key={card.label}
+                variants={fadeUp}
+                onClick={() => navigate("/onboarding")}
+                className={`text-left p-8 group transition-colors hover:bg-secondary/60 ${
+                  i < 2 ? "md:border-r border-border" : ""
+                } border-b border-border`}
+              >
+                <div className="flex items-baseline justify-between mb-6">
+                  <span className="section-num">{card.num}</span>
+                  <card.icon className="h-5 w-5 text-foreground/60 group-hover:text-accent transition-colors" />
                 </div>
-                <h3 className="font-display text-xl font-semibold text-foreground mb-2">
+                <h3 className="display-serif text-2xl md:text-3xl text-foreground mb-3 leading-tight">
+                  {card.label}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
+                <span className="eyebrow inline-flex items-center gap-1 mt-6 text-foreground group-hover:text-accent transition-colors">
+                  Start here <ArrowRight className="h-3 w-3" />
+                </span>
+              </motion.button>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CATEGORIES — quiet horizontal index */}
+      <section className="py-16 bg-secondary/40 border-y border-border">
+        <div className="container mx-auto px-4">
+          <span className="eyebrow block mb-6">Index of categories</span>
+          <div className="flex flex-wrap gap-x-10 gap-y-4">
+            {categories.map((cat, i) => (
+              <div key={cat.label} className="flex items-baseline gap-3">
+                <span className="mono text-xs text-muted-foreground">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <cat.icon className="h-4 w-4 text-foreground/70" />
+                <span className="display-serif text-xl text-foreground">{cat.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURES — editorial 2x2 with hairlines */}
+      <section id="features" className="py-24 lg:py-32">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-12 gap-8 mb-16">
+            <div className="lg:col-span-4">
+              <span className="eyebrow block mb-4">§ 03 — The method</span>
+              <h2 className="display-serif text-4xl md:text-6xl text-foreground leading-none">
+                Everything you need.<br />
+                <span className="display-italic accent-mark">Nothing you don’t.</span>
+              </h2>
+            </div>
+            <div className="lg:col-span-7 lg:col-start-6 lg:pt-6">
+              <p className="text-lg text-foreground/80 leading-relaxed">
+                NewBE is a quiet companion for the first year — a single, well-edited
+                place for the documents, decisions and small daily questions that
+                otherwise live in fifteen open browser tabs.
+              </p>
+            </div>
+          </div>
+
+          <motion.div
+            className="grid md:grid-cols-2 border-t border-foreground"
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            {features.map((feat, i) => (
+              <motion.div
+                key={feat.title}
+                variants={fadeUp}
+                className={`p-8 lg:p-10 border-b border-border ${
+                  i % 2 === 0 ? "md:border-r border-border" : ""
+                }`}
+              >
+                <div className="flex items-baseline justify-between mb-6">
+                  <span className="section-num">{feat.num}</span>
+                  <feat.icon className="h-5 w-5 text-foreground/60" />
+                </div>
+                <h3 className="display-serif text-2xl md:text-3xl text-foreground mb-3 leading-tight">
                   {feat.title}
                 </h3>
-                <p className="text-muted-foreground">{feat.desc}</p>
+                <p className="text-base text-muted-foreground leading-relaxed">{feat.desc}</p>
               </motion.div>
-            )}
+            ))}
           </motion.div>
         </div>
       </section>
 
-      {/* CTA — gradient with glass overlay */}
-      <section className="py-24 relative overflow-hidden" style={{ background: 'var(--gradient-hero)' }}>
-        <div className="absolute inset-0 shimmer" />
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}>
-            
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-foreground mb-4">
-              Ready to Feel at Home?
-            </h2>
-            <p className="text-lg text-primary-foreground/80 mb-8 max-w-xl mx-auto">
-              Create your profile in minutes and let NewBE guide you through
-              your new city.
-            </p>
-            <Button
-              variant="secondary"
-              size="lg"
-              onClick={() => navigate("/onboarding")}
-              className="font-semibold text-base px-8 h-12 shadow-lg hover:shadow-xl transition-shadow">
-              
-              Get Started Free <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </motion.div>
+      {/* CTA — full bleed ink block */}
+      <section className="bg-foreground text-background py-24">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-12 gap-8 items-end">
+            <div className="lg:col-span-8">
+              <span className="eyebrow !text-background/60 block mb-4">Colophon</span>
+              <h2 className="display-serif text-5xl md:text-7xl leading-[0.95]">
+                A new beginning,<br />
+                <span className="display-italic" style={{ color: "hsl(var(--accent))" }}>edited well.</span>
+              </h2>
+            </div>
+            <div className="lg:col-span-4">
+              <p className="text-background/70 mb-6 leading-relaxed">
+                Set up your file in under three minutes. Free to start, no credit card.
+              </p>
+              <Button
+                size="lg"
+                onClick={() => navigate("/onboarding")}
+                className="bg-background text-foreground hover:bg-background/90"
+              >
+                Get started <ArrowRight className="ml-1 h-4 w-4" />
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t border-border">
-        <div className="container mx-auto px-4 text-center text-muted-foreground text-sm">
-          © 2026 NewBE. Your personal relocation assistant.
+      <footer className="py-10 border-t border-border">
+        <div className="container mx-auto px-4 flex flex-wrap items-center justify-between gap-3">
+          <span className="eyebrow">© 2026 NewBE — Zürich</span>
+          <span className="eyebrow">Your new beginning, well edited.</span>
         </div>
       </footer>
-    </PageTransition>);
-
+    </PageTransition>
+  );
 }
