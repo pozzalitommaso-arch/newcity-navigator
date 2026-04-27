@@ -5,19 +5,19 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm text-sm font-medium tracking-tight ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm text-sm font-medium tracking-tight ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 relative",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/85",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-foreground/80 bg-transparent text-foreground hover:bg-foreground hover:text-background",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/70",
+        default: "bg-primary text-primary-foreground hover:shadow-[0_0_24px_hsl(var(--primary)/0.6)] hover:-translate-y-0.5",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 hover:shadow-[0_0_24px_hsl(var(--destructive)/0.5)]",
+        outline: "border border-primary/60 bg-transparent text-primary hover:bg-primary/10 hover:border-primary hover:shadow-[0_0_20px_hsl(var(--primary)/0.4)]",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/70 border border-border",
         ghost: "hover:bg-secondary text-foreground",
-        link: "text-foreground underline underline-offset-4 decoration-1 hover:decoration-2",
-        hero: "bg-primary text-primary-foreground hover:bg-primary/85 font-medium",
-        "hero-outline": "border border-foreground text-foreground hover:bg-foreground hover:text-background font-medium",
-        accent: "bg-accent text-accent-foreground hover:bg-accent/90 font-medium",
+        link: "text-primary underline underline-offset-4 decoration-1 hover:decoration-2",
+        hero: "bg-primary text-primary-foreground hover:shadow-[0_0_32px_hsl(var(--primary)/0.7)] hover:-translate-y-0.5 font-medium",
+        "hero-outline": "border border-primary text-primary hover:bg-primary/10 hover:shadow-[0_0_24px_hsl(var(--primary)/0.5)] font-medium",
+        accent: "bg-accent text-accent-foreground hover:shadow-[0_0_28px_hsl(var(--accent)/0.7)] hover:-translate-y-0.5 font-medium",
       },
       size: {
         default: "h-10 px-5 py-2",

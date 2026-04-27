@@ -14,9 +14,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter Tight", "system-ui", "sans-serif"],
-        display: ["Fraunces", "ui-serif", "Georgia", "serif"],
+        sans: ["Space Grotesk", "system-ui", "sans-serif"],
+        display: ["Space Grotesk", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "ui-monospace", "monospace"],
+        glitch: ["Major Mono Display", "JetBrains Mono", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
