@@ -1,20 +1,19 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
 import PageTransition from "@/components/PageTransition";
 import {
   GraduationCap, Home, Shield, Heart, Dumbbell, Landmark,
-  ArrowRight, Bell, BarChart3, MapPin, User, Sparkles,
-  FileText, Users, Zap, Wifi, Cpu,
+  ArrowRight, Bell, Compass, MapPin, User, Sparkles,
+  FileText, Users,
 } from "lucide-react";
 
 const features = [
-  { num: "01", icon: Sparkles, title: "AI.GUIDANCE", desc: "Personalised suggestions for schools, insurance and housing — built around the life you actually live.", glow: "primary" },
-  { num: "02", icon: Bell, title: "PROACTIVE.PINGS", desc: "Permits, insurance windows, registration cut-offs. Surfaced before they bite.", glow: "magenta" },
-  { num: "03", icon: BarChart3, title: "QUIET.PROGRESS", desc: "A calm, honest view of how settled you really are. No streaks. No noise.", glow: "cyan" },
-  { num: "04", icon: MapPin, title: "LOCAL.NOT.GENERIC", desc: "Curated knowledge by canton and city — neighbourhoods, services, community.", glow: "primary" },
+  { num: "I", icon: Sparkles, title: "Personal", italic: "guidance", desc: "Schools, insurance and housing — suggestions shaped around the life you actually live, not a generic checklist." },
+  { num: "II", icon: Bell, title: "Quiet", italic: "reminders", desc: "Permits, insurance windows, registration cut-offs — surfaced gently, before any of them bite." },
+  { num: "III", icon: Compass, title: "Local", italic: "knowledge", desc: "Curated by canton and city. Real neighbourhoods, real services, real community — never copy-pasted." },
+  { num: "IV", icon: Heart, title: "Made for", italic: "families", desc: "Partners, children, pets, paperwork — everyone in one calm, well-edited dossier." },
 ];
 
 const categories = [
@@ -22,40 +21,28 @@ const categories = [
   { icon: Heart, label: "Family" },
   { icon: Home, label: "Housing" },
   { icon: Shield, label: "Insurance" },
-  { icon: Dumbbell, label: "Sport" },
+  { icon: Dumbbell, label: "Sport & leisure" },
   { icon: Landmark, label: "Finance" },
 ];
 
-const marqueeItems = [
-  "PERMIT.B", "AHV.NUMBER", "SERAFE", "HALBTAX", "PILLAR.3A", "TAX.AT.SOURCE",
-  "GEMEINDE", "KRANKENKASSE", "RESIDENCE.PERMIT", "BANK.IBAN", "GA.TRAVELCARD",
-];
-
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
-const fadeUp = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const } } };
+const fadeUp = { hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } } };
 
 export default function LandingPage() {
   const navigate = useNavigate();
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
   return (
     <PageTransition className="min-h-screen relative">
-      {/* Animated blobs backdrop */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="blob bg-primary" style={{ width: 500, height: 500, top: "-10%", left: "-10%" }} />
-        <div className="blob bg-accent" style={{ width: 400, height: 400, top: "30%", right: "-10%", animationDelay: "-5s" }} />
-        <div className="blob bg-info" style={{ width: 450, height: 450, bottom: "-15%", left: "30%", animationDelay: "-9s" }} />
-      </div>
-
-      {/* Cyber nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border">
-        <div className="container mx-auto flex items-center justify-between h-14 px-4">
+      {/* Editorial nav */}
+      <nav className="sticky top-0 z-50 glass border-b border-border">
+        <div className="container mx-auto flex items-center justify-between h-16 px-4">
           <div className="flex items-baseline gap-3 cursor-pointer" onClick={() => navigate("/")}>
-            <span className="display-serif text-2xl text-foreground flicker">NewBE<span className="text-primary text-glow-primary">_</span></span>
-            <span className="eyebrow hidden sm:inline">v2.0 // CH</span>
+            <span className="display-serif text-2xl tracking-tight">
+              New<span className="editorial-italic text-primary">Be</span>
+            </span>
+            <span className="hidden sm:inline text-[10px] tracking-[0.25em] uppercase text-muted-foreground border-l border-border pl-3">
+              The Switzerland Field Guide
+            </span>
           </div>
           <div className="flex items-center gap-1">
             <Button variant="ghost" size="sm" onClick={() => navigate("/pricing")}>Pricing</Button>
@@ -63,141 +50,138 @@ export default function LandingPage() {
             <Button variant="ghost" size="icon" onClick={() => navigate("/profile")} title="Profile">
               <User className="h-5 w-5" />
             </Button>
-            <Button size="sm" onClick={() => navigate("/onboarding")} className="glow-primary">
-              <Zap className="h-3.5 w-3.5" /> Get started
+            <Button size="sm" onClick={() => navigate("/onboarding")}>
+              Begin
             </Button>
           </div>
         </div>
       </nav>
 
-      {/* HERO */}
-      <section ref={heroRef} className="relative pt-28 pb-20 lg:pt-36 lg:pb-32 z-10">
-        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="container mx-auto px-4 relative">
-          {/* Top status bar */}
-          <div className="flex items-center justify-between mb-10 lg:mb-14">
-            <span className="tape">SYS.ONLINE</span>
-            <span className="eyebrow hidden md:inline">// FIELD GUIDE FOR NEWCOMERS</span>
-            <span className="eyebrow mono">[CH·46.8°N]</span>
+      {/* MASTHEAD */}
+      <section className="relative pt-12 pb-16 lg:pt-20 lg:pb-24 z-10">
+        <div className="container mx-auto px-4">
+          {/* Magazine masthead bar */}
+          <div className="flex items-center justify-between text-[10px] tracking-[0.25em] uppercase text-muted-foreground mb-3">
+            <span>Vol. I — №01</span>
+            <span className="hidden md:inline">A Field Guide for Newcomers</span>
+            <span>Spring · 2026</span>
           </div>
+          <div className="rule-double mb-10 lg:mb-14" />
 
-          <div className="rule-ink mb-10 lg:mb-14" />
-
+          {/* HERO HEADLINE */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end"
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end"
           >
-            <div className="lg:col-span-8 relative">
-              <h1 className="display-serif text-foreground text-[3.25rem] sm:text-7xl lg:text-[8.5rem] leading-[0.9]">
-                <span className="block">MOVING</span>
-                <span className="block display-italic chrome-text text-[2.75rem] sm:text-6xl lg:text-[7rem]">is.hard</span>
-                <span className="block">SETTLING IN</span>
-                <span className="block accent-mark text-glow-accent">shouldn’t·be</span>
+            <div className="lg:col-span-8">
+              <span className="eyebrow block mb-6">The Cover Story</span>
+              <h1 className="display-serif text-foreground text-[2.75rem] sm:text-6xl lg:text-[7.5rem] leading-[0.95]">
+                Moving is hard.<br />
+                <span className="editorial-italic text-primary">Settling in</span><br />
+                shouldn’t be.
               </h1>
-              {/* Decorative corner brackets */}
-              <span className="absolute -top-3 -left-3 w-6 h-6 border-l-2 border-t-2 border-primary opacity-60" />
-              <span className="absolute -bottom-3 -right-3 w-6 h-6 border-r-2 border-b-2 border-accent opacity-60" />
             </div>
 
-            <div className="lg:col-span-4 lg:pb-6 glass p-6 rounded-sm">
-              <span className="eyebrow block mb-3">// THE.THESIS</span>
-              <p className="text-base text-foreground/85 leading-relaxed mb-6">
-                Bureaucracy, housing, insurance, friendship — twelve months of admin
-                compressed into a single, calm checklist. Tailored to your canton,
-                your family, your week ahead.
+            <div className="lg:col-span-4 lg:pb-4 border-l border-border pl-6 lg:pl-8">
+              <p className="text-base text-foreground/80 leading-relaxed mb-6 font-light">
+                A quiet companion for your first year in Switzerland —
+                paperwork, housing, insurance, friendships — gathered into a
+                single, <span className="editorial-italic text-primary">well-edited</span> dossier.
               </p>
-              <div className="flex items-center gap-3 flex-wrap">
-                <Button size="lg" onClick={() => navigate("/onboarding")} className="glow-primary">
-                  Initialize <ArrowRight className="ml-1 h-4 w-4" />
+              <div className="flex items-center gap-4 flex-wrap">
+                <Button size="lg" variant="hero" onClick={() => navigate("/onboarding")}>
+                  Begin your file <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
                 <button
-                  onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}
-                  className="eyebrow hover:text-accent transition-colors"
+                  onClick={() => document.getElementById("contents")?.scrollIntoView({ behavior: "smooth" })}
+                  className="text-sm underline underline-offset-4 decoration-1 hover:text-primary transition-colors"
                 >
-                  scroll ↓
+                  Table of contents
                 </button>
               </div>
             </div>
           </motion.div>
 
-          {/* Stats */}
-          <div className="rule mt-16 mb-6" />
+          {/* DECK / standfirst */}
+          <div className="rule mt-16 mb-10" />
           <motion.div
-            className="grid grid-cols-3 gap-6"
+            className="grid md:grid-cols-3 gap-10"
             variants={stagger}
             initial="hidden"
             animate="show"
           >
             {[
-              { k: "11", v: "LIFE.CATEGORIES", icon: Cpu },
-              { k: "50+", v: "CURATED.CHECKS", icon: Wifi },
-              { k: "AI", v: "GUIDANCE.ON.TAP", icon: Zap },
+              { k: "11", v: "Life chapters, from permits to friendships" },
+              { k: "60+", v: "Swiss cities, mapped canton by canton" },
+              { k: "01", v: "Calm dossier instead of fifteen open tabs" },
             ].map((s) => (
-              <motion.div key={s.v} variants={fadeUp} className="flex flex-col">
-                <span className="display-serif text-4xl md:text-6xl gradient-text leading-none">{s.k}</span>
-                <span className="eyebrow mt-2 flex items-center gap-2"><s.icon className="h-3 w-3" />{s.v}</span>
+              <motion.div key={s.v} variants={fadeUp} className="flex items-baseline gap-5">
+                <span className="display-italic text-primary text-5xl md:text-6xl leading-none">{s.k}</span>
+                <span className="text-sm text-foreground/70 leading-snug border-l border-border pl-4">{s.v}</span>
               </motion.div>
             ))}
           </motion.div>
-        </motion.div>
-      </section>
-
-      {/* MARQUEE band */}
-      <section className="relative z-10 py-6 border-y border-primary/30 bg-background/40 backdrop-blur-sm overflow-hidden">
-        <div className="marquee">
-          {[0, 1].map((dup) => (
-            <div key={dup} className="marquee-track" aria-hidden={dup === 1}>
-              {marqueeItems.map((item, i) => (
-                <span key={`${dup}-${i}`} className="eyebrow text-primary/80 flex items-center gap-3 whitespace-nowrap">
-                  <span className="text-accent">◆</span> {item}
-                </span>
-              ))}
-            </div>
-          ))}
         </div>
       </section>
 
-      {/* WORRIES */}
-      <section className="relative z-10 py-20">
+      {/* PULL QUOTE */}
+      <section className="relative z-10 py-16 lg:py-24">
+        <div className="container mx-auto px-4 max-w-4xl text-center">
+          <span className="eyebrow block mb-6">From the editor</span>
+          <p className="display-italic text-3xl md:text-5xl lg:text-6xl text-foreground leading-tight">
+            “The first year somewhere new is not a checklist —
+            it’s a <span className="text-primary">slow rewriting</span> of
+            what <span className="not-italic display-serif">home</span> means.”
+          </p>
+          <div className="rule-ink w-16 mx-auto mt-10" />
+          <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground mt-4 block">
+            NewBe — Switzerland Edition
+          </span>
+        </div>
+      </section>
+
+      {/* WORRIES — features in a magazine spread */}
+      <section id="contents" className="relative z-10 py-16 lg:py-24">
         <div className="container mx-auto px-4">
-          <div className="flex items-baseline justify-between mb-10">
-            <h2 className="display-serif text-3xl md:text-5xl text-foreground">
-              What’s <span className="accent-mark">on your mind</span>?
-            </h2>
-            <span className="eyebrow hidden md:inline">§02 // CONCERNS</span>
+          <div className="flex items-baseline justify-between mb-2">
+            <span className="eyebrow">Section §02 — In this issue</span>
+            <span className="text-xs tracking-widest uppercase text-muted-foreground hidden md:inline">p. 14</span>
           </div>
+          <h2 className="display-serif text-4xl md:text-6xl text-foreground mb-12 max-w-3xl leading-tight">
+            What’s <span className="editorial-italic text-primary">on your mind</span>?
+          </h2>
 
           <motion.div
-            className="grid md:grid-cols-3 gap-4"
+            className="grid md:grid-cols-3 gap-6 lg:gap-8"
             variants={stagger}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-80px" }}
           >
             {[
-              { num: "01", icon: FileText, label: "Paperwork & bureaucracy", desc: "Permits, registration, insurance deadlines — sequenced for your arrival date." },
-              { num: "02", icon: Home, label: "Housing & setup", desc: "Apartment hunt, utilities, internet, the deposit dance — explained plainly." },
-              { num: "03", icon: Users, label: "Making friends", desc: "Meet-ups, clubs, language tandems — a soft landing into a new community." },
+              { num: "i.", icon: FileText, label: "Paperwork", italic: "& bureaucracy", desc: "Permits, registration, insurance deadlines — sequenced for your arrival date." },
+              { num: "ii.", icon: Home, label: "Housing", italic: "& setting up", desc: "Apartment hunt, utilities, internet, the deposit dance — explained plainly." },
+              { num: "iii.", icon: Users, label: "Making", italic: "friends", desc: "Meet-ups, clubs, language tandems — a soft landing into your new community." },
             ].map((card) => (
               <motion.button
                 key={card.label}
                 variants={fadeUp}
                 onClick={() => navigate("/onboarding")}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="bento-card text-left group"
+                className="editorial-card text-left group"
               >
-                <div className="flex items-baseline justify-between mb-6 relative z-10">
-                  <span className="section-num">{card.num}</span>
-                  <card.icon className="h-5 w-5 text-foreground/60 group-hover:text-primary group-hover:drop-shadow-[0_0_8px_hsl(var(--primary))] transition-all" />
+                <div className="flex items-baseline justify-between mb-8">
+                  <span className="folio text-2xl">{card.num}</span>
+                  <card.icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 </div>
-                <h3 className="display-serif text-2xl md:text-3xl text-foreground mb-3 leading-tight relative z-10">
-                  {card.label}
+                <h3 className="display-serif text-3xl md:text-4xl text-foreground mb-4 leading-tight">
+                  {card.label}<br />
+                  <span className="editorial-italic text-primary">{card.italic}</span>
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed relative z-10">{card.desc}</p>
-                <span className="eyebrow inline-flex items-center gap-1 mt-6 group-hover:text-accent transition-colors relative z-10">
-                  Start here <ArrowRight className="h-3 w-3" />
+                <p className="text-sm text-muted-foreground leading-relaxed mb-6">{card.desc}</p>
+                <span className="text-xs tracking-[0.2em] uppercase text-foreground inline-flex items-center gap-2 border-b border-foreground pb-1 group-hover:text-primary group-hover:border-primary transition-colors">
+                  Read on <ArrowRight className="h-3 w-3" />
                 </span>
               </motion.button>
             ))}
@@ -205,108 +189,115 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* CATEGORIES — terminal index */}
-      <section className="relative z-10 py-16">
+      {/* CONTENTS — table of contents */}
+      <section className="relative z-10 py-16 lg:py-24">
         <div className="container mx-auto px-4">
-          <div className="glass rounded-sm p-8">
-            <span className="eyebrow block mb-6">// INDEX.OF.CATEGORIES</span>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-5">
-              {categories.map((cat, i) => (
-                <motion.div
-                  key={cat.label}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                  whileHover={{ x: 4 }}
-                  className="flex items-baseline gap-3 cursor-pointer group"
-                >
-                  <span className="mono text-xs text-primary">
-                    [{String(i + 1).padStart(2, "0")}]
-                  </span>
-                  <cat.icon className="h-4 w-4 text-foreground/70 group-hover:text-primary transition-colors" />
-                  <span className="display-serif text-xl text-foreground group-hover:text-glow-primary transition-all">{cat.label}</span>
-                </motion.div>
-              ))}
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
+            <div className="lg:col-span-4">
+              <span className="eyebrow block mb-6">Index</span>
+              <h2 className="display-serif text-4xl md:text-5xl leading-tight">
+                Table of <span className="editorial-italic text-primary">contents</span>
+              </h2>
+              <p className="text-sm text-muted-foreground mt-4 leading-relaxed">
+                Eleven chapters covering the territory between landing and belonging.
+              </p>
+            </div>
+            <div className="lg:col-span-8">
+              <ul className="divide-y divide-border border-y border-border">
+                {categories.map((cat, i) => (
+                  <motion.li
+                    key={cat.label}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.05, duration: 0.5 }}
+                    className="flex items-center justify-between py-4 group cursor-pointer"
+                  >
+                    <div className="flex items-baseline gap-5">
+                      <span className="folio text-base w-8">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <cat.icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                      <span className="display-serif text-xl md:text-2xl text-foreground group-hover:text-primary transition-colors">
+                        {cat.label}
+                      </span>
+                    </div>
+                    <span className="text-xs tracking-widest text-muted-foreground hidden sm:inline">
+                      p. {String((i + 1) * 12).padStart(3, "0")}
+                    </span>
+                  </motion.li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section id="features" className="relative z-10 py-24 lg:py-32">
+      {/* THE METHOD — features */}
+      <section className="relative z-10 py-20 lg:py-28">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-12 gap-8 mb-16">
-            <div className="lg:col-span-5">
-              <span className="eyebrow block mb-4">§03 // THE.METHOD</span>
-              <h2 className="display-serif text-4xl md:text-6xl text-foreground leading-none">
-                Everything you need.<br />
-                <span className="display-italic chrome-text">nothing.you.don’t</span>
+          <div className="grid lg:grid-cols-12 gap-8 mb-14">
+            <div className="lg:col-span-6">
+              <span className="eyebrow block mb-4">Section §03 — The method</span>
+              <h2 className="display-serif text-4xl md:text-6xl text-foreground leading-[1.05]">
+                Everything <span className="editorial-italic text-primary">you need</span>,<br />
+                nothing you don’t.
               </h2>
             </div>
-            <div className="lg:col-span-6 lg:col-start-7 lg:pt-6">
-              <p className="text-lg text-foreground/80 leading-relaxed">
-                NewBE is a quiet companion for the first year — a single, well-edited
-                place for the documents, decisions and small daily questions that
-                otherwise live in fifteen open browser tabs.
+            <div className="lg:col-span-5 lg:col-start-8 lg:pt-4">
+              <p className="text-base text-foreground/80 leading-relaxed font-light">
+                NewBe is a quiet companion for your first year — a single,
+                well-edited place for the documents, decisions and small
+                daily questions that otherwise live in fifteen open browser tabs.
               </p>
             </div>
           </div>
 
           <motion.div
-            className="grid md:grid-cols-2 gap-4"
+            className="grid md:grid-cols-2 gap-6 lg:gap-8"
             variants={stagger}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-80px" }}
           >
             {features.map((feat) => (
-              <motion.div
-                key={feat.title}
-                variants={fadeUp}
-                whileHover={{ y: -4 }}
-                className="bento-card group"
-              >
-                <div className="flex items-baseline justify-between mb-6 relative z-10">
-                  <span className="section-num">{feat.num}</span>
-                  <feat.icon className={`h-5 w-5 transition-all ${
-                    feat.glow === "magenta" ? "text-accent group-hover:drop-shadow-[0_0_12px_hsl(var(--accent))]" :
-                    feat.glow === "cyan" ? "text-info group-hover:drop-shadow-[0_0_12px_hsl(var(--info))]" :
-                    "text-primary group-hover:drop-shadow-[0_0_12px_hsl(var(--primary))]"
-                  }`} />
+              <motion.div key={feat.title} variants={fadeUp} className="editorial-card">
+                <div className="flex items-baseline justify-between mb-6">
+                  <span className="folio text-2xl">№ {feat.num}</span>
+                  <feat.icon className="h-5 w-5 text-primary" />
                 </div>
-                <h3 className="display-serif text-2xl md:text-3xl text-foreground mb-3 leading-tight relative z-10 mono tracking-tight">
-                  {feat.title}
+                <h3 className="display-serif text-2xl md:text-3xl text-foreground mb-3 leading-tight">
+                  {feat.title} <span className="editorial-italic text-primary">{feat.italic}</span>
                 </h3>
-                <p className="text-base text-muted-foreground leading-relaxed relative z-10">{feat.desc}</p>
+                <p className="text-base text-muted-foreground leading-relaxed">{feat.desc}</p>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* CTA — chrome block */}
-      <section className="relative z-10 py-24">
+      {/* COLOPHON / CTA */}
+      <section className="relative z-10 py-20 lg:py-28">
         <div className="container mx-auto px-4">
-          <div className="relative rounded-sm overflow-hidden p-10 lg:p-16 noise" style={{ background: "var(--gradient-card)", border: "1px solid hsl(var(--border))" }}>
-            {/* Iridescent border sweep */}
-            <div className="absolute inset-0 opacity-40 pointer-events-none" style={{ background: "var(--gradient-iridescent)", backgroundSize: "200% 200%", animation: "iridescent-shift 6s linear infinite", maskImage: "linear-gradient(black, black) content-box, linear-gradient(black, black)", WebkitMask: "linear-gradient(black 0 0) content-box, linear-gradient(black 0 0)", WebkitMaskComposite: "xor", padding: "1px" } as React.CSSProperties} />
-
-            <div className="grid lg:grid-cols-12 gap-8 items-end relative">
+          <div className="rounded-sm p-10 lg:p-16 border border-foreground/10 relative overflow-hidden" style={{ background: "var(--gradient-warm)" }}>
+            <div className="grid lg:grid-cols-12 gap-10 items-end relative">
               <div className="lg:col-span-8">
-                <span className="eyebrow block mb-4">// COLOPHON</span>
-                <h2 className="display-serif text-5xl md:text-7xl leading-[0.9] text-foreground">
+                <span className="eyebrow block mb-6">Colophon</span>
+                <h2 className="display-serif text-5xl md:text-7xl leading-[0.95] text-foreground">
                   A new beginning,<br />
-                  <span className="display-italic accent-mark">edited.well</span>
+                  <span className="editorial-italic text-primary">edited well.</span>
                 </h2>
               </div>
               <div className="lg:col-span-4">
-                <p className="text-foreground/70 mb-6 leading-relaxed">
+                <p className="text-foreground/75 mb-6 leading-relaxed font-light">
                   Set up your file in under three minutes. Free to start, no credit card.
                 </p>
-                <Button size="lg" onClick={() => navigate("/onboarding")} className="glow-primary">
-                  Boot sequence <ArrowRight className="ml-1 h-4 w-4" />
+                <Button size="lg" variant="hero" onClick={() => navigate("/onboarding")}>
+                  Begin your file <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
+                <div className="flex items-center gap-2 mt-5 text-xs text-muted-foreground">
+                  <MapPin className="h-3 w-3" /> 60+ Swiss cities · all 26 cantons
+                </div>
               </div>
             </div>
           </div>
@@ -315,9 +306,9 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="relative z-10 py-10 border-t border-border">
-        <div className="container mx-auto px-4 flex flex-wrap items-center justify-between gap-3">
-          <span className="eyebrow">© 2026 NewBE // ZÜRICH.NODE</span>
-          <span className="eyebrow">Your new beginning, well edited.</span>
+        <div className="container mx-auto px-4 flex flex-wrap items-center justify-between gap-3 text-xs tracking-[0.2em] uppercase text-muted-foreground">
+          <span>© 2026 NewBe — Zürich Bureau</span>
+          <span className="display-italic normal-case tracking-normal text-sm">Your new beginning, well edited.</span>
         </div>
       </footer>
     </PageTransition>
