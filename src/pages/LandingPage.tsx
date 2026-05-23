@@ -58,13 +58,36 @@ export default function LandingPage() {
       </nav>
 
       {/* MASTHEAD */}
-      <section className="relative pt-12 pb-16 lg:pt-20 lg:pb-24 z-10">
-        <div className="container mx-auto px-4">
+      <section className="relative pt-12 pb-16 lg:pt-20 lg:pb-24 z-10 overflow-hidden">
+        {/* Artistic electric-blue ink splash — focused accent */}
+        <svg
+          aria-hidden
+          className="absolute -top-24 -right-20 w-[520px] h-[520px] opacity-[0.07] pointer-events-none"
+          viewBox="0 0 600 600"
+        >
+          <defs>
+            <linearGradient id="ink" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="hsl(230 100% 50%)" />
+              <stop offset="100%" stopColor="hsl(225 100% 62%)" />
+            </linearGradient>
+          </defs>
+          <path
+            fill="url(#ink)"
+            d="M421,116c54,40,98,98,109,164c11,66-12,140-63,182c-51,42-129,52-196,33c-67-19-122-66-156-126c-34-60-46-132-21-188c25-56,87-95,152-110C311,56,367,76,421,116Z"
+          />
+        </svg>
+        {/* Tiny floating blue dot — punctuation */}
+        <div className="absolute top-40 left-8 w-2 h-2 rounded-full bg-primary shadow-electric hidden lg:block" />
+
+        <div className="container mx-auto px-4 relative">
           {/* Magazine masthead bar */}
           <div className="flex items-center justify-between text-[10px] tracking-[0.25em] uppercase text-muted-foreground mb-3">
             <span>Vol. I — №01</span>
             <span className="hidden md:inline">A Field Guide for Newcomers</span>
-            <span>Spring · 2026</span>
+            <span className="inline-flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              Spring · 2026
+            </span>
           </div>
           <div className="rule-double mb-10 lg:mb-14" />
 
@@ -79,19 +102,24 @@ export default function LandingPage() {
               <span className="eyebrow block mb-6">The Cover Story</span>
               <h1 className="display-serif text-foreground text-[2.75rem] sm:text-6xl lg:text-[7.5rem] leading-[0.95]">
                 Moving is hard.<br />
-                <span className="editorial-italic text-primary">Settling in</span><br />
+                <span className="editorial-italic text-primary relative">
+                  Settling in
+                  <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden>
+                    <path d="M2,8 Q75,1 150,6 T298,5" stroke="hsl(var(--primary))" strokeWidth="2" fill="none" strokeLinecap="round" />
+                  </svg>
+                </span><br />
                 shouldn’t be.
               </h1>
             </div>
 
-            <div className="lg:col-span-4 lg:pb-4 border-l border-border pl-6 lg:pl-8">
+            <div className="lg:col-span-4 lg:pb-4 border-l-2 border-primary pl-6 lg:pl-8">
               <p className="text-base text-foreground/80 leading-relaxed mb-6 font-light">
                 A quiet companion for your first year in Switzerland —
                 paperwork, housing, insurance, friendships — gathered into a
                 single, <span className="editorial-italic text-primary">well-edited</span> dossier.
               </p>
               <div className="flex items-center gap-4 flex-wrap">
-                <Button size="lg" variant="hero" onClick={() => navigate("/onboarding")}>
+                <Button size="lg" variant="default" onClick={() => navigate("/onboarding")}>
                   Begin your file <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
                 <button
