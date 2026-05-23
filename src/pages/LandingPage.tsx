@@ -304,26 +304,35 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* COLOPHON / CTA */}
+      {/* COLOPHON / CTA — electric blue focal point */}
       <section className="relative z-10 py-20 lg:py-28">
         <div className="container mx-auto px-4">
-          <div className="rounded-sm p-10 lg:p-16 border border-foreground/10 relative overflow-hidden" style={{ background: "var(--gradient-warm)" }}>
+          <div className="rounded-sm p-10 lg:p-16 relative overflow-hidden bg-primary text-primary-foreground" style={{ boxShadow: "var(--shadow-electric)" }}>
+            {/* artistic concentric circles */}
+            <svg aria-hidden className="absolute -right-32 -bottom-32 w-[420px] h-[420px] opacity-20 pointer-events-none" viewBox="0 0 200 200">
+              <g fill="none" stroke="currentColor" strokeWidth="0.5">
+                <circle cx="100" cy="100" r="40" />
+                <circle cx="100" cy="100" r="60" />
+                <circle cx="100" cy="100" r="80" />
+                <circle cx="100" cy="100" r="100" />
+              </g>
+            </svg>
             <div className="grid lg:grid-cols-12 gap-10 items-end relative">
               <div className="lg:col-span-8">
-                <span className="eyebrow block mb-6">Colophon</span>
-                <h2 className="display-serif text-5xl md:text-7xl leading-[0.95] text-foreground">
+                <span className="text-[10px] font-semibold tracking-[0.25em] uppercase opacity-80 block mb-6">Colophon</span>
+                <h2 className="display-serif text-5xl md:text-7xl leading-[0.95]">
                   A new beginning,<br />
-                  <span className="editorial-italic text-primary">edited well.</span>
+                  <span className="editorial-italic">edited well.</span>
                 </h2>
               </div>
               <div className="lg:col-span-4">
-                <p className="text-foreground/75 mb-6 leading-relaxed font-light">
+                <p className="opacity-85 mb-6 leading-relaxed font-light">
                   Set up your file in under three minutes. Free to start, no credit card.
                 </p>
-                <Button size="lg" variant="hero" onClick={() => navigate("/onboarding")}>
+                <Button size="lg" variant="secondary" onClick={() => navigate("/onboarding")} className="bg-background text-foreground hover:bg-background/90">
                   Begin your file <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
-                <div className="flex items-center gap-2 mt-5 text-xs text-muted-foreground">
+                <div className="flex items-center gap-2 mt-5 text-xs opacity-75">
                   <MapPin className="h-3 w-3" /> 60+ Swiss cities · all 26 cantons
                 </div>
               </div>
