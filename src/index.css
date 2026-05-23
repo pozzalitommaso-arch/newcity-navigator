@@ -6,100 +6,99 @@
 
 /*
   ─────────────────────────────────────────────────────────
-  NewBE — EDITORIAL TRAVEL MAGAZINE
-  Cream / ink black / bordeaux / sage. Big serif italics + clean sans.
+  NewBE — ARTISTIC WHITE / ELECTRIC BLUE
+  Pure white gallery, ink black type, electric blue used as focused punctuation.
   ─────────────────────────────────────────────────────────
 */
 
 @layer base {
   :root {
-    /* Light first — warm cream paper */
-    --background: 38 35% 96%;
-    --foreground: 25 25% 12%;
+    --background: 0 0% 100%;
+    --foreground: 220 15% 8%;
 
-    --card: 40 40% 98%;
-    --card-foreground: 25 25% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 8%;
 
-    --popover: 40 40% 98%;
-    --popover-foreground: 25 25% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 8%;
 
-    /* Bordeaux — rich editorial accent */
-    --primary: 355 55% 32%;
-    --primary-foreground: 38 35% 96%;
-    --primary-glow: 355 55% 45%;
+    /* Electric blue — used sparingly, with intent */
+    --primary: 230 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 225 100% 62%;
 
-    --secondary: 38 25% 90%;
-    --secondary-foreground: 25 25% 12%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 15% 8%;
 
-    --muted: 38 25% 92%;
-    --muted-foreground: 25 12% 38%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 8% 42%;
 
-    /* Sage green — supporting accent */
-    --accent: 110 18% 38%;
-    --accent-foreground: 38 35% 96%;
+    --accent: 230 100% 50%;
+    --accent-foreground: 0 0% 100%;
 
-    /* Ochre / golden travel-postcard tone */
-    --info: 35 60% 48%;
-    --info-foreground: 25 25% 12%;
+    --info: 230 100% 50%;
+    --info-foreground: 0 0% 100%;
 
-    --destructive: 5 65% 45%;
-    --destructive-foreground: 38 35% 96%;
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 0 0% 100%;
 
-    --warning: 38 75% 50%;
-    --warning-foreground: 25 25% 12%;
+    --warning: 38 95% 52%;
+    --warning-foreground: 220 15% 8%;
 
-    --success: 110 25% 35%;
-    --success-foreground: 38 35% 96%;
+    --success: 152 60% 38%;
+    --success-foreground: 0 0% 100%;
 
-    --border: 35 18% 82%;
-    --input: 35 18% 82%;
-    --ring: 355 55% 32%;
+    --border: 220 13% 90%;
+    --input: 220 13% 90%;
+    --ring: 230 100% 50%;
 
     --radius: 0.25rem;
 
-    --sidebar-background: 38 35% 94%;
-    --sidebar-foreground: 25 25% 12%;
-    --sidebar-primary: 355 55% 32%;
-    --sidebar-primary-foreground: 38 35% 96%;
-    --sidebar-accent: 38 25% 88%;
-    --sidebar-accent-foreground: 25 25% 12%;
-    --sidebar-border: 35 18% 78%;
-    --sidebar-ring: 355 55% 32%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 15% 8%;
+    --sidebar-primary: 230 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 220 15% 8%;
+    --sidebar-border: 220 13% 90%;
+    --sidebar-ring: 230 100% 50%;
 
-    --gradient-hero: linear-gradient(180deg, hsl(38 40% 97%), hsl(38 30% 93%));
-    --gradient-warm: linear-gradient(135deg, hsl(38 50% 92%), hsl(35 45% 86%));
-    --gradient-card: linear-gradient(180deg, hsl(40 40% 99%), hsl(38 35% 95%));
+    --gradient-hero: radial-gradient(1100px 600px at 90% -10%, hsl(230 100% 50% / 0.10), transparent 60%), linear-gradient(180deg, hsl(0 0% 100%), hsl(220 20% 99%));
+    --gradient-warm: linear-gradient(135deg, hsl(0 0% 100%), hsl(220 20% 97%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(220 20% 99%));
+    --gradient-electric: linear-gradient(135deg, hsl(230 100% 50%), hsl(225 100% 62%));
 
-    --shadow-soft: 0 1px 0 hsl(35 18% 82%);
-    --shadow-card: 0 1px 2px hsl(25 25% 12% / 0.04), 0 8px 24px -12px hsl(25 25% 12% / 0.08);
-    --shadow-elevated: 0 20px 50px -20px hsl(25 25% 12% / 0.18);
+    --shadow-soft: 0 1px 0 hsl(220 13% 90%);
+    --shadow-card: 0 1px 2px hsl(220 15% 8% / 0.04), 0 8px 24px -12px hsl(220 15% 8% / 0.08);
+    --shadow-elevated: 0 20px 50px -20px hsl(230 100% 50% / 0.25);
+    --shadow-electric: 0 10px 40px -10px hsl(230 100% 50% / 0.45);
 
-    --glass-bg: hsl(40 40% 98% / 0.85);
-    --glass-border: hsl(25 25% 12% / 0.08);
+    --glass-bg: hsl(0 0% 100% / 0.78);
+    --glass-border: hsl(220 15% 8% / 0.08);
   }
 
   .dark {
-    --background: 25 18% 10%;
-    --foreground: 38 30% 92%;
-    --card: 25 18% 13%;
-    --card-foreground: 38 30% 92%;
-    --popover: 25 18% 13%;
-    --popover-foreground: 38 30% 92%;
-    --primary: 355 60% 55%;
-    --primary-foreground: 25 18% 10%;
-    --secondary: 25 14% 18%;
-    --secondary-foreground: 38 30% 92%;
-    --muted: 25 14% 16%;
-    --muted-foreground: 38 15% 65%;
-    --accent: 110 22% 55%;
-    --accent-foreground: 25 18% 10%;
-    --border: 25 14% 22%;
-    --input: 25 14% 22%;
-    --ring: 355 60% 55%;
-    --gradient-hero: linear-gradient(180deg, hsl(25 18% 10%), hsl(25 18% 8%));
-    --gradient-card: linear-gradient(180deg, hsl(25 18% 14%), hsl(25 18% 11%));
-    --glass-bg: hsl(25 18% 13% / 0.8);
-    --glass-border: hsl(38 30% 92% / 0.08);
+    --background: 220 20% 6%;
+    --foreground: 0 0% 98%;
+    --card: 220 18% 9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 220 18% 9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 225 100% 62%;
+    --primary-foreground: 220 20% 6%;
+    --secondary: 220 14% 14%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 220 14% 14%;
+    --muted-foreground: 220 8% 65%;
+    --accent: 225 100% 62%;
+    --accent-foreground: 220 20% 6%;
+    --border: 220 14% 18%;
+    --input: 220 14% 18%;
+    --ring: 225 100% 62%;
+    --gradient-hero: radial-gradient(1100px 600px at 90% -10%, hsl(230 100% 50% / 0.18), transparent 60%), linear-gradient(180deg, hsl(220 20% 6%), hsl(220 20% 5%));
+    --gradient-card: linear-gradient(180deg, hsl(220 18% 10%), hsl(220 18% 8%));
+    --glass-bg: hsl(220 18% 9% / 0.78);
+    --glass-border: hsl(0 0% 98% / 0.08);
   }
 }
 
@@ -116,15 +115,15 @@
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  /* Subtle paper texture */
+  /* Subtle paper grain — neutral */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.5;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.3 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.07 0 0 0 0 0.12 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   h1, h2, h3, h4, h5 {

@@ -58,13 +58,36 @@ export default function LandingPage() {
       </nav>
 
       {/* MASTHEAD */}
-      <section className="relative pt-12 pb-16 lg:pt-20 lg:pb-24 z-10">
-        <div className="container mx-auto px-4">
+      <section className="relative pt-12 pb-16 lg:pt-20 lg:pb-24 z-10 overflow-hidden">
+        {/* Artistic electric-blue ink splash — focused accent */}
+        <svg
+          aria-hidden
+          className="absolute -top-24 -right-20 w-[520px] h-[520px] opacity-[0.07] pointer-events-none"
+          viewBox="0 0 600 600"
+        >
+          <defs>
+            <linearGradient id="ink" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="hsl(230 100% 50%)" />
+              <stop offset="100%" stopColor="hsl(225 100% 62%)" />
+            </linearGradient>
+          </defs>
+          <path
+            fill="url(#ink)"
+            d="M421,116c54,40,98,98,109,164c11,66-12,140-63,182c-51,42-129,52-196,33c-67-19-122-66-156-126c-34-60-46-132-21-188c25-56,87-95,152-110C311,56,367,76,421,116Z"
+          />
+        </svg>
+        {/* Tiny floating blue dot — punctuation */}
+        <div className="absolute top-40 left-8 w-2 h-2 rounded-full bg-primary shadow-electric hidden lg:block" />
+
+        <div className="container mx-auto px-4 relative">
           {/* Magazine masthead bar */}
           <div className="flex items-center justify-between text-[10px] tracking-[0.25em] uppercase text-muted-foreground mb-3">
             <span>Vol. I — №01</span>
             <span className="hidden md:inline">A Field Guide for Newcomers</span>
-            <span>Spring · 2026</span>
+            <span className="inline-flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              Spring · 2026
+            </span>
           </div>
           <div className="rule-double mb-10 lg:mb-14" />
 
@@ -79,19 +102,24 @@ export default function LandingPage() {
               <span className="eyebrow block mb-6">The Cover Story</span>
               <h1 className="display-serif text-foreground text-[2.75rem] sm:text-6xl lg:text-[7.5rem] leading-[0.95]">
                 Moving is hard.<br />
-                <span className="editorial-italic text-primary">Settling in</span><br />
+                <span className="editorial-italic text-primary relative">
+                  Settling in
+                  <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden>
+                    <path d="M2,8 Q75,1 150,6 T298,5" stroke="hsl(var(--primary))" strokeWidth="2" fill="none" strokeLinecap="round" />
+                  </svg>
+                </span><br />
                 shouldn’t be.
               </h1>
             </div>
 
-            <div className="lg:col-span-4 lg:pb-4 border-l border-border pl-6 lg:pl-8">
+            <div className="lg:col-span-4 lg:pb-4 border-l-2 border-primary pl-6 lg:pl-8">
               <p className="text-base text-foreground/80 leading-relaxed mb-6 font-light">
                 A quiet companion for your first year in Switzerland —
                 paperwork, housing, insurance, friendships — gathered into a
                 single, <span className="editorial-italic text-primary">well-edited</span> dossier.
               </p>
               <div className="flex items-center gap-4 flex-wrap">
-                <Button size="lg" variant="hero" onClick={() => navigate("/onboarding")}>
+                <Button size="lg" variant="default" onClick={() => navigate("/onboarding")}>
                   Begin your file <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
                 <button
@@ -276,26 +304,35 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* COLOPHON / CTA */}
+      {/* COLOPHON / CTA — electric blue focal point */}
       <section className="relative z-10 py-20 lg:py-28">
         <div className="container mx-auto px-4">
-          <div className="rounded-sm p-10 lg:p-16 border border-foreground/10 relative overflow-hidden" style={{ background: "var(--gradient-warm)" }}>
+          <div className="rounded-sm p-10 lg:p-16 relative overflow-hidden bg-primary text-primary-foreground" style={{ boxShadow: "var(--shadow-electric)" }}>
+            {/* artistic concentric circles */}
+            <svg aria-hidden className="absolute -right-32 -bottom-32 w-[420px] h-[420px] opacity-20 pointer-events-none" viewBox="0 0 200 200">
+              <g fill="none" stroke="currentColor" strokeWidth="0.5">
+                <circle cx="100" cy="100" r="40" />
+                <circle cx="100" cy="100" r="60" />
+                <circle cx="100" cy="100" r="80" />
+                <circle cx="100" cy="100" r="100" />
+              </g>
+            </svg>
             <div className="grid lg:grid-cols-12 gap-10 items-end relative">
               <div className="lg:col-span-8">
-                <span className="eyebrow block mb-6">Colophon</span>
-                <h2 className="display-serif text-5xl md:text-7xl leading-[0.95] text-foreground">
+                <span className="text-[10px] font-semibold tracking-[0.25em] uppercase opacity-80 block mb-6">Colophon</span>
+                <h2 className="display-serif text-5xl md:text-7xl leading-[0.95]">
                   A new beginning,<br />
-                  <span className="editorial-italic text-primary">edited well.</span>
+                  <span className="editorial-italic">edited well.</span>
                 </h2>
               </div>
               <div className="lg:col-span-4">
-                <p className="text-foreground/75 mb-6 leading-relaxed font-light">
+                <p className="opacity-85 mb-6 leading-relaxed font-light">
                   Set up your file in under three minutes. Free to start, no credit card.
                 </p>
-                <Button size="lg" variant="hero" onClick={() => navigate("/onboarding")}>
+                <Button size="lg" variant="secondary" onClick={() => navigate("/onboarding")} className="bg-background text-foreground hover:bg-background/90">
                   Begin your file <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
-                <div className="flex items-center gap-2 mt-5 text-xs text-muted-foreground">
+                <div className="flex items-center gap-2 mt-5 text-xs opacity-75">
                   <MapPin className="h-3 w-3" /> 60+ Swiss cities · all 26 cantons
                 </div>
               </div>
